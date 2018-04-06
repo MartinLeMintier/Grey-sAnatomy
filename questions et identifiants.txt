@@ -1,0 +1,14 @@
+
+
+mot de passe d'utilisateur lecture/ecriture: (w3JACpxt OU) sWgcLH8g
+utilisateur: mg151962-rw
+choix du serveur: SQL USERS v5 port 3305
+
+
+Etat de votre base de données : Activée!
+sur le serveur mysql v5 sur sql-users.ece.fr
+
+Question:
+est ce que chacun doit importer la base de donnée sur le serveur de l'ECE?
+Putty? 
+comment faire le lien entre le code est la base de donnée?

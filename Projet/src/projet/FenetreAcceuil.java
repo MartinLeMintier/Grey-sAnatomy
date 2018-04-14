@@ -80,6 +80,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     P5.setBackground(new Color(0x97DFC6));
     Ptitre = new JPanel();
     Ptitre.setBackground(new Color(0x97DFC6));
+    b4.addActionListener(this);
     P4.add(l4);
     P4.add(t4);
     P5.add(b4);
@@ -122,6 +123,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
          
          try {
              conni = new Connexion (nom_data,login, passw);
+             this.dispose();
              
          } catch (SQLException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);

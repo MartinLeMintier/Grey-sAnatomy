@@ -5,6 +5,7 @@
  */
 package projet;
 
+import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.*;
 /**
@@ -42,7 +43,11 @@ public class SelectionServeur extends JFrame implements ActionListener
         boite = Box.createVerticalBox();
         bouton = new JButton("Valider");
         bouton.addActionListener(this);
-        selection = new JComboBox(); 
+        selection = new JComboBox();
+        servt.setBackground(new Color(0x79F8F8));
+        servc.setBackground(new Color(0x79F8F8));
+        servG.setBackground(new Color(0x79F8F8));
+        servb.setBackground(new Color(0x79F8F8));
             
             ///choix pour la comboBox
             selection.addItem("localhost");

@@ -221,16 +221,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
               if("Employe".equals(choix))
       {
           tout=new JRadioButton("Tout afficher");
-          r1=new JRadioButton("Numero de l'infirmier");
+          r1=new JRadioButton("Numero de l'employe");
           r2=new JRadioButton("Code de son service");
-          r3=new JRadioButton("Sa période de travail (jour ou nuit)");
-          r4=new JRadioButton("Son salaire");
+          r3=new JRadioButton("Nom de l'employe");
+          r4=new JRadioButton("Prenom de l'employe");
+          r5=new JRadioButton("téléphone de l'employe");
+          r6=new JRadioButton("Adresse de l'employe");
           
           Box1.add(tout);
           Box1.add(r1); 
           Box1.add(r2); 
           Box1.add(r3);
           Box1.add(r4);
+          Box1.add(r5);
+          Box1.add(r6);
           
           String chaine="";
            
@@ -245,17 +249,227 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
            if(r3.isSelected())
            {
-               chaine="rotation";
+               chaine="nom";
            }
            if(r4.isSelected())
            {
-               chaine="salaire";
+               chaine="prenom";
+           }
+           if(r5.isSelected())
+           {
+               chaine="tel";
+           }
+           if(r6.isSelected())
+           {
+               chaine="adresse";
            }
            if(tout.isSelected())
            {
-               chaine="numero, code_service, rotation,salaire";
+               chaine="numero, code_service, nom, prenom, tel, adresse";
            }
       }
+              
+              
+              if("Hospitalisation".equals(choix))
+      {
+          tout=new JRadioButton("Tout afficher");
+          r1=new JRadioButton("Numero du malade");
+          r2=new JRadioButton("Code du service de l'hospitalisation");
+          r3=new JRadioButton("Numero chambre");
+          r4=new JRadioButton("Nombre de lits");
+          
+          Box1.add(tout);
+          Box1.add(r1); 
+          Box1.add(r2); 
+          Box1.add(r3);
+          Box1.add(r4);
+          
+          String chaine="";
+           
+           if(r1.isSelected())
+           {
+               chaine="no_malade";
+           }
+           
+           if(r2.isSelected())
+           {
+               chaine="code_service";
+           }
+           if(r3.isSelected())
+           {
+               chaine="no_chambre";
+           }
+           if(r4.isSelected())
+           {
+               chaine="lit";
+           }
+          
+           if(tout.isSelected())
+           {
+               chaine="no_malade, code_service, no_chambre, lit";
+           }
+      }
+              
+               if("Soigne".equals(choix))
+      {
+          tout=new JRadioButton("Tout afficher");
+          r1=new JRadioButton("Numero du docteur");
+          r2=new JRadioButton("Numero du malade");
+       
+          Box1.add(tout);
+          Box1.add(r1); 
+          Box1.add(r2); 
+          
+          String chaine="";
+           
+           if(r1.isSelected())
+           {
+               chaine="no_docteur";
+           }
+           
+           if(r2.isSelected())
+           {
+               chaine="no_malade";
+           }
+                     
+           if(tout.isSelected())
+           {
+               chaine="no_docteur, no_malade";
+           }
+      }
+               
+                if("Malade".equals(choix))
+      {
+          tout=new JRadioButton("Tout afficher");
+          r1=new JRadioButton("Numero du malade");
+          r2=new JRadioButton("Nom du malade");
+          r3=new JRadioButton("Prenom du malade");
+          r4=new JRadioButton("tel du malade");
+          r5=new JRadioButton("adresse du malade");
+          r6=new JRadioButton("mutuelle");
+          
+          Box1.add(tout);
+          Box1.add(r1); 
+          Box1.add(r2); 
+          Box1.add(r3);
+          Box1.add(r4);
+          Box1.add(r5);
+          Box1.add(r6);
+          
+          String chaine="";
+           
+           if(r1.isSelected())
+           {
+               chaine="numero";
+           }
+           
+           if(r2.isSelected())
+           {
+               chaine="nom";
+           }
+           if(r3.isSelected())
+           {
+               chaine="prenom";
+           }
+           if(r4.isSelected())
+           {
+               chaine="tel";
+           }
+           if(r5.isSelected())
+           {
+               chaine="adresse";
+           }
+           if(r6.isSelected())
+           {
+               chaine="mutuelle";
+           }
+           if(tout.isSelected())
+           {
+               chaine="numero, nom, prenom, tel, adresse, mutuelle";
+           }
+      }
+                
+                if("Chambre".equals(choix))
+      {
+          tout=new JRadioButton("Tout afficher");
+          r1=new JRadioButton("Numero de la chambre");
+          r2=new JRadioButton("Code du service de de la chambre");
+          r3=new JRadioButton("surveillant de la chambre");
+          r4=new JRadioButton("Nombre de lits dans la chambre");
+          
+          Box1.add(tout);
+          Box1.add(r1); 
+          Box1.add(r2); 
+          Box1.add(r3);
+          Box1.add(r4);
+          
+          String chaine="";
+           
+           if(r1.isSelected())
+           {
+               chaine="no_chambre";
+           }
+           
+           if(r2.isSelected())
+           {
+               chaine="code_service";
+           }
+           if(r3.isSelected())
+           {
+               chaine="surveillant";
+           }
+           if(r4.isSelected())
+           {
+               chaine="nb_lits";
+           }
+          
+           if(tout.isSelected())
+           {
+               chaine="no_chambre, code_service, surveillant, nb_lits";
+           }
+      }
+                
+                if("Service".equals(choix))
+      {
+          tout=new JRadioButton("Tout afficher");
+          r1=new JRadioButton("Code du service");
+          r2=new JRadioButton("Nom du service");
+          r3=new JRadioButton("Batiment du service");
+          r4=new JRadioButton("Directeur du service");
+          
+          Box1.add(tout);
+          Box1.add(r1); 
+          Box1.add(r2); 
+          Box1.add(r3);
+          Box1.add(r4);
+          
+          String chaine="";
+           
+           if(r1.isSelected())
+           {
+               chaine="code";
+           }
+           
+           if(r2.isSelected())
+           {
+               chaine="nom";
+           }
+           if(r3.isSelected())
+           {
+               chaine="batiment";
+           }
+           if(r4.isSelected())
+           {
+               chaine="directeur";
+           }
+          
+           if(tout.isSelected())
+           {
+               chaine="code, nom, batiment, directeur";
+           }
+      }
+                
+                
            pan2.add(Box1);
            add(pan2);
            setVisible(true);

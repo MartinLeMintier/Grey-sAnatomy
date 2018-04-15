@@ -30,12 +30,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
    public  JLabel l1, l2, l3, l4, l5;
    public JRadioButton r1, r2, r3, r4, r5, r6, r7, r8,r9, r10, r11, r12, r13, r14,r15, r16, r17,r18, r19, r20, r21, r22, r23, r24, r25, r26,r27, r28, r29, r30, r31, r32,r33,r34, tout, tout1, tout2, tout3, tout4, tout5, tout6, tout7, tout8;
    public JButton execute;
-   public   boolean nombre, bool;
+   public   boolean nombre, bool, bool2;
     
     public FenetrePrincipale()
             {
                 nombre=true;
                 bool=true;
+                bool2=true;
                 
                 pan= new JPanel();
                 pan2= new JPanel();
@@ -323,6 +324,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
          l3.setText("Voulez vous ajouter une condition ? ");
          r33.setText("Oui");
          r34.setText("Non");
+         bool2=false;
                          
          Box1.add(l3);  
          Box1.add(r33); 
@@ -333,20 +335,23 @@ public class FenetrePrincipale extends JFrame implements ActionListener
         bool=true;       
   
             }
-        
+        if(bool2==false)
+        {
          if(e.getSource()==r33)
            {
                System.out.println("maman!!!!");
-                l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
-                Box1.add(l4);
-                
+                                
                 if("Docteur".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+                   
                     c2.addItem("Numero");
                     c2.addItem("Specialite");
                 }
                   if("Employe".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+                
                     c2.addItem("Numero");
                     c2.addItem("Code du sevice");
                     c2.addItem("Nom");
@@ -356,13 +361,17 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                 }
                      if("Infirmier".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+           
                     c2.addItem("Numero");
                     c2.addItem("Code du sevice");
                     c2.addItem("Rotation");
                     c2.addItem("Salaire");
                  }
-                        if("Soigne".equals(choix))
+                        if("Soin".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+                
                     c2.addItem("Numero du docteur");
                     c2.addItem("Code du malade");
                  
@@ -370,6 +379,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                         
                            if("Hospitalisation".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+          
                     c2.addItem("Numero du malade");
                     c2.addItem("Code du sevice");
                     c2.addItem("Surveillant");
@@ -379,6 +390,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                            
                         if("Malade".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+      
                     c2.addItem("Numero");
                     c2.addItem("Nom");
                     c2.addItem("Prenom");
@@ -388,15 +401,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                 }
                        if("Service".equals(choix))
                 {
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+              
                     c2.addItem("Code du service");
                     c2.addItem("nom du service");
                     c2.addItem("Batiment");
                     c2.addItem("Directeur");
                   }
+                 Box1.add(l4);
                 Box1.add(c2);
                 add(pan2);
-         setVisible(true);
-        bool=true; 
+            
+            setVisible(true);
+            bool2=true; 
+           }
            }
            
            
@@ -546,6 +564,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
        {
            choix = (String) c1.getSelectedItem();
            
+           if(bool==true)
+           {
+           
            if("Docteur".equals(choix)&& nombre==true)
       {   
           nombre=false;
@@ -626,7 +647,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           
         }
               
-               if("Soigne".equals(choix)&& nombre==true)
+               if("Soin".equals(choix)&& nombre==true)
       {
           nombre=false;
           l2.setText("Avec quels critères? ");
@@ -704,6 +725,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r31);
           Box1.add(r32);           
       }
+           }
                 
         
         

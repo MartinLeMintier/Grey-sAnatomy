@@ -17,7 +17,7 @@ public class Projet {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        FenetrePrincipale F = new FenetrePrincipale();
+        SelectionServeur S = new SelectionServeur();
         
     }
     

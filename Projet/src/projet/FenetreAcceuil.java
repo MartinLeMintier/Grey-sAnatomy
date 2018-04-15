@@ -44,10 +44,10 @@ public class FenetreAcceuil extends JFrame implements ActionListener
 
     //Panel général qui regroupe tous les autres 
     P1 = new JPanel();
-    P1.setBackground(new Color(0x97DFC6));
+    P1.setBackground(new Color(0x79F8F8));
     P1.setLayout(new BoxLayout(P1, BoxLayout.LINE_AXIS));
     P6 = new JPanel();
-    P6.setBackground(new Color(0x97DFC6));
+    P6.setBackground(new Color(0x79F8F8));
     l5 = new JLabel ("Quel est votre mot de passe database?");
     t5 = new JPasswordField(15);
     t5.setText("");
@@ -84,11 +84,11 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     Ptitre = new JPanel();
     
     //Couleur du background
-    P2.setBackground(new Color(0x97DFC6));
-    P3.setBackground(new Color(0x97DFC6));
-    P4.setBackground(new Color(0x97DFC6));
-    P5.setBackground(new Color(0x97DFC6));
-    Ptitre.setBackground(new Color(0x97DFC6));
+    P2.setBackground(new Color(0x79F8F8));
+    P3.setBackground(new Color(0x79F8F8));
+    P4.setBackground(new Color(0x79F8F8));
+    P5.setBackground(new Color(0x79F8F8));
+    Ptitre.setBackground(new Color(0x79F8F8));
     
     //On ajoute tout aux panneaux correspondant 
     
@@ -169,7 +169,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
         try {    
              conni = new Connexion (nom_data,login, passw);
              this.dispose();
-             //System.out.println(conni.remplirChampsRequete("SELECT * FROM employe").get(0));
+             System.out.println(conni.remplirChampsRequete("SELECT * FROM employe").get(0));
              FenetrePrincipale P = new FenetrePrincipale();
         
          } catch (SQLException | ClassNotFoundException ex) {
@@ -194,6 +194,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
              
          }
+         
         }        
       }
    }

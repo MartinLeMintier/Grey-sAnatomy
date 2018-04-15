@@ -30,9 +30,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
    public  JLabel l1, l2, l3, l4, l5;
    public JRadioButton r1, r2, r3, r4, r5, r6, r7, r8, tout;
    public JButton execute;
+   public   boolean nombre;
     
     public FenetrePrincipale()
             {
+                nombre=true;
+                
                 pan= new JPanel();
                 pan2= new JPanel();
                 bouton= new JButton("Recherche d’informations ");
@@ -152,8 +155,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
        public void actionPerformed(ActionEvent e)
        {
            choix = (String) c1.getSelectedItem();
-           if("Docteur".equals(choix))
-      {
+           
+           if("Docteur".equals(choix)&& nombre==true)
+      {   
+          nombre=false;
           String chaine2="", chaine1="";
           tout=new JRadioButton("Tout afficher");
         
@@ -179,8 +184,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
       }
            
-           if("Infirmier".equals(choix))
+           if("Infirmier".equals(choix)&& nombre==true)
       {
+          nombre=false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Numero de l'infirmier");
           r2=new JRadioButton("Code de son service");
@@ -218,8 +224,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
       }
            
-              if("Employe".equals(choix))
+              if("Employe".equals(choix)&& nombre==true)
       {
+          nombre=false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Numero de l'employe");
           r2=new JRadioButton("Code de son service");
@@ -270,8 +277,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
       }
               
               
-              if("Hospitalisation".equals(choix))
+              if("Hospitalisation".equals(choix)&& nombre==true)
       {
+          nombre=false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Numero du malade");
           r2=new JRadioButton("Code du service de l'hospitalisation");
@@ -310,8 +318,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
       }
               
-               if("Soigne".equals(choix))
+               if("Soigne".equals(choix)&& nombre==true)
       {
+          nombre=false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Numero du docteur");
           r2=new JRadioButton("Numero du malade");
@@ -338,8 +347,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
       }
                
-                if("Malade".equals(choix))
+                if("Malade".equals(choix)&& nombre==true)
       {
+          nombre=false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Numero du malade");
           r2=new JRadioButton("Nom du malade");
@@ -389,8 +399,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
       }
                 
-                if("Chambre".equals(choix))
+                if("Chambre".equals(choix)&& nombre==true)
       {
+          nombre= false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Numero de la chambre");
           r2=new JRadioButton("Code du service de de la chambre");
@@ -429,8 +440,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
       }
                 
-                if("Service".equals(choix))
+                if("Service".equals(choix)&& nombre==true)
       {
+          nombre=false;
           tout=new JRadioButton("Tout afficher");
           r1=new JRadioButton("Code du service");
           r2=new JRadioButton("Nom du service");

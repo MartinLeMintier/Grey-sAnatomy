@@ -29,10 +29,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
    public  JLabel l1, l2, l3, l4, l5, l6;
    public JRadioButton r1, r2, r3, r4, r5, r6, r7, r8,r9, r10, r11, r12, r13, r14,r15, r16, r17,r18, r19, r20, r21, r22, r23, r24, r25, r26,r27, r28, r29, r30, r31, r32,r33,r34, tout, tout1, tout2, tout3, tout4, tout5, tout6, tout7, tout8;
    public JButton execute;
-   public   boolean nombre, bool, bool2, bool3, bool4, executer, bool5;
+   public   boolean nombre, bool, bool2, bool3, bool4, executer, bool5, where;
    public String chaine, chaine2,chaine3,chaine4, table; //   dans l'ordre chaine: select, chaine2: <, > ou = du where, chaie3: l'attribut du where
   
-   
+   public Connexion con;
    
     public FenetrePrincipale()
             {
@@ -42,6 +42,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                 bool3=true;
                 bool4=true;
                 bool5=true;
+                where=false;
                 chaine="";
                 chaine2="";
                 chaine3="";
@@ -360,6 +361,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
         {
          if(e.getSource()==r33 && bool5==true)
            {
+               where=true;
                System.out.println("maman!!!!");
                c2.addItem("Choisir");
                                 
@@ -485,12 +487,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            {     
                executer=true;
                bool5=false;
+               where=false;
            }
         if(executer==true)
         {
             Box1.add(execute);
             pan2.add(Box1);
-           add(pan2);
+            add(pan2);
            setVisible(true);
         }
         
@@ -1261,17 +1264,53 @@ public class FenetrePrincipale extends JFrame implements ActionListener
     
    public void afficher_requete()
    {
-      System.out.println("remove");
-      Box1.removeAll();
-      pan2.removeAll();
-      Box1.repaint();
-      pan2.repaint();
-      remove(Box1);
-      remove(pan2);
-      add(pan3, "East");
-      setVisible(true);
-       
-    
+       try {
+           System.out.println("remove");
+           Box1.removeAll();
+           pan2.removeAll();
+           Box1.repaint();
+           pan2.repaint();
+           remove(Box1);
+           remove(pan2);
+           add(pan3, "East");
+           setVisible(true);
+           
+           
+           
+           String requete;
+           con  = new Connexion("hopital", "root", "");
+           if(chaine2.equals("="))
+           {
+               chaine2+="=";
+           }
+           String chaine5="";
+           if(where==true)
+           {
+               chaine5= chaine4+ chaine2 + chaine3;
+           }
+           else
+           {
+               chaine5="1";
+           }
+           requete="SELECT "+ chaine +  " FROM " + table + " WHERE " + chaine5;
+           
+           
+           System.out.println(requete);
+           for(int i=0; i<con.remplirChampsRequete(requete).size();i++)
+           {
+               System.out.println(con.remplirChampsRequete(requete).get(i));
+           }
+           
+           
+           
+           
+           //  FenetrePrincipale fen= new  FenetrePrincipale();
+       } catch (SQLException ex) {
+           Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+       }
+      
    }
     
  

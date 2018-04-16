@@ -20,26 +20,38 @@ import java.util.logging.Logger;
  */
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
-   public JPanel pan, pan2;
+   public JPanel pan, pan2, pan3;
    public JButton bouton, bouton2, bouton3;
-   
-   protected Connexion conni;
-   public String choix;
+   public JTextField t1, t2;
+   public String choix, choix2;
    public JComboBox c1, c2,c3;
    public  Box Box1;
-   public  JLabel l1, l2, l3, l4, l5;
+   public  JLabel l1, l2, l3, l4, l5, l6;
    public JRadioButton r1, r2, r3, r4, r5, r6, r7, r8,r9, r10, r11, r12, r13, r14,r15, r16, r17,r18, r19, r20, r21, r22, r23, r24, r25, r26,r27, r28, r29, r30, r31, r32,r33,r34, tout, tout1, tout2, tout3, tout4, tout5, tout6, tout7, tout8;
    public JButton execute;
-   public   boolean nombre, bool, bool2;
-    
+   public   boolean nombre, bool, bool2, bool3, bool4, executer, bool5;
+   public String chaine, chaine2,chaine3,chaine4, table; //   dans l'ordre chaine: select, chaine2: <, > ou = du where, chaie3: l'attribut du where
+  
+   
+   
     public FenetrePrincipale()
             {
                 nombre=true;
                 bool=true;
                 bool2=true;
+                bool3=true;
+                bool4=true;
+                bool5=true;
+                chaine="";
+                chaine2="";
+                chaine3="";
+                chaine4="";
+                table="";
+                executer=false;
                 
                 pan= new JPanel();
                 pan2= new JPanel();
+                pan3= new JPanel();
                 bouton= new JButton("Recherche d’informations ");
                 bouton2= new JButton("Mise à jour des données ");
                 bouton3= new JButton("Reporting ");
@@ -62,15 +74,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                 bouton3.setBackground(new Color(0x0EAD89));  
                 pan.setBackground(new Color(0x00604A));
                 pan2.setBackground(new Color(0x79F8F8));
+                pan3.setBackground(new Color(0x79F8F8));
                 pan.add(bouton);
                 pan.add(bouton2);
                 pan.add(bouton3);
               
               pan.setPreferredSize(new Dimension(325, 1050));
               pan2.setPreferredSize(new Dimension(1625,1050));
+              pan3.setPreferredSize(new Dimension(1625,1050));
                 
               pan.setBorder(BorderFactory.createLineBorder(Color.black));
               pan2.setBorder(BorderFactory.createLineBorder(Color.black));
+              pan3.setBorder(BorderFactory.createLineBorder(Color.black));
              
              
                 add(pan, "West");
@@ -84,8 +99,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
     
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()==bouton)
+        if(e.getSource()==bouton && bool4==true)
         {
+            bool4=false;
             afficher_recherche();
         }
          if(e.getSource()==bouton2)
@@ -96,7 +112,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
         {
             afficher_reporting();
         }
-          String chaine="";
+          
+           if(e.getSource()==execute)
+        {
+          
+               afficher_requete();
+        }          
           
        
          if(e.getSource()==r1)
@@ -337,59 +358,94 @@ public class FenetrePrincipale extends JFrame implements ActionListener
             }
         if(bool2==false)
         {
-         if(e.getSource()==r33)
+         if(e.getSource()==r33 && bool5==true)
            {
                System.out.println("maman!!!!");
+               c2.addItem("Choisir");
                                 
-                if("Docteur".equals(choix))
+                if("Docteur".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
                    
                     c2.addItem("Numero");
                     c2.addItem("Specialite");
+                    bool3=false;
+                     Box1.add(l4);
+                    Box1.add(c2);
                 }
-                  if("Employe".equals(choix))
+                  if("Employe".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
                 
                     c2.addItem("Numero");
-                    c2.addItem("Code du sevice");
                     c2.addItem("Nom");
                     c2.addItem("Prenom");
                     c2.addItem("Tel");
                     c2.addItem("Adresse");
+                    bool3=false;
+                     Box1.add(l4);
+                Box1.add(c2);
                 }
-                     if("Infirmier".equals(choix))
+                     if("Infirmier".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
            
                     c2.addItem("Numero");
-                    c2.addItem("Code du sevice");
+                    c2.addItem("Code_sevice");
                     c2.addItem("Rotation");
                     c2.addItem("Salaire");
+                    bool3=false;
+                    Box1.add(l4);
+                    Box1.add(c2);
                  }
-                        if("Soin".equals(choix))
+                        if("Soin".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
                 
-                    c2.addItem("Numero du docteur");
-                    c2.addItem("Code du malade");
+                    c2.addItem("Numero_docteur");
+                    c2.addItem("Numero_malade");
+                    bool3=false;
+                     Box1.add(l4);
+                Box1.add(c2);
+                 
+                }
+                        if("Chambre".equals(choix)&& bool3==true)
+                {
+                    System.out.println(bool3);
+                    l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
+                
+                    c2.addItem("Numero_chambre");
+                    c2.addItem("Code_service");
+                    c2.addItem("Surveillant");
+                    c2.addItem("Nombre_lits");
+                    bool3=false;
+                     Box1.add(l4);
+                Box1.add(c2);
                  
                 }
                         
-                           if("Hospitalisation".equals(choix))
+                           if("Hospitalisation".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
           
-                    c2.addItem("Numero du malade");
-                    c2.addItem("Code du sevice");
-                    c2.addItem("Surveillant");
-                    c2.addItem("Nomvre de lits");
+                    c2.addItem("Numero_malade");
+                    c2.addItem("Code_sevice");
+                    c2.addItem("Numero_chambre");
+                    c2.addItem("lit");
+                    bool3=false;
+                     Box1.add(l4);
+                Box1.add(c2);
          
                 }
                            
-                        if("Malade".equals(choix))
+                        if("Malade".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
       
                     c2.addItem("Numero");
@@ -398,30 +454,45 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                     c2.addItem("Tel");
                     c2.addItem("Adresse");
                     c2.addItem("Mutuelle");
+                    bool3=false;
+                     Box1.add(l4);
+                Box1.add(c2);
                 }
-                       if("Service".equals(choix))
+                       if("Service".equals(choix)&& bool3==true)
                 {
+                    System.out.println(bool3);
                     l4= new JLabel("Sur quel critère voulez-vous faire porter la condition? ");
               
-                    c2.addItem("Code du service");
-                    c2.addItem("nom du service");
+                    c2.addItem("Code_service");
+                    c2.addItem("Nom_service");
                     c2.addItem("Batiment");
                     c2.addItem("Directeur");
+                    bool3=false;
+                     Box1.add(l4);
+                     Box1.add(c2);
                   }
-                 Box1.add(l4);
-                Box1.add(c2);
+                
                 add(pan2);
             
             setVisible(true);
             bool2=true; 
+            bool5=false; 
            }
            }
            
            
-           if(e.getSource()==r34)
+           if(e.getSource()==r34 && bool5==true)
            {     
-               
+               executer=true;
+               bool5=false;
            }
+        if(executer==true)
+        {
+            Box1.add(execute);
+            pan2.add(Box1);
+           add(pan2);
+           setVisible(true);
+        }
         
            
            
@@ -433,13 +504,17 @@ public class FenetrePrincipale extends JFrame implements ActionListener
      
       Box1 = Box.createVerticalBox();
            
-      execute= new JButton("Execute");
+      execute= new JButton("Executer");
        
       l1= new JLabel("Qu'est ce que vous recherchez? ");
       l2= new JLabel("Avec quels critères? ");
       l3= new JLabel("Voulez vous ajouter une condition ? ");
       l4= new JLabel("Quelles conditions souhaitez-vous ajouter? ");
       l5= new JLabel();
+      l6= new JLabel();
+      
+      t1= new JTextField(15);
+      t2= new JTextField(15);
        
       c1= new JComboBox ();
       c2= new JComboBox ();
@@ -499,6 +574,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
       tout8= new JRadioButton();
       
       c1.addActionListener(new ItemAction());
+      c2.addActionListener(new ItemAction());
       r1.addActionListener(this);
       r2.addActionListener(this);
       r3.addActionListener(this);
@@ -541,6 +617,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
       tout6.addActionListener(this);
       tout7.addActionListener(this);
       tout8.addActionListener(this);
+      execute.addActionListener(this);
       
       //on ajoute les différents éléments dans la box
       Box1.add(l1);
@@ -563,12 +640,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
        public void actionPerformed(ActionEvent e)
        {
            choix = (String) c1.getSelectedItem();
+           choix2 = (String) c2.getSelectedItem();
            
-           if(bool==true)
-           {
+         
            
            if("Docteur".equals(choix)&& nombre==true)
       {   
+          
           nombre=false;
           l2.setText("Avec quels critères? ");
           tout.setText("Tout afficher");
@@ -579,6 +657,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(tout);
           Box1.add(r1); 
           Box1.add(r2); 
+          table="docteur";
+          
           
       }
            
@@ -598,7 +678,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r4); 
           Box1.add(r5);
           Box1.add(r6);
-          
+          table="infirmier";
          
            
       }
@@ -623,7 +703,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r10);
           Box1.add(r11);
           Box1.add(r12);
-          
+          table="employe";
          
         }
               
@@ -645,6 +725,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r15);
           Box1.add(r16);
           
+          table="hospitalisation";
+          
         }
               
                if("Soin".equals(choix)&& nombre==true)
@@ -660,6 +742,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r17); 
           Box1.add(r18); 
           
+          table="soin";
          
           }
                
@@ -684,7 +767,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r23);
           Box1.add(r24);
           
-
+          table="malade";
     
       }
                 
@@ -705,6 +788,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r27);
           Box1.add(r28);
           
+          table="chambre";
             
       }
                 
@@ -723,16 +807,442 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(r29); 
           Box1.add(r30); 
           Box1.add(r31);
-          Box1.add(r32);           
+          Box1.add(r32); 
+
+          table="service";
       }
-           }
-                
+             
+         if("Docteur".equals(choix)&&"Numero".equals(choix2))
+          {
+              chaine4="numero";
+              l5.setText("Voulez-vous que le numéro du docteur soit <, > ou = au chiffre rentré?: ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+              
+          }
+          if("Docteur".equals(choix)&&"Specialite".equals(choix2))
+          {
+              chaine4="specialite";
+              l5.setText("Voulez-vous que la spécialité soit placée dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quelle specialite souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          
+          if("Employe".equals(choix)&&"Numero".equals(choix2))
+          {
+              chaine4="numero";
+              l5.setText("Voulez-vous que le numéro de l'employe soit <, > ou = au chiffre rentré?: ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+              
+          }
+      
+          
+          if("Employe".equals(choix)&&"Nom".equals(choix2))
+          {
+              chaine4="nom";
+              l5.setText("Voulez-vous que le nom de l'employé soit dans l'ordre alphabétique avant, après ou soit exactement la chaine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel nom souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          
+          if("Employe".equals(choix)&&"Prenom".equals(choix2))
+          {
+              chaine4="prenom";
+              l5.setText("Voulez-vous que le prenom de l'employe soit placée dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel prenom souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+          if("Employe".equals(choix)&&"Tel".equals(choix2))
+          {
+              chaine4="tel";
+              l5.setText("Voulez-vous que le numero de téléphone de l'employé soit <, > ou = au chiffre rentré?: ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de telephone souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          if("Employe".equals(choix)&&"Adresse".equals(choix2))
+          {
+              chaine4="adresse";
+              l5.setText("Voulez-vous que l'adresse de l'employe soit dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quelle adresse souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          
+          
+           if("Malade".equals(choix)&&"Numero".equals(choix2))
+          {
+              chaine4="numero";
+              l5.setText("Voulez-vous que le numéro du malade soit <, > ou = au chiffre rentré?: ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+              
+          }
+         
+          if("Malade".equals(choix)&&"Nom".equals(choix2))
+          {
+              chaine4="nom";
+              l5.setText("Voulez-vous que le nom du malade soit dans l'ordre alphabétique avant, après ou soit exactement la chaine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel nom souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          
+          if("Malade".equals(choix)&&"Prenom".equals(choix2))
+          {
+              chaine4="prenom";
+              l5.setText("Voulez-vous que le prenom du malade soit placée dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel prenom souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+          if("Malade".equals(choix)&&"Tel".equals(choix2))
+          {
+              chaine4="tel";
+              l5.setText("Voulez-vous que le numero de téléphone du malade soit <, > ou = au chiffre rentré?: ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de telephone souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          if("Malade".equals(choix)&&"Adresse".equals(choix2))
+          {
+              chaine4="adresse";
+              l5.setText("Voulez-vous que l'adresse du malade soit dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quelle adresse souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+            if("Malade".equals(choix)&&"Mutuelle".equals(choix2))
+          {
+              chaine4="mutuelle";
+              l5.setText("Voulez-vous que la mutuelle du malade soit dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel mutuelle souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+          if("Soin".equals(choix)&&"Numero_docteur".equals(choix2))
+          {
+              chaine4="no_docteur";
+              l5.setText("Voulez-vous que le numéro du docteur soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de docteur souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+              
+          }
+          if("Soin".equals(choix)&&"Numero_malade".equals(choix2))
+          {
+              chaine4="no_malade";
+              l5.setText("Voulez-vous que le numero du malade soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de malade souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          
+          if("Hospitalisation".equals(choix)&&"Numero_malade".equals(choix2))
+          {
+              chaine4="no_malade";
+              l5.setText("Voulez-vous que le numéro du malade soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero dde malade souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+              
+          }
+          if("Hospitalisation".equals(choix)&&"Code_service".equals(choix2))
+          {
+              chaine4="code_service";
+              l5.setText("Voulez-vous que le code du service soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel ncode de service souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+          
+           if("Hospitalisation".equals(choix)&&"Numero_chambre".equals(choix2))
+          {
+              chaine4="no_chambre";
+              l5.setText("Voulez-vous que le numero de chambre soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de chambre souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+            if("Hospitalisation".equals(choix)&&"Lit".equals(choix2))
+          {
+              chaine4="lit";
+              l5.setText("Voulez-vous que le numero du lit soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de lit souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+           if("Chambre".equals(choix)&&"Numero_chambre".equals(choix2))
+          {
+              chaine4="no_chambre";
+              l5.setText("Voulez-vous que le numero de chambre soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero de chambre souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          }  
+           if("Chambre".equals(choix)&&"Code_service".equals(choix2))
+          {
+              chaine4="code_service";
+              l5.setText("Voulez-vous que le code du service soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel code de service souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+           
+           if("Chambre".equals(choix)&&"Surveillant".equals(choix2))
+          {
+              chaine4="surveillant";
+              l5.setText("Voulez-vous que le code du surveillant soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel surveillant de chambre souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+           
+           if("Chambre".equals(choix)&&"Nombre_lits".equals(choix2))
+          {
+              chaine4="nb_lits";
+              l5.setText("Voulez-vous que le nombre de lit soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel nombre de lits souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+           
+           if("Service".equals(choix)&&"Code_service".equals(choix2))
+          {
+              chaine4="code";
+              l5.setText("Voulez-vous que le code du sevice soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel code de service souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+           
+            if("Service".equals(choix)&&"Nom_service".equals(choix2))
+          {
+              chaine4="nom";
+              l5.setText("Voulez-vous que le nom du service soit dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel nom de service souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+             if("Service".equals(choix)&&"Batiment".equals(choix2))
+          {
+              chaine4="batiment";
+              l5.setText("Voulez-vous que le batiment soit dans l'ordre alphabétique avant, après ou soit exactement la caine rentrée? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel batiment souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+              if("Service".equals(choix)&&"Directeur".equals(choix2))
+          {
+              chaine4="directeur";
+              l5.setText("Voulez-vous que le code du directeur soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel directeur souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+              
+              if("Infirmier".equals(choix)&&"Numero".equals(choix2))
+          {
+              chaine4="numero";
+              l5.setText("Voulez-vous que le numero de l'infirmier soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero d'infirmier souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+              if("Infirmier".equals(choix)&&"Code_service".equals(choix2))
+          {
+              chaine4="code_service";
+              l5.setText("Voulez-vous que le code du service de l'infirmier soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel code de service de l'infirmier souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+              if("Infirmier".equals(choix)&&"Rotation".equals(choix2))
+          {
+              chaine4="rotation";
+              l5.setText("Voulez-vous que la rotation soit de jour ou de nuit? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              chaine3="==";
+              executer=true;
+          } 
+              
+              if("Infirmier".equals(choix)&&"Salaire".equals(choix2))
+          {
+              chaine4="salaire";
+              l5.setText("Voulez-vous que le salaire de l'infirmier soit <, > ou = au chiffre rentré? ");
+              Box1.add(l5);
+              Box1.add(t1);
+              chaine2= t1.getText();
+              l6.setText("Quel numero souhaitez-vous chercher?  ");
+              Box1.add(l6);
+              Box1.add(t2);
+              chaine3=t2.getText();
+              executer=true;
+          } 
+             
         
         
+        if(executer==true)
+        {
+            Box1.add(execute);
+        }
         
            
-           
-           
+                    
            pan2.add(Box1);
            add(pan2);
            setVisible(true);
@@ -741,7 +1251,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
    
     public void afficher_MAJ()
    {
-       
+       Box1.removeAll();
    }
     
      public void afficher_reporting()
@@ -749,7 +1259,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
        
    }
     
+   public void afficher_requete()
+   {
+      System.out.println("remove");
+      Box1.removeAll();
+      pan2.removeAll();
+      Box1.repaint();
+      pan2.repaint();
+      remove(Box1);
+      remove(pan2);
+      add(pan3, "East");
+      setVisible(true);
+       
     
+   }
     
  
 }

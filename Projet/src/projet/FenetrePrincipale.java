@@ -172,11 +172,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                
            }
            
-           if(e.getSource()==r8)
-           {
-               chaine="code_service";
-               bool=false;
-           }
+          
            if(e.getSource()==r9)
            {
                chaine="nom";
@@ -199,7 +195,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            }
            if(e.getSource()==tout3)
            {
-               chaine="numero, code_service, nom, prenom, tel, adresse";
+               chaine="numero, nom, prenom, tel, adresse";
                bool=false;
            }
            
@@ -692,7 +688,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           l2.setText("Avec quels critères? ");
           tout3.setText("Tout afficher");
           r7.setText("Numero de l'employe");
-          r8.setText("Code de son service");
           r9.setText("Nom de l'employe");
           r10.setText("Prenom de l'employe");
           r11.setText("téléphone de l'employe");
@@ -701,7 +696,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
           Box1.add(l2);
           Box1.add(tout3);
           Box1.add(r7); 
-          Box1.add(r8); 
           Box1.add(r9);
           Box1.add(r10);
           Box1.add(r11);
@@ -821,11 +815,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
               l5.setText("Voulez-vous que le numéro du docteur soit <, > ou = au chiffre rentré?: ");
               Box1.add(l5);
               Box1.add(t1);
-              chaine2= t1.getText();
               l6.setText("Quel numero souhaitez-vous chercher?  ");
               Box1.add(l6);
               Box1.add(t2);
-              chaine3=t2.getText();
               executer=true;
               
           }
@@ -1236,12 +1228,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
               chaine3=t2.getText();
               executer=true;
           } 
-             
-        
+              
+         
         
         if(executer==true)
         {
-            Box1.add(execute);
+           Box1.add(execute);
         }
         
            
@@ -1275,8 +1267,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            add(pan3, "East");
            setVisible(true);
            
-           
-           
+         chaine2= t1.getText();
+         chaine3= t2.getText();
+             
+       
            String requete;
            con  = new Connexion("hopital", "root", "");
            if(chaine2.equals("="))
@@ -1286,7 +1280,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            String chaine5="";
            if(where==true)
            {
-               chaine5= chaine4+ chaine2 + chaine3;
+               chaine5= chaine4+ chaine2 + "'"+ chaine3+"'";
            }
            else
            {

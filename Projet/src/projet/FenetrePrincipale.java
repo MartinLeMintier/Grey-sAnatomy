@@ -20,9 +20,10 @@ import java.util.logging.Logger;
  */
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
-   public JPanel pan, pan2, pan3;
+   public JPanel pan, pan2, pan3, pan4, pan5;
    public JButton bouton, bouton2, bouton3;
    public JTextField t1, t2;
+   public JTextArea a;
    public String choix, choix2;
    public JComboBox c1, c2,c3;
    public  Box Box1;
@@ -52,7 +53,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                 
                 pan= new JPanel();
                 pan2= new JPanel();
-                pan3= new JPanel();
+                pan3= new JPanel(new BorderLayout());
+                pan4= new JPanel();
+                pan5= new JPanel();
+      
+      
                 bouton= new JButton("Recherche d’informations ");
                 bouton2= new JButton("Mise à jour des données ");
                 bouton3= new JButton("Reporting ");
@@ -73,6 +78,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
                 bouton.setBackground(new Color(0x0EAD89 ));
                 bouton2.setBackground(new Color(0x0EAD89 ));  
                 bouton3.setBackground(new Color(0x0EAD89));  
+                
+                
                 pan.setBackground(new Color(0x00604A));
                 pan2.setBackground(new Color(0x79F8F8));
                 pan3.setBackground(new Color(0x79F8F8));
@@ -83,10 +90,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
               pan.setPreferredSize(new Dimension(325, 1050));
               pan2.setPreferredSize(new Dimension(1625,1050));
               pan3.setPreferredSize(new Dimension(1625,1050));
+              pan4.setPreferredSize(new Dimension(1625,100));
+              pan5.setPreferredSize(new Dimension(1625,950));
                 
               pan.setBorder(BorderFactory.createLineBorder(Color.black));
               pan2.setBorder(BorderFactory.createLineBorder(Color.black));
               pan3.setBorder(BorderFactory.createLineBorder(Color.black));
+              pan4.setBorder(BorderFactory.createLineBorder(Color.black));
+              pan5.setBorder(BorderFactory.createLineBorder(Color.black));
              
              
                 add(pan, "West");
@@ -512,6 +523,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
       l5= new JLabel();
       l6= new JLabel();
       
+      
+      a= new JTextArea();
+      a.setEditable(false);
+      a.setLineWrap(true);
+      a.setWrapStyleWord(true);
+     
       t1= new JTextField(15);
       t2= new JTextField(15);
        
@@ -1264,6 +1281,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            pan2.repaint();
            remove(Box1);
            remove(pan2);
+           JButton test = new JButton("Test");
+           //pan3.add(test);
            add(pan3, "East");
            setVisible(true);
            
@@ -1293,9 +1312,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
            for(int i=0; i<con.remplirChampsRequete(requete).size();i++)
            {
                System.out.println(con.remplirChampsRequete(requete).get(i));
+               a.setText(a.getText()+(String) con.remplirChampsRequete(requete).get(i));
            }
            
-           
+         pan5.add(a);
+         pan3.add(pan4, "North");
+         pan3.add(pan5,"South");
+         
+         add(pan3, "East");
+         setVisible(true);
            
            
            //  FenetrePrincipale fen= new  FenetrePrincipale();

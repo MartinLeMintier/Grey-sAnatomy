@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author MArgaux 
@@ -22,16 +23,14 @@ import javax.swing.table.DefaultTableModel;
 public class FenetrePrincipale extends JFrame
 {
    public JPanel pan, pan2;
-   public JButton bouton, bouton2, bouton3, execute;
+   public JButton bouton, bouton2, bouton3, execute, execute_model;
    public JTextField t1;
-   public JTextArea a;
    public JComboBox c1, c2,c3;
-   public  Box Box1;
-   public  JLabel l1, l2, l3, l4, l5;
+   public  JLabel l1, l2, l3, l4, l5, l6;
    public JRadioButton r1, r2, r3, r4;
    public String select, table, condition, math, valeur; //   dans l'ordre chaine: select, chaine2: <, > ou = du where, chaie3: l'attribut du where
    public Connexion con;
-   public JTable tableau;
+   public JTable tableau, tableau_model;
    public JScrollPane tableau2;
    public String[][] tabRecup ;
    
@@ -46,6 +45,12 @@ public class FenetrePrincipale extends JFrame
                 setResizable(false);
                 setTitle("Mon Hopital");
                 
+                math="=";
+                select="";
+                table="";
+                condition="";
+                valeur="";
+                
                 tabRecup= new String[][]{{""}};
                 
                 pan= new JPanel();
@@ -56,11 +61,11 @@ public class FenetrePrincipale extends JFrame
                 pan2.setBackground(new Color(0x79F8F8));  
                        
                              
-                bouton= new JButton("Recherche d’informations ");
-                bouton2= new JButton("Mise à jour des données ");
+                bouton= new JButton("Recherche ");
+                bouton2= new JButton("Mise à jour");
                 bouton3= new JButton("Reporting ");
                 
-                
+              
                 
                 bouton.setBounds(30,30,120,50);
                 bouton2.setBounds(30,100,120,50);
@@ -127,6 +132,8 @@ public class FenetrePrincipale extends JFrame
                 l3= new JLabel("Condition: ");
                 l4= new JLabel("Valeur: ");
                 l5= new JLabel("La valeur cherchee doit être: ");
+                l6 = new JLabel();
+                l6.setBounds(100,680,700,10);
       
                 c1.addItem("Selectionner");
                 c1.addItem("Docteur");
@@ -178,6 +185,7 @@ public class FenetrePrincipale extends JFrame
                 pan2.add(l3);
                 pan2.add(l4);
                 pan2.add(l5);
+                pan2.add(l6);
                 pan2.add(t1);
                 pan2.add(r1);
                 pan2.add(r2);
@@ -203,6 +211,11 @@ public class FenetrePrincipale extends JFrame
                            
    }
    
+   
+   
+   
+   
+   
    class ItemAction implements ActionListener
    {
        @Override
@@ -210,7 +223,11 @@ public class FenetrePrincipale extends JFrame
        {
            if(e.getSource()==bouton)
            {
-               
+               select="";
+               table="";
+               condition="";
+               valeur="";
+               pan2.removeAll();
                afficher_recherche();
            }
               
@@ -238,7 +255,10 @@ public class FenetrePrincipale extends JFrame
               {
                   afficher_resultat();
               }
-      
+           if(e.getSource()==bouton2)
+           {
+               pan2.updateUI();
+           }
            
        }
        
@@ -249,24 +269,36 @@ public class FenetrePrincipale extends JFrame
        try {
            System.out.println("patate");
            String requete;
-           valeur=t1.getText();
+           valeur="'"+t1.getText()+"'";
            con= new Connexion("hopital", "root", "");
+           if("Selectionner".equals(select))
+       {   
+            select="";
+                     
+       }
+           if("Selectionner".equals(table))
+       {   
+            table="";
+                     
+       }
+           if("Selectionner".equals(condition))
+       {   
+            condition="";
+                     
+       }
+                   
            
-           String chaine5;
-             
-//           if(condition=="aucune")
-//           {
-//               condition="1";
-//           }
-//           else
-//           {
-//               
-//               condition=condition+math+valeur;
-//           }
-         
-           requete="SELECT "+ select +  " FROM " + table + " WHERE " + condition + math+valeur;
+           if(condition.equals("aucune"))
+           {
+               requete="SELECT "+ select +  " FROM " + table + " WHERE " + "1";
+           }
+           else{
+               requete="SELECT "+ select +  " FROM " + table + " WHERE " + condition + math+valeur;
+           }
            
            System.out.println(requete);
+           if(select!=""&&table!=""&&condition!="")
+           {
            tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
            for(int i=0; i<con.remplirChampsRequete(requete).size();i++)
            {
@@ -276,6 +308,13 @@ public class FenetrePrincipale extends JFrame
            String[] videe = new String[]{""};
            DefaultTableModel mod = new DefaultTableModel(tabRecup,videe);
            tableau.setModel(mod);
+           }
+           else
+           {
+                           
+               l6.setText("Votre saisie est erronee veuillez recommencer");
+             
+           }
           
            
        } catch (SQLException ex) {
@@ -316,6 +355,7 @@ public class FenetrePrincipale extends JFrame
                      
       }
           
+          
            
            if("Infirmier".equals(table))
       {
@@ -344,6 +384,13 @@ public class FenetrePrincipale extends JFrame
       {
           tab=new String []{"Selectionner","Tout_afficher", "numero", "nom","prenom","tel","adresse","mutuelle"};
           tab2=new String []{"Selectionner","aucune", "numero", "nom","prenom","tel","adresse","mutuelle"};
+          
+    
+      }
+                  if("Soigne".equals(table))
+      {
+          tab=new String []{"Selectionner","Tout_afficher", "no_docteur", "no_malade"};
+          tab2=new String []{"Selectionner","aucune", "no_docteur", "no_malade"};
           
     
       }
@@ -444,7 +491,7 @@ public class FenetrePrincipale extends JFrame
    
     public void afficher_MAJ()
    {
-       Box1.removeAll();
+      
    }
     
      public void afficher_reporting()

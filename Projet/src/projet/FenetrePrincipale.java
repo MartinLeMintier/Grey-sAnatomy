@@ -22,17 +22,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FenetrePrincipale extends JFrame
 {
-   public JPanel pan, pan2;
-   public JButton bouton, bouton2, bouton3, execute, execute_model;
-   public JTextField t1;
+   public JPanel pan, pan2, pan3, pan4;
+   public JButton bouton, bouton2, bouton3,bouton4, execute, execute2;
+   public JTextField t1, t2;
    public JComboBox c1, c2,c3;
-   public  JLabel l1, l2, l3, l4, l5, l6;
+   public  JLabel l1, l2, l3, l4, l5, l6, l7;
    public JRadioButton r1, r2, r3, r4;
    public String select, table, condition, math, valeur; //   dans l'ordre chaine: select, chaine2: <, > ou = du where, chaie3: l'attribut du where
    public Connexion con;
    public JTable tableau, tableau_model;
    public JScrollPane tableau2;
    public String[][] tabRecup ;
+   public boolean choix;
+   public  DefaultTableModel tableau3;
+   public  String [] tab3;
    
    
     public FenetrePrincipale()
@@ -45,6 +48,7 @@ public class FenetrePrincipale extends JFrame
                 setResizable(false);
                 setTitle("Mon Hopital");
                 
+              
                 math="=";
                 select="";
                 table="";
@@ -64,17 +68,20 @@ public class FenetrePrincipale extends JFrame
                 bouton= new JButton("Recherche ");
                 bouton2= new JButton("Mise à jour");
                 bouton3= new JButton("Reporting ");
+                bouton4= new JButton("Complique ");
                 
               
                 
                 bouton.setBounds(30,30,120,50);
                 bouton2.setBounds(30,100,120,50);
                 bouton3.setBounds(30,170, 120,50);
+                bouton4.setBounds(30,240, 120,50);
                 
                 
                 bouton.setBackground(new Color(0x0EAD89 ));
                 bouton2.setBackground(new Color(0x0EAD89 ));  
-                bouton3.setBackground(new Color(0x0EAD89));  
+                bouton3.setBackground(new Color(0x0EAD89));
+                bouton4.setBackground(new Color(0x0EAD89));
                 
                                
               pan.setPreferredSize(new Dimension(190,800));
@@ -86,6 +93,7 @@ public class FenetrePrincipale extends JFrame
                 pan.add(bouton);
                 pan.add(bouton2);
                 pan.add(bouton3);
+                pan.add(bouton4);
                
                        
                 add(pan, "West");
@@ -95,6 +103,7 @@ public class FenetrePrincipale extends JFrame
                 bouton.addActionListener(new ItemAction());
                 bouton2.addActionListener(new ItemAction());
                 bouton3.addActionListener(new ItemAction());
+                 bouton4.addActionListener(new ItemAction());
                 
                 
             }
@@ -102,10 +111,14 @@ public class FenetrePrincipale extends JFrame
  
    public void afficher_recherche()
    {   
-                
+        choix=true;        
         String [] vide = {""};
+        
                 
         tableau = new JTable(tabRecup,vide);
+        tableau3 = new DefaultTableModel();
+        tableau.setModel(tableau3);
+        
                 
         tableau.setBounds(200,400,500,100);
                 tableau2= new JScrollPane(tableau);
@@ -212,6 +225,51 @@ public class FenetrePrincipale extends JFrame
    }
    
    
+   public void requetes_compliquees()
+   {
+     choix=false;
+     pan3= new JPanel();
+     pan3.setLayout(null);
+     pan3.setBounds(20,30,700,150);
+     pan3.setBackground(new Color(0x79F8F8));
+     
+     pan4= new JPanel();
+     pan4.setLayout(null);
+     pan4.setBounds(20,200,700,500);
+     pan4.setBackground(new Color(0x79F8F8));
+     
+     execute2 = new JButton ("execute");
+     execute2.setBounds(290,100,80,20);
+     execute2.addActionListener(new ItemAction());
+     
+     String [] vide = {""};
+      tableau = new JTable(tabRecup,vide);
+      tableau3 = new DefaultTableModel();
+        tableau.setModel(tableau3);
+                
+        tableau.setBounds(200,400,500,100);
+                tableau2= new JScrollPane(tableau);
+                
+                tableau2.setBounds(30,50,650,300);
+     
+     
+     t2= new JTextField(25);
+     t2.setBounds(170,60,300,20);
+     
+     l7 = new JLabel("Veuillez rentrer votre requete: ");
+     l7.setBounds(250,30,300,20);
+     
+     
+     pan3.add(t2);
+     pan3.add(execute2);
+     pan3.add(l7);
+   pan4.add(tableau2);
+     pan2.add(pan4);
+     pan2.add(pan3);
+     setVisible(true);
+       
+      
+   }
    
    
    
@@ -229,6 +287,14 @@ public class FenetrePrincipale extends JFrame
                valeur="";
                pan2.removeAll();
                afficher_recherche();
+           }
+           
+           if(e.getSource()==bouton4)
+           {
+               pan2.removeAll();
+               pan2.setEnabled(false);
+               pan2.setEnabled(true);
+               requetes_compliquees();
            }
               
          if(e.getSource()==r1)
@@ -253,6 +319,11 @@ public class FenetrePrincipale extends JFrame
               
            if(e.getSource()==execute)
               {
+                  
+                  afficher_resultat();
+              }
+            if(e.getSource()==execute2)
+             {                  
                   afficher_resultat();
               }
            if(e.getSource()==bouton2)
@@ -267,10 +338,16 @@ public class FenetrePrincipale extends JFrame
    public void afficher_resultat()
    {
        try {
-           System.out.println("patate");
-           String requete;
-           valeur="'"+t1.getText()+"'";
-           con= new Connexion("hopital", "root", "");
+  
+           String requete;           
+           con= new Connexion("hopital", "root", "");          
+        
+         
+                   
+     if(choix==true)    
+     {
+         
+            valeur="'"+t1.getText()+"'";
            if("Selectionner".equals(select))
        {   
             select="";
@@ -286,8 +363,7 @@ public class FenetrePrincipale extends JFrame
             condition="";
                      
        }
-                   
-           
+         
            if(condition.equals("aucune"))
            {
                requete="SELECT "+ select +  " FROM " + table + " WHERE " + "1";
@@ -295,12 +371,28 @@ public class FenetrePrincipale extends JFrame
            else{
                requete="SELECT "+ select +  " FROM " + table + " WHERE " + condition + math+valeur;
            }
+     }
+     else{
+         requete=t2.getText();
+         System.out.println(requete);
+     }
            
-           System.out.println(requete);
-           if(select!=""&&table!=""&&condition!="")
+           
+           if((select!=""&&table!=""&&condition!="")|| choix==false)
            {
            tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
-           for(int i=0; i<con.remplirChampsRequete(requete).size();i++)
+           if(choix==true)
+           {
+               tabRecup [0][0]="";
+                for(int i=0; i< tab3.length; i++)
+           {
+                tabRecup[0][0]+=tab3[i]+"  ";
+           }
+           }
+           
+          
+          
+           for(int i=1; i<con.remplirChampsRequete(requete).size();i++)
            {
               tabRecup[i][0]= con.remplirChampsRequete(requete).get(i);
               
@@ -348,10 +440,12 @@ public class FenetrePrincipale extends JFrame
            
           String tab[]={""};
           String tab2[]={""};
+          
           if("Docteur".equals(table))
       {   
         tab= new String [] {"Selectionner","Tout_afficher", "numero", "specialite"};
         tab2= new String [] {"Selectionner","aucune", "numero", "specialite"};
+        tab3= new String [] {"numero", "specialite"};
                      
       }
           
@@ -361,6 +455,7 @@ public class FenetrePrincipale extends JFrame
       {
          tab= new String []{"Selectionner","Tout_afficher", "numero", "code_service","rotation", "salaire"};
          tab2= new String []{"Selectionner","aucune", "numero", "code_service","rotation", "salaire"};
+         tab3= new String []{ "numero", "code_service","rotation", "salaire"};
             
             
       }
@@ -369,6 +464,7 @@ public class FenetrePrincipale extends JFrame
       {
           tab=new String []{"Selectionner","Tout_afficher", "numero", "nom", "prenom","tel", "adresse"};
           tab2=new String []{"Selectionner","aucune", "numero", "nom", "prenom","tel", "adresse"};
+          tab3=new String []{ "numero", "nom", "prenom","tel", "adresse"};
                   
         }
               
@@ -377,6 +473,7 @@ public class FenetrePrincipale extends JFrame
       {
            tab= new String []{"Selectionner","Tout_afficher", "no_malade", "code_service","no_chambre","lit"};
            tab2= new String []{"Selectionner","aucune", "no_malade", "code_service","no_chambre","lit"};
+           tab3= new String []{ "no_malade", "code_service","no_chambre","lit"};
           
       }
                
@@ -384,6 +481,7 @@ public class FenetrePrincipale extends JFrame
       {
           tab=new String []{"Selectionner","Tout_afficher", "numero", "nom","prenom","tel","adresse","mutuelle"};
           tab2=new String []{"Selectionner","aucune", "numero", "nom","prenom","tel","adresse","mutuelle"};
+          tab3= new String []{"numero", "nom","prenom","tel","adresse","mutuelle"};
           
     
       }
@@ -391,6 +489,7 @@ public class FenetrePrincipale extends JFrame
       {
           tab=new String []{"Selectionner","Tout_afficher", "no_docteur", "no_malade"};
           tab2=new String []{"Selectionner","aucune", "no_docteur", "no_malade"};
+          tab3=new String []{ "no_docteur", "no_malade"};
           
     
       }
@@ -399,6 +498,7 @@ public class FenetrePrincipale extends JFrame
       {
           tab=new String []{"Selectionner","Tout_afficher", "no_chambre", "code_service","surveillant","nb_lits"};
           tab2=new String []{"Selectionner","aucune", "no_chambre", "code_service","surveillant","nb_lits"};
+          tab3=new String []{ "no_chambre", "code_service","surveillant","nb_lits"};
                    
       }
                 
@@ -406,6 +506,7 @@ public class FenetrePrincipale extends JFrame
       {
            tab=new String []{"Selectionner","Tout_afficher", "code", "nom","batiment","directeur"};
            tab2=new String []{"Selectionner","aucune", "code", "nom","batiment","directeur"};
+           tab3=new String []{ "code", "nom","batiment","directeur"};
     
       }
                 

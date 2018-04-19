@@ -38,17 +38,26 @@ public class FenetrePrincipale extends JFrame
    public  DefaultTableModel tableau3;
    public  String [] tab3;
    
-   
+   /**
+    *Constructeur
+    * Initialise la page principale avec les 4 boutons à gauche et le pan vide à droite
+    */
     public FenetrePrincipale()
             {
+                
+                
+                // Initialisation de la fenetre
+                
                 setLayout(new BorderLayout());
                 setSize(1000,800);
                 setVisible(true);
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+              setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);
                 setResizable(false);
                 setTitle("Mon Hopital");
                 
+              
+              // Initialisation des 4 varaibles qui permettent de créer la requete
               
                 math="=";
                 select="";
@@ -56,8 +65,10 @@ public class FenetrePrincipale extends JFrame
                 condition="";
                 valeur="";
                 
+                // Initialisation du tableau qui permet de recuperer  le resultat des requetes 
                 tabRecup= new String[][]{{""}};
                 
+                //initialisation des deux panel 
                 pan= new JPanel();
                 pan2= new JPanel();
                 pan.setLayout(null);
@@ -65,42 +76,46 @@ public class FenetrePrincipale extends JFrame
                 pan.setBackground(new Color(0x00604A));
                 pan2.setBackground(new Color(0x79F8F8));  
                        
-                             
+                
+                //Initialisation des 4 boutons sur la gauche de la page pour choisir ce que l'utilisateutr veut faire
                 bouton= new JButton("Recherche ");
                 bouton2= new JButton("Mise à jour");
                 bouton3= new JButton("Reporting ");
                 bouton4= new JButton("Complique ");
                 
               
-                
+                //Positionner les boutons
                 bouton.setBounds(30,30,120,50);
                 bouton2.setBounds(30,100,120,50);
                 bouton3.setBounds(30,170, 120,50);
                 bouton4.setBounds(30,240, 120,50);
                 
-                
+                //choisir la couleur des boutons
                 bouton.setBackground(new Color(0x0EAD89 ));
                 bouton2.setBackground(new Color(0x0EAD89 ));  
                 bouton3.setBackground(new Color(0x0EAD89));
                 bouton4.setBackground(new Color(0x0EAD89));
                 
-                               
-              pan.setPreferredSize(new Dimension(190,800));
-              pan2.setPreferredSize(new Dimension(790,800));
+               // Taille des pannels               
+               pan.setPreferredSize(new Dimension(190,800));
+               pan2.setPreferredSize(new Dimension(790,800));
               
-              pan.setBorder(BorderFactory.createLineBorder(Color.black));
-              pan2.setBorder(BorderFactory.createLineBorder(Color.black));
+               //Affiche les bordures des pannels en noir
+               pan.setBorder(BorderFactory.createLineBorder(Color.black));
+               pan2.setBorder(BorderFactory.createLineBorder(Color.black));
                 
+               // Ajoute les boutons sur le premier pannel
                 pan.add(bouton);
                 pan.add(bouton2);
                 pan.add(bouton3);
                 pan.add(bouton4);
                
-                       
+               // Ajoute les deux apnnels sur la fenetre        
                 add(pan, "West");
                 add(pan2,"East");
                 setVisible(true);
                 
+                //Ajoute des actionLstener sur chzque bouton
                 bouton.addActionListener(new ItemAction());
                 bouton2.addActionListener(new ItemAction());
                 bouton3.addActionListener(new ItemAction());
@@ -109,38 +124,46 @@ public class FenetrePrincipale extends JFrame
                 
             }
 
- 
+ /**
+  * Cette méthode permet d'afficher ce qui se passe qaund on veut rechercher dans la base de donnée: c'est-a-dire quand on appuie sur le bouton 1 
+  * Elle affiche tous les elelments graphique nécéssaires à la bonne position et mis en forment
+  */
    public void afficher_recherche()
    {   
-        choix=true;        
-        String [] vide = {""};
+       
+       // Booleen qui permet de savoir si l'on est dans le module recherche ou dans le module recherche compliué ou le client rentre la requete
+        choix=true;    
         
-                
+        //Création d'un tableau model qui permet de le mettre à jour quand on fait une nouvelle requete
+        String [] vide = {""};         
         tableau = new JTable(tabRecup,vide);
         tableau3 = new DefaultTableModel();
         tableau.setModel(tableau3);
-        
-                
         tableau.setBounds(200,400,500,100);
-                tableau2= new JScrollPane(tableau);
                 
-                tableau2.setBounds(100,350,600,300);
+       // Insertion du tableau dans un tableau avec scroll
+        tableau2= new JScrollPane(tableau);                
+        tableau2.setBounds(100,350,600,300);
                 
+                // Création du bouton qui permet d'executer la requete
                 execute= new JButton("Execute");
                 execute.addActionListener(new ItemAction());
                 
-                
+                // Création des trois comboBoxe pour reccueillir la volonté d el'utilisateur
                 c1= new JComboBox ();
                 c2= new JComboBox (new String[]{""});
                 c3= new JComboBox (new String[]{""});
                 
+                // Création des radiobutton pour choisir si l'on veut cherccher qq chose <, > ou = a la valeur rentrée
                 r1= new JRadioButton("Inferieur ou egal");
                 r2= new JRadioButton("Supérieur ou egal");
                 r3= new JRadioButton("Egal");
                 r4= new JRadioButton("Different");
                 
+                // Création du JText Field pour rentrer la valeur du where par l'utilisateur
                 t1= new JTextField (20);
-                                
+                
+                // Création des labels pour expliuer à l'utilisateur ce qu'il doit faire
                 l1= new JLabel("Table: ");
                 l2= new JLabel("Champ: ");
                 l3= new JLabel("Condition: ");
@@ -148,7 +171,8 @@ public class FenetrePrincipale extends JFrame
                 l5= new JLabel("La valeur cherchee doit être: ");
                 l6 = new JLabel();
                 l6.setBounds(100,680,700,10);
-      
+                
+                // Rajouter les champs de la premiere comboboxe les chammps des deux autres dépendront du choix d el'utilisteur sur celle-ci
                 c1.addItem("Selectionner");
                 c1.addItem("Docteur");
                 c1.addItem("Employe");
@@ -159,36 +183,42 @@ public class FenetrePrincipale extends JFrame
                 c1.addItem("Service");
                 c1.addItem("Infirmier");
                 
+                //Positionnement des comboboxes
                 c1.setBounds(150,30,210,20);
                 c2.setBounds(150,100,210,20);
                 c3.setBounds(150,170,210,20);
                 
+                //positionnement des radiobuttons
                 r1.setBounds(550,70,130,20);
                 r2.setBounds(550,110,130,20);
                 r3.setBounds(550,150,130,20);
                 r4.setBounds(550,190,130,20);
                 
+                //Creation d'un bouton group qui permet qu'on ne puisse chosiir qu'un seul radiobutton
                 ButtonGroup b = new ButtonGroup();
                 b.add(r1);
                 b.add(r2);
                 b.add(r3);
                 b.add(r4);
                 
+                //Coouleur des radiobutton
                 r1.setBackground(new Color(0x79F8F8));
                 r2.setBackground(new Color(0x79F8F8));
                 r3.setBackground(new Color(0x79F8F8));
                 r4.setBackground(new Color(0x79F8F8));
                 
-                t1.setBounds(150,240,210,20);
-                
+                //Position du textfield et du bouton execute
+                t1.setBounds(150,240,210,20);              
                 execute.setBounds(550,240,130,20);
                 
+                // Position des labels
                 l1.setBounds(50,30,60,20);
                 l2.setBounds(50,100,60,20);
                 l3.setBounds(50,170,60,20);
                 l4.setBounds(50,240,60,20);
                 l5.setBounds(550,30,180,20);
                 
+                // MAJ du pan2 en ajoutant tous les éléments graphiques précedents
                 pan2.setEnabled(false);
                 pan2.setEnabled(true);
                 pan2.add(c1);
@@ -209,6 +239,8 @@ public class FenetrePrincipale extends JFrame
                 pan2.add(execute);
              
                 
+                // Ajout d'actionListener pour chaque ojjet graphique qui doit etre ecouté
+                // Création de différentes class de Listener pour séparer les cas
                 c1.addActionListener(new Combo());
                 c2.addActionListener(new Combo2());
                 c3.addActionListener(new Combo3());
@@ -217,6 +249,7 @@ public class FenetrePrincipale extends JFrame
                 r3.addActionListener(new ItemAction());
                 r4.addActionListener(new ItemAction());
                 
+                // MAJ de la fenetre
                 add(pan,"West");
                 add(pan2,"East");
                 pan2.setVisible(true);
@@ -224,47 +257,53 @@ public class FenetrePrincipale extends JFrame
       
                            
    }
-   
+   /**
+    * Méthode qui gère l'interface quand on appuie sur l bouton qui permet à l'utilisateur de rentrer ces propres requetes
+    * Elle met en place le pan2 et le maj pour ue l'utilisateur puisse rentrer une requete
+    */
    
    public void requetes_compliquees()
    {
+     // Booleen qui permet de dire que l'utilisateur choisit sa requete et ne passe pas par le formulaire
      choix=false;
+     
+     //Création de dux nouveau pannels pour la mise en page + Layout + position+ couleur
      pan3= new JPanel();
      pan3.setLayout(null);
      pan3.setBounds(20,30,700,150);
-     pan3.setBackground(new Color(0x79F8F8));
-     
+     pan3.setBackground(new Color(0x79F8F8));   
      pan4= new JPanel();
      pan4.setLayout(null);
      pan4.setBounds(20,200,700,500);
      pan4.setBackground(new Color(0x79F8F8));
      
+     // Création du bouton executer
      execute2 = new JButton ("execute");
      execute2.setBounds(290,100,80,20);
      execute2.addActionListener(new ItemAction());
      
+    // Instanciation du tableu qui affiche le resultat de la requete et son modele qui permet de mettre a jour le contenu du tableau selon les requetes
      String [] vide = {""};
-      tableau = new JTable(tabRecup,vide);
-      tableau3 = new DefaultTableModel();
-        tableau.setModel(tableau3);
-                
-        tableau.setBounds(200,400,500,100);
-                tableau2= new JScrollPane(tableau);
-                
-                tableau2.setBounds(30,50,650,300);
+     tableau = new JTable(tabRecup,vide);
+     tableau3 = new DefaultTableModel();
+     tableau.setModel(tableau3);    
+     tableau.setBounds(200,400,500,100);
+     tableau2= new JScrollPane(tableau);          
+     tableau2.setBounds(30,50,650,300);
      
-     
+     //declaration du JTextField qui recupere la requete
      t2= new JTextField(25);
      t2.setBounds(170,60,300,20);
      
+     //declaration du JLabel qui explique à l'utiliateur ce qu'il doit faire
      l7 = new JLabel("Veuillez rentrer votre requete: ");
      l7.setBounds(250,30,300,20);
      
-     
+     // Ajoutter les elements graphique sur pan2 puis sur la fenetre
      pan3.add(t2);
      pan3.add(execute2);
      pan3.add(l7);
-   pan4.add(tableau2);
+     pan4.add(tableau2);
      pan2.add(pan4);
      pan2.add(pan3);
      setVisible(true);
@@ -273,7 +312,11 @@ public class FenetrePrincipale extends JFrame
    }
    
    
-   
+   /**
+    * Classe ItemAction qui implemente actionListener qui permet de gérer tous les éléments qui on un actionListener Itemaction
+    * Il permet, pour ces elements graphiques, de gérer ce qu'il se passe dans le cas ou l'utilisateur les selectionneent
+    * Cette classe est pour les JButton il y aura d'autrespour les comboboxes
+    */
    
    class ItemAction implements ActionListener
    {
@@ -348,6 +391,9 @@ public class FenetrePrincipale extends JFrame
        
       
    }
+   /**
+    * Methode qui affiche qui créé une requete selon les decisions de l'utilisateur et remplit le tableau affichant le resultat
+    */
    public void afficher_resultat()
    {
        try {
@@ -608,13 +654,17 @@ public class FenetrePrincipale extends JFrame
    
    
    
-   
+   /**
+    * Méthode qui est appelé qaund l'utilisateur decide de mettre à jour la base de donnée
+    */
    
     public void afficher_MAJ()
    {
       
    }
-    
+    /**
+    * Méthode qui est appelé qaund l'utilisateur decide d'afficher des diagrammes faisant certaines statistiques
+    */
      public void afficher_reporting()
    {
        System.out.println("reporting");
@@ -625,9 +675,4 @@ public class FenetrePrincipale extends JFrame
       
    }
     
-   public void afficher_requete()
-   {
-      
- 
-}
 }

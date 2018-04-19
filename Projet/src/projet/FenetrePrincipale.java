@@ -291,6 +291,10 @@ public class FenetrePrincipale extends JFrame
      tableau2= new JScrollPane(tableau);          
      tableau2.setBounds(30,50,650,300);
      
+     //création d'un label
+     l6 = new JLabel();
+     l6.setBounds(100,680,700,10);
+     
      //declaration du JTextField qui recupere la requete
      t2= new JTextField(25);
      t2.setBounds(170,60,300,20);
@@ -303,6 +307,7 @@ public class FenetrePrincipale extends JFrame
      pan3.add(t2);
      pan3.add(execute2);
      pan3.add(l7);
+     pan3.add(l6);
      pan4.add(tableau2);
      pan2.add(pan4);
      pan2.add(pan3);

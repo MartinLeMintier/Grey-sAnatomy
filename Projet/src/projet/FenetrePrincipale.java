@@ -18,7 +18,7 @@ import org.jfree.ui.RefineryUtilities;
 
 
 /**
- *
+ *Classe qui gère l'affichage et la mise en place des trois modules: recherche, mise à jour, reporting
  * @author MArgaux 
  */
 public class FenetrePrincipale extends JFrame
@@ -323,6 +323,7 @@ public class FenetrePrincipale extends JFrame
        @Override
        public void actionPerformed(ActionEvent e)
        {
+           //Quand le bouton de recherche est actionné remettre le pan2 à 0 et appelerla fonction qui execute la recherche dans la base de donnée
            if(e.getSource()==bouton)
            {
                select="";
@@ -333,6 +334,7 @@ public class FenetrePrincipale extends JFrame
                afficher_recherche();
            }
            
+           // Quand le bouton recherchecompliquée est activé remettre le pan2 à 0 et appeler la fontion qui affiche et execute la recherche lorsque l'utilisateur rentre une requete
            if(e.getSource()==bouton4)
            {
                pan2.removeAll();
@@ -341,7 +343,7 @@ public class FenetrePrincipale extends JFrame
                requetes_compliquees();
            }
            
-           
+         // quand le bouton reporting est actionné appel le sous programme  qui affiche le reporting 
            
             if(e.getSource()==bouton3)
            {
@@ -350,7 +352,7 @@ public class FenetrePrincipale extends JFrame
                pan2.setEnabled(true);
                afficher_reporting();
            }
-              
+         // Pour les 4 bouton radios associer  à la variable utilisée pour créer une requete, la valeur qui lui correspond  
          if(e.getSource()==r1)
            {
                math="<=";
@@ -370,18 +372,21 @@ public class FenetrePrincipale extends JFrame
                math="!=";
            }   
               
-              
+           // Bouton qui affiche le resultat de la requete lorsque l'on appui sur executer   
            if(e.getSource()==execute)
               {
              
                   
                   afficher_resultat();
               }
+            // Bouton qui affiche le resultat de la requete lorsque l'on appui sur executer dans le module de recherche compliqué
             if(e.getSource()==execute2)
              {        
                  
                   afficher_resultat();
               }
+            
+            // Bouton qui gère les maj quand on appui dessus
            if(e.getSource()==bouton2)
            {
                pan2.updateUI();
@@ -397,16 +402,21 @@ public class FenetrePrincipale extends JFrame
    public void afficher_resultat()
    {
        try {
+           //remettre à zero le JTextField à chaque execution
            l6.setText("");
+           
+           
            String requete;           
            con= new Connexion("hopital", "root", "");          
         
          
-                   
+    // dans le cas ou on est dans le module ou l'utilisateur passe par le formulaire               
      if(choix==true)    
      {
-         
+         //recuperer ce qu'il  ais dans le JTextField
             valeur="'"+t1.getText()+"'";
+            
+          // Si il selectionne Selectionner dans une des 3 ComboBoxe initialiser les cariables de la requete à vide
            if("Selectionner".equals(select))
        {   
             select="";
@@ -422,6 +432,7 @@ public class FenetrePrincipale extends JFrame
             condition="";
                      
        }
+           // Permet de gerer si il y a un where ou non dans la requete si oui ce qu'il y a apres le where prend la valeeur condition + math+valeur sinon 1 ce qui veut dire pas de where
          
            if(condition.equals("aucune"))
            {
@@ -431,16 +442,18 @@ public class FenetrePrincipale extends JFrame
                requete="SELECT "+ select +  " FROM " + table + " WHERE " + condition + math+valeur;
            }
      }
-     else{
+     else{ // si choix == false cad que l'utilisateur rentre directement la requete on recupere juste ce qu'il y a dans le jTextField
          requete=t2.getText();
        
      }
    
-           
+           //Blindage pour que les requetes demandées à l'execution existent 
            if((select!=""&&table!=""&&condition!="")|| choix==false)
            {
+            //tableau qui va recupererle retour de la requete
            tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
            
+           //initialise les titres dans le tableau qui affiche le resulatta de la requete
            if(choix==true)
            {
                tabRecup [0][0]="";
@@ -452,23 +465,28 @@ public class FenetrePrincipale extends JFrame
            }
            
           
-          System.out.println(requete);
+        //// // System.out.println(requete);
+        
+        // remplir le tableau du resultat des requetes
            for(int i=1; i<con.remplirChampsRequete(requete).size();i++)
            {
               tabRecup[i][0]= con.remplirChampsRequete(requete).get(i);
               
            }
+           
+           // remplir le tableau graphique avec le tableau de requetes
            String[] videe = new String[]{""};
            DefaultTableModel mod = new DefaultTableModel(tabRecup,videe);
            tableau.setModel(mod);
            }
            else
            {
-                           
+                // Affichage que la requete est erronee dans le cas ou le blindage a empeché la requete de s'executer          
                l6.setText("Votre saisie est erronee veuillez recommencer");
              
            }
            
+           // reininitialiser les vraiables des requetes à vide pour ne pas garder les valurs prises precedemment
            select="";
            table="";
            condition="";
@@ -487,26 +505,30 @@ public class FenetrePrincipale extends JFrame
    
    
    
-   
+   /**
+    * déclaration d'une classe qui implémente actionListener et qui décrit ce qui sera fait selon le choix de l'utilisateur sur la premiere combo boxe
+    */
    class Combo implements ActionListener
    {
+      // Implementation de la méthode actionperformed 
        @Override
        public void actionPerformed(ActionEvent e)
        {
-          table = (String)c1.getSelectedItem();
-         
-                 
-          
+           // A chaque fois que l'utilisteur fait un choix dans la combo boxe on appelle la focntion afficher_combo
+          table = (String)c1.getSelectedItem();                                 
           afficher_combo();
     
        }
-       
+       /**
+        * Cette méthode permet de créer le contenu de la deuxieme comboboxs selon le choix d el'utilisateur dans la premiere
+        */
         public void afficher_combo()
        {
            
           String tab[]={""};
           String tab2[]={""};
           
+          // Si l'utilisateur a choisi docteur la comboboxe "deux" presentra les attributs de la classe docteur
           if("Docteur".equals(table))
       {   
         tab= new String [] {"Selectionner","Tout_afficher", "numero", "specialite"};
@@ -516,7 +538,7 @@ public class FenetrePrincipale extends JFrame
       }
           
           
-           
+         // Si l'utilisateur a choisi infirmier la comboboxe "deux" presentra les attributs de la classe infirmier 
            if("Infirmier".equals(table))
       {
          tab= new String []{"Selectionner","Tout_afficher", "numero", "code_service","rotation", "salaire"};
@@ -525,7 +547,7 @@ public class FenetrePrincipale extends JFrame
             
             
       }
-           
+        // Si l'utilisateur a choisi employe la comboboxe "deux" presentra les attributs de la classe employe  
               if("Employe".equals(table))
       {
           tab=new String []{"Selectionner","Tout_afficher", "numero", "nom", "prenom","tel", "adresse"};
@@ -534,7 +556,7 @@ public class FenetrePrincipale extends JFrame
                   
         }
               
-              
+         // Si l'utilisateur a choisi hospitalisation la comboboxe "deux" presentra les attributs de la classe hospitalisation     
               if("Hospitalisation".equals(table))
       {
            tab= new String []{"Selectionner","Tout_afficher", "no_malade", "code_service","no_chambre","lit"};
@@ -542,7 +564,7 @@ public class FenetrePrincipale extends JFrame
            tab3= new String []{ "no_malade", "code_service","no_chambre","lit"};
           
       }
-               
+        // Si l'utilisateur a choisi malade la comboboxe "deux" presentra les attributs de la classe mlade      
                 if("Malade".equals(table))
       {
           tab=new String []{"Selectionner","Tout_afficher", "numero", "nom","prenom","tel","adresse","mutuelle"};
@@ -551,6 +573,7 @@ public class FenetrePrincipale extends JFrame
           
     
       }
+                // Si l'utilisateur a choisi soigne la comboboxe "deux" presentra les attributs de la classe soigne
                   if("Soigne".equals(table))
       {
           tab=new String []{"Selectionner","Tout_afficher", "no_docteur", "no_malade"};
@@ -559,6 +582,7 @@ public class FenetrePrincipale extends JFrame
           
     
       }
+                  // Si l'utilisateur a choisi chambre la comboboxe "deux" presentra les attributs de la classe chambre
                 
                 if("Chambre".equals(table))
       {
@@ -567,7 +591,7 @@ public class FenetrePrincipale extends JFrame
           tab3=new String []{ "no_chambre", "code_service","surveillant","nb_lits"};
                    
       }
-                
+             // Si l'utilisateur a choisi service la comboboxe "deux" presentra les attributs de la classe service   
                 if("Service".equals(table))
       {
            tab=new String []{"Selectionner","Tout_afficher", "code", "nom","batiment","directeur"};
@@ -577,7 +601,7 @@ public class FenetrePrincipale extends JFrame
       }
                 
                 
-                
+         // Création des comboboxes avec un model pour que les maj des comboboxes soient prisent en compte à chaque nouvelle requete       
                 
         DefaultComboBoxModel model = new DefaultComboBoxModel(tab) ; 
         DefaultComboBoxModel model2 = new DefaultComboBoxModel(tab2) ; 
@@ -593,18 +617,23 @@ public class FenetrePrincipale extends JFrame
        
    }
    
-   
+    /**
+    * déclaration d'une classe qui implémente actionListener et qui décrit ce qui sera fait selon le choix de l'utilisateur sur la deuxieme combo boxe
+    */
    
     class Combo2 implements ActionListener
    {
        @Override
        public void actionPerformed(ActionEvent e)
        {
+           // chzque fois que l'utilisateur fait un choix sur la 2eme comboboxe chaine_prend_bonne_valeur est appelé
            select = (String) c2.getSelectedItem();
            chaine_prend_bonne_valeur();
                
        }
-       
+       /**
+        * Cette sous fonction permet de faire prendre à select la bonne valeur lorsque il fait le chois de tout afficher 
+        */
         public void chaine_prend_bonne_valeur()
         {
             if("Docteur".equals(table)&& "Tout_afficher".equals(select))
@@ -643,11 +672,16 @@ public class FenetrePrincipale extends JFrame
               
         }
     }
+    
+    /**
+    * déclaration d'une classe qui implémente actionListener et qui décrit ce qui sera fait selon le choix de l'utilisateur sur la troisieme combo boxe
+    */
     class Combo3 implements ActionListener
    {
        @Override
        public void actionPerformed(ActionEvent e)
        {
+           // condition prend la valeur du choix fait ar l'utilisateur
            condition = (String) c3.getSelectedItem();
        }
     }

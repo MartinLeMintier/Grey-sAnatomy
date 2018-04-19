@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.ui.RefineryUtilities;
 
 
 /**
@@ -22,20 +23,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FenetrePrincipale extends JFrame
 {
-   private JPanel pan, pan2, pan3, pan4;
-   private JButton bouton, bouton2, bouton3,bouton4, execute, execute2;
-   private JTextField t1, t2;
-   private JComboBox c1, c2,c3;
-   private  JLabel l1, l2, l3, l4, l5, l6, l7;
-   private JRadioButton r1, r2, r3, r4;
-   private String select, table, condition, math, valeur; //   dans l'ordre chaine: select, chaine2: <, > ou = du where, chaie3: l'attribut du where
-   private Connexion con;
-   private JTable tableau, tableau_model;
-   private JScrollPane tableau2;
-   private String[][] tabRecup ;
-   private boolean choix;
-   private  DefaultTableModel tableau3;
-   private  String [] tab3;
+   public JPanel pan, pan2, pan3, pan4;
+   public JButton bouton, bouton2, bouton3,bouton4, execute, execute2;
+   public JTextField t1, t2;
+   public JComboBox c1, c2,c3;
+   public  JLabel l1, l2, l3, l4, l5, l6, l7;
+   public JRadioButton r1, r2, r3, r4;
+   public String select, table, condition, math, valeur; //   dans l'ordre chaine: select, chaine2: <, > ou = du where, chaie3: l'attribut du where
+   public Connexion con;
+   public JTable tableau, tableau_model;
+   public JScrollPane tableau2;
+   public String[][] tabRecup ;
+   public boolean choix;
+   public  DefaultTableModel tableau3;
+   public  String [] tab3;
    
    
     public FenetrePrincipale()
@@ -296,6 +297,16 @@ public class FenetrePrincipale extends JFrame
                pan2.setEnabled(true);
                requetes_compliquees();
            }
+           
+           
+           
+            if(e.getSource()==bouton3)
+           {
+               pan2.removeAll();
+               pan2.setEnabled(false);
+               pan2.setEnabled(true);
+               afficher_reporting();
+           }
               
          if(e.getSource()==r1)
            {
@@ -338,7 +349,7 @@ public class FenetrePrincipale extends JFrame
    public void afficher_resultat()
    {
        try {
-           l6.setText("");
+  
            String requete;           
            con= new Connexion("hopital", "root", "");          
         
@@ -381,14 +392,11 @@ public class FenetrePrincipale extends JFrame
            if((select!=""&&table!=""&&condition!="")|| choix==false)
            {
            tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
-            tabRecup [0][0]="";
            if(choix==true)
            {
-               
-               
+               tabRecup [0][0]="";
                 for(int i=0; i< tab3.length; i++)
            {
-               
                 tabRecup[0][0]+=tab3[i]+"  ";
            }
            }
@@ -600,7 +608,12 @@ public class FenetrePrincipale extends JFrame
     
      public void afficher_reporting()
    {
-       
+       System.out.println("reporting");
+      Pie demo = new Pie( "doc" );  
+      demo.setSize( 800 , 600 );    
+      RefineryUtilities.centerFrameOnScreen( demo );    
+      demo.setVisible( true ); 
+      
    }
     
    public void afficher_requete()

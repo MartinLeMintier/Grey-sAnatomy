@@ -42,7 +42,7 @@ public class FenetrePrincipale extends JFrame
     *Constructeur
     * Initialise la page principale avec les 4 boutons à gauche et le pan vide à droite
     */
-    public FenetrePrincipale()
+    public FenetrePrincipale(Connexion conni)
             {
                 
                 
@@ -56,7 +56,7 @@ public class FenetrePrincipale extends JFrame
                 setResizable(false);
                 setTitle("Mon Hopital");
                 
-              
+              con=conni;
               // Initialisation des 4 varaibles qui permettent de créer la requete
               
                 math="=";
@@ -412,7 +412,7 @@ public class FenetrePrincipale extends JFrame
            
            
            String requete;           
-           con= new Connexion("hopital", "root", "");          
+          // con= new Connexion("hopital", "root", "");          
         
          
     // dans le cas ou on est dans le module ou l'utilisateur passe par le formulaire               
@@ -451,26 +451,26 @@ public class FenetrePrincipale extends JFrame
          requete=t2.getText();
        
      }
-   
+  
            //Blindage pour que les requetes demandées à l'execution existent 
            if((select!=""&&table!=""&&condition!="")|| choix==false)
            {
             //tableau qui va recupererle retour de la requete
            tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
-           
+//           tabRecup [0][0]="";
+
            //initialise les titres dans le tableau qui affiche le resulatta de la requete
-           if(choix==true)
-           {
-               tabRecup [0][0]="";
-               
-                for(int i=0; i< tab3.length; i++)
-           {
-                tabRecup[0][0]+=tab3[i]+"  ";
-           }
-           }
+//           if(choix==true)
+//           {
+//               
+//                for(int i=0; i< tab3.length; i++)
+//           {
+//                tabRecup[0][0]+=tab3[i]+"  ";
+//           }
+//           }
            
           
-        //// // System.out.println(requete);
+        System.out.println(requete);
         
         // remplir le tableau du resultat des requetes
            for(int i=1; i<con.remplirChampsRequete(requete).size();i++)
@@ -500,9 +500,7 @@ public class FenetrePrincipale extends JFrame
            
        } catch (SQLException ex) {
            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
-       }
+       } 
    }
    
    

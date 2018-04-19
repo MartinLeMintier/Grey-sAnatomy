@@ -170,7 +170,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
              conni = new Connexion (nom_data,login, passw);
              this.dispose();
              System.out.println(conni.remplirChampsRequete("SELECT * FROM employe").get(0));
-             FenetrePrincipale P = new FenetrePrincipale();
+             FenetrePrincipale P = new FenetrePrincipale(conni);
         
          } catch (SQLException | ClassNotFoundException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
@@ -188,7 +188,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
          try {      
                conni = new Connexion (usernameECE,passwordECE, loginDataBase, passwordDataBase);
                this.dispose();
-               FenetrePrincipale P = new FenetrePrincipale();
+               FenetrePrincipale P = new FenetrePrincipale(conni);
              
          } catch (SQLException | ClassNotFoundException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);

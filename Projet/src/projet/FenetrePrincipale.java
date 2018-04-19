@@ -330,11 +330,13 @@ public class FenetrePrincipale extends JFrame
               
            if(e.getSource()==execute)
               {
+             
                   
                   afficher_resultat();
               }
             if(e.getSource()==execute2)
-             {                  
+             {        
+                 
                   afficher_resultat();
               }
            if(e.getSource()==bouton2)
@@ -349,7 +351,7 @@ public class FenetrePrincipale extends JFrame
    public void afficher_resultat()
    {
        try {
-  
+           l6.setText("");
            String requete;           
            con= new Connexion("hopital", "root", "");          
         
@@ -385,16 +387,18 @@ public class FenetrePrincipale extends JFrame
      }
      else{
          requete=t2.getText();
-         System.out.println(requete);
+       
      }
-           
+   
            
            if((select!=""&&table!=""&&condition!="")|| choix==false)
            {
            tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
+           
            if(choix==true)
            {
                tabRecup [0][0]="";
+               
                 for(int i=0; i< tab3.length; i++)
            {
                 tabRecup[0][0]+=tab3[i]+"  ";
@@ -402,7 +406,7 @@ public class FenetrePrincipale extends JFrame
            }
            
           
-          
+          System.out.println(requete);
            for(int i=1; i<con.remplirChampsRequete(requete).size();i++)
            {
               tabRecup[i][0]= con.remplirChampsRequete(requete).get(i);
@@ -418,6 +422,11 @@ public class FenetrePrincipale extends JFrame
                l6.setText("Votre saisie est erronee veuillez recommencer");
              
            }
+           
+           select="";
+           table="";
+           condition="";
+           valeur="";
           
            
        } catch (SQLException ex) {

@@ -45,10 +45,10 @@ public class SelectionServeur extends JFrame implements ActionListener
         bouton = new JButton("Valider");
         bouton.addActionListener(this);
         selection = new JComboBox();
-        servt.setBackground(new Color(0x79F8F8));
-        servc.setBackground(new Color(0x79F8F8));
-        servG.setBackground(new Color(0x79F8F8));
-        servb.setBackground(new Color(0x79F8F8));
+        servt.setBackground(new Color(0xEDF7F7));
+        servc.setBackground(new Color(0xEDF7F7));
+        servG.setBackground(new Color(0xEDF7F7));
+        servb.setBackground(new Color(0xEDF7F7));
             
             ///choix pour la comboBox
             selection.addItem("localhost");

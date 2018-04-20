@@ -505,7 +505,7 @@ public class Recherche extends JFrame
        try {
            //remettre à zero le JTextField à chaque execution
            l6.setText("");                     
-           String requete;       
+           String requete="";       
         
          
     // dans le cas ou on est dans le module ou l'utilisateur passe par le formulaire               
@@ -541,7 +541,13 @@ public class Recherche extends JFrame
            }
      }
      else{ // si choix == false cad que l'utilisateur rentre directement la requete on recupere juste ce qu'il y a dans le jTextField
+         
          requete=t2.getText();
+         if(requete.equals(""))
+         {
+             t2.setText("select * from employe");
+             requete="select * from employe";
+         }
        
      }
   
@@ -554,11 +560,11 @@ public class Recherche extends JFrame
         
         // remplir le tableau du resultat des requetes
         try{
-          tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
-          //tableau qui va recupererle retour de la requete
+//          tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
+//          //tableau qui va recupererle retour de la requete
 //           tabRecup [0][0]="";
-
-           //initialise les titres dans le tableau qui affiche le resulatta de la requete
+//
+//           //initialise les titres dans le tableau qui affiche le resulatta de la requete
 //           if(choix==true)
 //           {
 //               

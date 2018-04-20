@@ -78,10 +78,10 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     
     //Panel général qui regroupe tous les autres 
     P1 = new JPanel();
-    P1.setBackground(new Color(0x79F8F8));
+    P1.setBackground(new Color(0xEDF7F7));
     P1.setLayout(new BoxLayout(P1, BoxLayout.LINE_AXIS));
     P6 = new JPanel();
-    P6.setBackground(new Color(0x79F8F8));
+    P6.setBackground(new Color(0xEDF7F7));
     l5 = new JLabel ("Quel est votre mot de passe database?");
     t5 = new JPasswordField(15);
     t5.setText("");
@@ -118,11 +118,11 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     Ptitre = new JPanel();
     
     //Couleur du background
-    P2.setBackground(new Color(0x79F8F8));
-    P3.setBackground(new Color(0x79F8F8));
-    P4.setBackground(new Color(0x79F8F8));
-    P5.setBackground(new Color(0x79F8F8));
-    Ptitre.setBackground(new Color(0x79F8F8));
+    P2.setBackground(new Color(0xEDF7F7));
+    P3.setBackground(new Color(0xEDF7F7));
+    P4.setBackground(new Color(0xEDF7F7));
+    P5.setBackground(new Color(0xEDF7F7));
+    Ptitre.setBackground(new Color(0xEDF7F7));
     
     //On ajoute tout aux panneaux correspondant 
     

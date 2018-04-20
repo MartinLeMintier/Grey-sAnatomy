@@ -20,17 +20,17 @@ import java.util.logging.Logger;
 public class FenetreAcceuil extends JFrame implements ActionListener 
 {
     ///Initialisation des éléments graphiques
-   public JPanel P1, P2, P3, P4, P5, P6, Ptitre;
-   public JLabel l2, l3, l4, l5, titre;
+   private JPanel P1, P2, P3, P4, P5, P6, Ptitre;
+   private JLabel l2, l3, l4, l5, titre;
     
-   public JTextField t2, t3;
+   private JTextField t2, t3;
     
-   public JPasswordField t4, t5;
+   private JPasswordField t4, t5;
     
-   public JButton b4; 
-   public Box Box1;
-   public Connexion conni;
-   public String choix_serveur;
+   private JButton b4; 
+   private Box Box1;
+   private Connexion conni;
+   private String choix_serveur;
    
    ///Constructeur
     public FenetreAcceuil(String choix){
@@ -169,7 +169,6 @@ public class FenetreAcceuil extends JFrame implements ActionListener
         try {    
              conni = new Connexion (nom_data,login, passw);
              this.dispose();
-             System.out.println(conni.remplirChampsRequete("SELECT * FROM employe").get(0));
              FenetrePrincipale P = new FenetrePrincipale(conni);
         
          } catch (SQLException | ClassNotFoundException ex) {

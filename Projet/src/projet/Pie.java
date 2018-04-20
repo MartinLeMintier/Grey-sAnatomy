@@ -21,17 +21,11 @@ import Controleur.Connexion;
     
     public class Pie extends ApplicationFrame 
     {
-        
-        double nb_cardio = 20;
-        double nb_ortho = 20;
-        double nb_trauma = 30;
-        double nb_anes = 10;
-        double nb_pneumo = 10;
-        double nb_radio = 10;
-        public Connexion connex;
-        public String [] retour;
-        public String [] specialite ;
-        public String titre;
+        private Connexion connex;
+        private String [] retour;
+        private String [] specialite ;
+        private String total ;
+        private String titre;
         
     
    public Pie(String title, Connexion con ) {
@@ -106,11 +100,11 @@ import Controleur.Connexion;
                     
                     for(int i=0; i<specialite.length;i++)
                   {
-                      requete[i] ="select count(specialite) from docteur where specialite='"+specialite[i]+"'";
+                      requete[i] ="select count(specialite)/32 from docteur where specialite='"+specialite[i]+"'";
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                       System.out.println(retour[i]) ;
                   }
-            
+    
                }
                
                  if(titre.equals("rotation des infirmieres"))
@@ -122,10 +116,10 @@ import Controleur.Connexion;
                     
                     for(int i=0; i<specialite.length;i++)
                   {
-                      requete[i] ="select count(rotation) from infirmier where rotation='"+specialite[i]+"'";
+                      requete[i] ="select count(rotation)/28 from infirmier where rotation='"+specialite[i]+"'";
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                       System.out.println(retour[i]) ;
-                  }
+                  }                  
             
                }
                  

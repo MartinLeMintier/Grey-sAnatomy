@@ -24,38 +24,39 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class FenetrePrincipale extends JFrame
 {
-   public JPanel pan, pan2, pan3, pan4; // 2 premiers pan = pan principaux, les deux autres= sous pan dans le module recherchec compliquée
-   public JButton bouton, bouton2, bouton3,bouton4, execute, execute2,exit,exemartin; // 4 boutons pour choisir le modul et differents boutons quitter
-   public JTextField t1, t2;
-   public JComboBox c1, c2,c3,c4;
-   public  JLabel l1, l2, l3, l4, l5, l6, l7, l8;
-   public JRadioButton r1, r2, r3, r4;
-   public String select, table, condition, math, valeur, condition2; // Retours des comboBoxes et JTextField pourconstruire une requete  
-   public Connexion con; // connexion récupérée en parametre du constructeur
-   public JTable tableau, tableau_model; // Tableau affichant le resultat d'une requete
-   public JScrollPane tableau2; // Tableau affichant le resultat d'une requete
-   public String[][] tabRecup ; // Tableau recuperant le resultat d'une requete
-   public boolean choix; // savoir si l'utilisateur a chosii le module de recherche avec le formulaire ou en rentrant la requete
-   public  DefaultTableModel tableau3; // model du tableau affiché
-   public  String [] tab3; // Titres dans l'affichage des requetes
-   public Pie demo; // declaration d'un diagramme
-   public double []y;
-   public int x;
+   private JPanel pan, pan2, pan3, pan4, pan5; // 2 premiers pan = pan principaux, les deux autres= sous pan dans le module recherchec compliquée
+   private JButton bouton, bouton2, bouton3,bouton4, execute, execute2,exit,exemartin; // 4 boutons pour choisir le modul et differents boutons quitter
+   private JTextField t1, t2;
+   private JComboBox c1, c2,c3,c4;
+   private  JLabel l1, l2, l3, l4, l5, l6, l7, l8;
+   private JRadioButton r1, r2, r3, r4;
+   private String select, table, condition, math, valeur, condition2; // Retours des comboBoxes et JTextField pourconstruire une requete  
+   private Connexion con; // connexion récupérée en parametre du constructeur
+   private JTable tableau, tableau_model; // Tableau affichant le resultat d'une requete
+   private JScrollPane tableau2; // Tableau affichant le resultat d'une requete
+   private String[][] tabRecup ; // Tableau recuperant le resultat d'une requete
+   private boolean choix; // savoir si l'utilisateur a chosii le module de recherche avec le formulaire ou en rentrant la requete
+   private  DefaultTableModel tableau3; // model du tableau affiché
+   private  String [] tab3; // Titres dans l'affichage des requetes
+   private Pie demo; // declaration d'un diagramme
+   private double []y;
+   private int x;
    
-   public JRadioButton saisie_num, saisie_nom;
-   public String choix_maj, choix_sous_menu, choix_combo_ss, requeteMaj;
-   public JComboBox sel_action, choix_supprimer, choix_mis, combo_ss_menu,combo_spec, code_service, rotation, mutuelle, champs_surveillant,nbr_lit, choix_modifier;
-   public JTextField champs_nom, champs_prenom, champs_numero,champs_adresse,champs_tel, salaire, lit, n_chambre, n_doctor, champs_num;
-   public JTextField search_maj_numero, search_maj_nom, search_maj_prenom;
-   public JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit;
-   public JLabel n_chambre_tl, search_maj_numtl, search_maj_ptl, n_doctor_tl, chp_num_tl, chp_chambre_num, nb_lit_tl, n_surveillant_tl, num_medecin, chp_numero_patient, titre, label_maj_p1;
-   public JButton valider_maj;
-   public JLabel label_maj_p, saisie;
+   private JRadioButton saisie_num, saisie_nom;
+   private String choix_maj, choix_sous_menu, choix_combo_ss, requeteMaj;
+   private JComboBox sel_action, choix_supprimer, choix_mis, combo_ss_menu,combo_spec, code_service, rotation, mutuelle, champs_surveillant,nbr_lit, choix_modifier;
+   private JTextField champs_nom, champs_prenom, champs_numero,champs_adresse,champs_tel, salaire, lit, n_chambre, n_doctor, champs_num;
+   private JTextField search_maj_numero, search_maj_nom, search_maj_prenom;
+   private JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit;
+   private JLabel n_chambre_tl, search_maj_numtl, search_maj_ptl, n_doctor_tl, chp_num_tl, chp_chambre_num, nb_lit_tl, n_surveillant_tl, num_medecin, chp_numero_patient, titre, label_maj_p1;
+   private JButton valider_maj;
+   private JLabel label_maj_p, saisie;
    
    
    /**
     *Constructeur
     * Initialise la page principale avec les 4 boutons à gauche et le pan vide à droite
+     * @param conni
     */
     public FenetrePrincipale(Connexion conni)
             {
@@ -66,7 +67,7 @@ public class FenetrePrincipale extends JFrame
                 setLayout(new BorderLayout());
                 setSize(1000,800);
                 setVisible(true);
-              setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setLocationRelativeTo(null);
                 setResizable(false);
                 setTitle("Mon Hopital");
@@ -80,6 +81,7 @@ public class FenetrePrincipale extends JFrame
                 table="";
                 condition="";
                 valeur="";
+                condition2="% de docteur par specialite";
                 
                 // Initialisation du tableau qui permet de recuperer  le resultat des requetes 
                 tabRecup= new String[][]{{""}};
@@ -398,22 +400,19 @@ public class FenetrePrincipale extends JFrame
               
            // Bouton qui affiche le resultat de la requete lorsque l'on appui sur executer   
            if(e.getSource()==execute)
-              {
-             
-                  
+              {                
                   afficher_resultat();
               }
             // Bouton qui affiche le resultat de la requete lorsque l'on appui sur executer dans le module de recherche compliqué
             if(e.getSource()==execute2)
-             {        
-                 
+             {                
                   afficher_resultat();
               }
             
             // Bouton qui gère les maj quand on appui dessus
            if(e.getSource()==bouton2)
            {
-               pan2.updateUI();
+               afficher_MAJ();
            }
            
            // Bouton pour gérer la fermeture du diagramme sans fermer la fenetre
@@ -427,7 +426,7 @@ public class FenetrePrincipale extends JFrame
            if(e.getSource()==exemartin)
            {
                //Premier diagramme
-               if(condition2.equals("Docteur"))
+               if(condition2.equals("% de docteur par specialite"))
                {
                 demo = new Pie( "Spécilites des docteurs", con );  
                 demo.setSize( 500 , 500 );    
@@ -437,7 +436,7 @@ public class FenetrePrincipale extends JFrame
    
                }
                //deuxieme diagramme
-               if(condition2.equals("Infirmier"))
+               if(condition2.equals("% d'infirmier par rotation"))
                {
 //                   HistogramDataset h = new  HistogramDataset();
 //                   h.addSeries("histogramme",y,x);
@@ -463,11 +462,8 @@ public class FenetrePrincipale extends JFrame
    {
        try {
            //remettre à zero le JTextField à chaque execution
-           l6.setText("");
-           
-           
-           String requete;           
-          // con= new Connexion("hopital", "root", "");          
+           l6.setText("");                     
+           String requete;       
         
          
     // dans le cas ou on est dans le module ou l'utilisateur passe par le formulaire               
@@ -774,7 +770,7 @@ public class FenetrePrincipale extends JFrame
     public void afficher_MAJ()
    {
       pan2.removeAll();
-       pan2.setLayout(null);
+      pan2.setLayout(null);
        
         
        ////Need pour la fenetre de mise à jour
@@ -929,18 +925,20 @@ public class FenetrePrincipale extends JFrame
        titre = new JLabel("Menu de mise à jour des données");
        label_maj_p1 = new JLabel("Quelle action souhaitez-vous effectuer?");
        titre.setFont(font);
-       titre.setBounds(450,50,300,20);
-       label_maj_p1.setBounds(490,100,300,20);
-       sel_action.setBounds(450,125,300,20);
+       titre.setBounds(250,50,300,20);
+       label_maj_p1.setBounds(250,100,300,20);
+       sel_action.setBounds(250,125,300,20);
        //On met la combobox sous écoute afin de récupérer le choix de l'utilisateur
        sel_action.addActionListener(new ItemActionMaj());
        
+       pan2.setEnabled(false);
+       pan2.setEnabled(true);
        pan2.add(titre);
        pan2.add(label_maj_p1);
        pan2.add(sel_action);
        
        pan2.updateUI();
-       add(pan2);
+       add(pan2,"East");
        setVisible(true);
    }
     /**
@@ -951,8 +949,12 @@ public class FenetrePrincipale extends JFrame
    {
      // bouton executer  
      exemartin = new JButton("GO");
-     exemartin.setBounds(150,60,310,20);
+     exemartin.setBounds(340,60,110,20);
      exemartin.addActionListener(new ItemAction());
+     
+     //nouveau pan pourr afficher le diagramme 
+     pan5= new JPanel();
+     pan5.setBounds(20,130,750,600);
      
      //bouton de sortie pour fermer un diagramme sans frmer la fenetre
      exit = new JButton("EXIT");
@@ -960,13 +962,14 @@ public class FenetrePrincipale extends JFrame
      
      //declaration de la comboboxe pour choisir le diagramme a afficher
      c4= new JComboBox ();
-     c4.addItem("Docteur");
-     c4.addItem("Infirmier");
-     c4.setBounds(150,30,210,20);
+     c4.addItem("% de docteur par specialite");
+     c4.addItem("% d'infirmier par rotation");
+     c4.setBounds(250,30,280,20);
      c4.addActionListener(new Combo4());
      
      //MAJ du pannel
      pan2.add(c4);
+     pan2.add(pan5);
      pan2.add(exemartin);
      
     // MAJ de la fenetre   

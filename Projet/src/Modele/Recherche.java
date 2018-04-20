@@ -560,11 +560,6 @@ public class Recherche extends JFrame
        } 
    }
    
-   
-   
-   
-   
-   
    /**
     * déclaration d'une classe qui implémente actionListener et qui décrit ce qui sera fait selon le choix de l'utilisateur sur la premiere combo boxe
     */
@@ -760,11 +755,8 @@ public class Recherche extends JFrame
        
    }
    
-   
-   
-   
    /**
-    * Méthode qui est appelé qaund l'utilisateur decide de mettre à jour la base de donnée
+    * Méthode qui est appelée qaund l'utilisateur decide de mettre à jour la base de donnée
     */
    
     public void afficher_MAJ()
@@ -1009,8 +1001,8 @@ public class Recherche extends JFrame
             setVisible(true);
             
             label_maj_p.setText("Sélectionnez ce que vous souhaitez ajouter");
-            label_maj_p.setBounds(450,175,300,20);
-            choix_mis.setBounds(450,200,300,20);
+            label_maj_p.setBounds(250,175,300,20);
+            choix_mis.setBounds(250,200,300,20);
             pan2.add(label_maj_p);
             pan2.add(choix_mis);
             
@@ -1023,40 +1015,40 @@ public class Recherche extends JFrame
                 if("Un employé".equals(choix_sous_menu)){
                     saisie.setText("Veuillez remplir les champs ci-dessous:");
                     pan2.add(saisie);
-                    saisie.setBounds(480,250,300,20);
+                    saisie.setBounds(280,250,300,20);
                     
                     pan2.add(chp_nom_tl);
-                    chp_nom_tl.setBounds(450,340,75,20);
+                    chp_nom_tl.setBounds(250,340,75,20);
                     pan2.add(champs_nom);
-                    champs_nom.setBounds(450,365,100,20);
+                    champs_nom.setBounds(250,365,100,20);
                     
                     pan2.add(chp_prenom_tl);
-                    chp_prenom_tl.setBounds(450, 400, 100, 20);
+                    chp_prenom_tl.setBounds(250, 400, 100, 20);
                     pan2.add(champs_prenom);
-                    champs_prenom.setBounds(450, 425, 100, 20);
+                    champs_prenom.setBounds(250, 425, 100, 20);
                     
                     pan2.add(chp_numero_tl);
-                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    chp_numero_tl.setBounds(450, 400, 100, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(650, 425, 100, 20);
+                    champs_numero.setBounds(450, 425, 100, 20);
                     
                     pan2.add(chp_adresse_tl);
-                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(650, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 100, 20);
                     
                     pan2.add(chp_tel_tl);
-                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    chp_tel_tl.setBounds(450, 340, 100, 20);
                     pan2.add(champs_tel);
-                    champs_tel.setBounds(650, 365, 100, 20);
+                    champs_tel.setBounds(450, 365, 100, 20);
                     
                     pan2.add(type_emploi);
-                    type_emploi.setBounds(450,280,100,20);
+                    type_emploi.setBounds(250,280,100,20);
                     pan2.add(combo_ss_menu);
                     
                     pan2.add(valider_maj);
-                    valider_maj.setBounds(550,520,100,30);
-                    combo_ss_menu.setBounds(450,305,100,20);
+                    valider_maj.setBounds(350,520,100,30);
+                    combo_ss_menu.setBounds(250,305,100,20);
                     
                     
                     choix_combo_ss = (String) combo_ss_menu.getSelectedItem();
@@ -1074,9 +1066,9 @@ public class Recherche extends JFrame
                             pan2.setEnabled(true);
                             
                             pan2.add(chp_special);
-                            chp_special.setBounds(550,460,100,20);
+                            chp_special.setBounds(350,460,100,20);
                             pan2.add(combo_spec);
-                            combo_spec.setBounds(550,485,100,20);
+                            combo_spec.setBounds(350,485,100,20);
                             pan2.updateUI();
                             add(pan2,"East");
                             setVisible(true);
@@ -1108,19 +1100,19 @@ public class Recherche extends JFrame
                             pan2.setEnabled(false);
                             pan2.setEnabled(true);
                             pan2.add(cs_tl);
-                            cs_tl.setBounds(400,460,100,20);
+                            cs_tl.setBounds(200,460,100,20);
                             pan2.add(code_service);
-                            code_service.setBounds(400,485,100,20);
+                            code_service.setBounds(200,485,100,20);
                             
                             pan2.add(rot_tl);
-                            rot_tl.setBounds(550,460,100,20);
+                            rot_tl.setBounds(350,460,100,20);
                             pan2.add(rotation);
-                            rotation.setBounds(550,485,100,20);
+                            rotation.setBounds(350,485,100,20);
                             
                             pan2.add(sal_tl);
-                            sal_tl.setBounds(700,460,100,20);
+                            sal_tl.setBounds(500,460,100,20);
                             pan2.add(salaire);
-                            salaire.setBounds(700,485,100,20);
+                            salaire.setBounds(500,485,100,20);
                             pan2.updateUI();
                             add(pan2,"East");
                             setVisible(true);
@@ -1147,40 +1139,40 @@ public class Recherche extends JFrame
                 if("Un malade".equals(choix_sous_menu)){
                     saisie.setText("Veuillez remplir les champs ci-dessous:");
                     pan2.add(saisie);
-                    saisie.setBounds(480,250,300,20);
+                    saisie.setBounds(280,250,300,20);
                     
                     pan2.add(chp_nom_tl);
-                    chp_nom_tl.setBounds(450,280,75,20);
+                    chp_nom_tl.setBounds(250,280,75,20);
                     pan2.add(champs_nom);
-                    champs_nom.setBounds(450,305,100,20);
+                    champs_nom.setBounds(250,305,100,20);
                     
                     pan2.add(chp_prenom_tl);
-                    chp_prenom_tl.setBounds(450, 340, 100, 20);
+                    chp_prenom_tl.setBounds(250, 340, 100, 20);
                     pan2.add(champs_prenom);
-                    champs_prenom.setBounds(450, 365, 100, 20);
+                    champs_prenom.setBounds(250, 365, 100, 20);
                     
                     pan2.add(mut_tl);
-                    mut_tl.setBounds(450,400,100,20);
+                    mut_tl.setBounds(250,400,100,20);
                     pan2.add(mutuelle);
-                    mutuelle.setBounds(450,425,100,20);
+                    mutuelle.setBounds(250,425,100,20);
                     
                     pan2.add(chp_numero_tl);
-                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    chp_numero_tl.setBounds(450, 400, 100, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(650, 425, 100, 20);
+                    champs_numero.setBounds(450, 425, 100, 20);
                     
                     pan2.add(chp_adresse_tl);
-                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(650, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 100, 20);
                     
                     pan2.add(chp_tel_tl);
-                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    chp_tel_tl.setBounds(450, 340, 100, 20);
                     pan2.add(champs_tel);
-                    champs_tel.setBounds(650, 365, 100, 20);
+                    champs_tel.setBounds(450, 365, 100, 20);
                     
                     pan2.add(valider_maj);
-                    valider_maj.setBounds(550,520,100,30);
+                    valider_maj.setBounds(350,520,100,30);
                     pan2.updateUI();
                     add(pan2,"East");
                     setVisible(true);
@@ -1199,39 +1191,39 @@ public class Recherche extends JFrame
                 if("Une hospitalisation".equals(choix_sous_menu)){
                     saisie.setText("Veuillez remplir les champs ci-dessous:");
                     pan2.add(saisie);
-                    saisie.setBounds(480,250,300,20);
+                    saisie.setBounds(280,250,300,20);
                     
                     pan2.add(saisie_num);
-                    saisie_num.setBounds(350,300,275,20);
+                    saisie_num.setBounds(150,300,275,20);
                     pan2.add(saisie_nom);
-                    saisie_nom.setBounds(650,300,200,20);
+                    saisie_nom.setBounds(450,300,200,20);
                     
                     if(saisie_nom.isSelected()){
                         
                         pan2.add(chp_nom_tl);
-                        chp_nom_tl.setBounds(450,340,75,20);
+                        chp_nom_tl.setBounds(250,340,75,20);
                         pan2.add(champs_nom);
-                        champs_nom.setBounds(450,365,100,20);
+                        champs_nom.setBounds(250,365,100,20);
                         
                         pan2.add(champs_lit);
-                        champs_lit.setBounds(650,340,75,20);
+                        champs_lit.setBounds(450,340,75,20);
                         pan2.add(lit);
-                        lit.setBounds(650,365,75,20);
+                        lit.setBounds(450,365,75,20);
                     
                         pan2.add(chp_prenom_tl);
-                        chp_prenom_tl.setBounds(450, 400, 100, 20);
+                        chp_prenom_tl.setBounds(250, 400, 100, 20);
                         pan2.add(champs_prenom);
-                        champs_prenom.setBounds(450, 425, 100, 20);
+                        champs_prenom.setBounds(250, 425, 100, 20);
                         
                         pan2.add(cs_tl);
-                        cs_tl.setBounds(650, 400, 100, 20);
+                        cs_tl.setBounds(450, 400, 100, 20);
                         pan2.add(code_service);
-                        code_service.setBounds(650, 425, 100, 20);
+                        code_service.setBounds(450, 425, 100, 20);
                         
                         pan2.add(n_chambre_tl);
-                        n_chambre_tl.setBounds(450, 460,150,20);
+                        n_chambre_tl.setBounds(250, 460,150,20);
                         pan2.add(n_chambre);
-                        n_chambre.setBounds(450,485,100,20);
+                        n_chambre.setBounds(250,485,100,20);
                         
                         if(ae.getSource()==valider_maj){
                          try {Connexion con = new Connexion("hopital", "root", "");
@@ -1251,24 +1243,24 @@ public class Recherche extends JFrame
                     
                     if(saisie_num.isSelected()){
                         pan2.add(chp_num_tl);
-                        chp_num_tl.setBounds(450,340,150,20);
+                        chp_num_tl.setBounds(250,340,150,20);
                         pan2.add(champs_num);
-                        champs_num.setBounds(450,365,150,20);
+                        champs_num.setBounds(250,365,150,20);
                         
                         pan2.add(champs_lit);
-                        champs_lit.setBounds(650,340,75,20);
+                        champs_lit.setBounds(450,340,75,20);
                         pan2.add(lit);
-                        lit.setBounds(650,365,75,20);
+                        lit.setBounds(450,365,75,20);
                     
                         pan2.add(n_chambre_tl);
-                        n_chambre_tl.setBounds(450, 400, 150, 20);
+                        n_chambre_tl.setBounds(250, 400, 150, 20);
                         pan2.add(champs_prenom);
-                        champs_prenom.setBounds(450, 425, 100, 20);
+                        champs_prenom.setBounds(250, 425, 100, 20);
                         
                         pan2.add(cs_tl);
-                        cs_tl.setBounds(650, 400, 100, 20);
+                        cs_tl.setBounds(450, 400, 100, 20);
                         pan2.add(code_service);
-                        code_service.setBounds(650, 425, 100, 20);
+                        code_service.setBounds(450, 425, 100, 20);
                         
                         if(ae.getSource()==valider_maj){
                          try {Connexion con = new Connexion("hopital", "root", "");
@@ -1284,7 +1276,7 @@ public class Recherche extends JFrame
                    
                     
                     pan2.add(valider_maj);
-                    valider_maj.setBounds(550,520,100,30);
+                    valider_maj.setBounds(350,520,100,30);
                     pan2.updateUI();
                     add(pan2,"East");
                     setVisible(true);
@@ -1293,30 +1285,30 @@ public class Recherche extends JFrame
                 if("Une chambre".equals(choix_sous_menu)){
                      saisie.setText("Veuillez remplir les champs ci-dessous:");
                      pan2.add(saisie);
-                     saisie.setBounds(480,250,300,20);
+                     saisie.setBounds(280,250,300,20);
                     
                      pan2.add(cs_tl);
-                     cs_tl.setBounds(450,300,150,20);
+                     cs_tl.setBounds(250,300,150,20);
                      pan2.add(code_service);
-                     code_service.setBounds(450,325,150,20);
+                     code_service.setBounds(250,325,150,20);
                     
                      pan2.add(n_chambre_tl);
-                     n_chambre_tl.setBounds(450, 360, 150, 20);
+                     n_chambre_tl.setBounds(250, 360, 150, 20);
                      pan2.add(champs_prenom);
-                     champs_prenom.setBounds(450, 385, 100, 20);
+                     champs_prenom.setBounds(250, 385, 100, 20);
                      
                      pan2.add(n_surveillant_tl);
-                     n_surveillant_tl.setBounds(650, 300, 150, 20);
+                     n_surveillant_tl.setBounds(450, 300, 150, 20);
                      pan2.add(champs_surveillant);
-                     champs_surveillant.setBounds(650, 325, 100, 20);
+                     champs_surveillant.setBounds(450, 325, 100, 20);
                      
                      pan2.add(nb_lit_tl);
-                     nb_lit_tl.setBounds(650, 360, 150, 20);
+                     nb_lit_tl.setBounds(450, 360, 150, 20);
                      pan2.add(nbr_lit);
-                     nbr_lit.setBounds(650, 385, 100, 20);
+                     nbr_lit.setBounds(450, 385, 100, 20);
                      
                      pan2.add(valider_maj);
-                     valider_maj.setBounds(550,520,100,30);
+                     valider_maj.setBounds(350,520,100,30);
                      pan2.updateUI();
                      add(pan2,"East");
                      setVisible(true);
@@ -1336,20 +1328,20 @@ public class Recherche extends JFrame
                 if("Attribuer un médecin".equals(choix_sous_menu)){
                     saisie.setText("Veuillez remplir les champs ci-dessous:");
                     pan2.add(saisie);
-                    saisie.setBounds(480,250,300,20);
+                    saisie.setBounds(280,250,300,20);
                     
                     pan2.add(num_medecin);
-                    num_medecin.setBounds(450,300,150,20);
+                    num_medecin.setBounds(250,300,150,20);
                     pan2.add(champs_num);
-                    champs_num.setBounds(450,325,150,20);
+                    champs_num.setBounds(250,325,150,20);
                         
                     pan2.add(chp_numero_patient);
-                    chp_numero_patient.setBounds(650, 300, 150, 20);
+                    chp_numero_patient.setBounds(450, 300, 150, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(650, 325, 100, 20);
+                    champs_numero.setBounds(450, 325, 100, 20);
                     
                     pan2.add(valider_maj);
-                    valider_maj.setBounds(550,400,100,30);
+                    valider_maj.setBounds(350,400,100,30);
                     pan2.updateUI();
                     add(pan2,"East");
                     setVisible(true);
@@ -1384,8 +1376,8 @@ public class Recherche extends JFrame
             setVisible(true);
             
             label_maj_p.setText("Que souhaitez-vous modifier?");
-            label_maj_p.setBounds(510,175,300,20);
-            choix_modifier.setBounds(450,200,300,20);
+            label_maj_p.setBounds(310,175,300,20);
+            choix_modifier.setBounds(250,200,300,20);
             pan2.add(label_maj_p);
             pan2.add(choix_modifier);
             String choixdemodif = (String) choix_modifier.getSelectedItem();
@@ -1394,40 +1386,40 @@ public class Recherche extends JFrame
                 
                 saisie.setText("Veuillez remplir les champs ci-dessous:");
                     pan2.add(saisie);
-                    saisie.setBounds(480,250,300,20);
+                    saisie.setBounds(280,250,300,20);
                     
                     pan2.add(chp_nom_tl);
-                    chp_nom_tl.setBounds(450,340,75,20);
+                    chp_nom_tl.setBounds(250,340,75,20);
                     pan2.add(champs_nom);
-                    champs_nom.setBounds(450,365,100,20);
+                    champs_nom.setBounds(250,365,100,20);
                     
                     pan2.add(chp_prenom_tl);
-                    chp_prenom_tl.setBounds(450, 400, 100, 20);
+                    chp_prenom_tl.setBounds(250, 400, 100, 20);
                     pan2.add(champs_prenom);
-                    champs_prenom.setBounds(450, 425, 100, 20);
+                    champs_prenom.setBounds(250, 425, 100, 20);
                     
                     pan2.add(chp_numero_tl);
-                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    chp_numero_tl.setBounds(450, 400, 100, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(650, 425, 100, 20);
+                    champs_numero.setBounds(450, 425, 100, 20);
                     
                     pan2.add(chp_adresse_tl);
-                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(650, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 100, 20);
                     
                     pan2.add(chp_tel_tl);
-                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    chp_tel_tl.setBounds(450, 340, 100, 20);
                     pan2.add(champs_tel);
-                    champs_tel.setBounds(650, 365, 100, 20);
+                    champs_tel.setBounds(450, 365, 100, 20);
                     
                     pan2.add(type_emploi);
-                    type_emploi.setBounds(450,280,100,20);
+                    type_emploi.setBounds(250,280,100,20);
                     pan2.add(combo_ss_menu);
                     
                     pan2.add(valider_maj);
-                    valider_maj.setBounds(550,520,100,30);
-                    combo_ss_menu.setBounds(450,305,100,20);
+                    valider_maj.setBounds(350,520,100,30);
+                    combo_ss_menu.setBounds(250,305,100,20);
                     
                     
                     choix_combo_ss = (String) combo_ss_menu.getSelectedItem();
@@ -1445,9 +1437,9 @@ public class Recherche extends JFrame
                             pan2.setEnabled(true);
                             
                             pan2.add(chp_special);
-                            chp_special.setBounds(550,460,100,20);
+                            chp_special.setBounds(350,460,100,20);
                             pan2.add(combo_spec);
-                            combo_spec.setBounds(550,485,100,20);
+                            combo_spec.setBounds(350,485,100,20);
                             pan2.updateUI();
                             add(pan2,"East");
                             setVisible(true);
@@ -1477,19 +1469,19 @@ public class Recherche extends JFrame
                             pan2.setEnabled(true);
                             
                             pan2.add(cs_tl);
-                            cs_tl.setBounds(400,460,100,20);
+                            cs_tl.setBounds(200,460,100,20);
                             pan2.add(code_service);
-                            code_service.setBounds(400,485,100,20);
+                            code_service.setBounds(200,485,100,20);
                             
                             pan2.add(rot_tl);
-                            rot_tl.setBounds(550,460,100,20);
+                            rot_tl.setBounds(350,460,100,20);
                             pan2.add(rotation);
-                            rotation.setBounds(550,485,100,20);
+                            rotation.setBounds(350,485,100,20);
                             
                             pan2.add(sal_tl);
-                            sal_tl.setBounds(700,460,100,20);
+                            sal_tl.setBounds(500,460,100,20);
                             pan2.add(salaire);
-                            salaire.setBounds(700,485,100,20);
+                            salaire.setBounds(500,485,100,20);
                             pan2.updateUI();
                             add(pan2,"East");
                             setVisible(true);
@@ -1518,40 +1510,40 @@ public class Recherche extends JFrame
                  
                  saisie.setText("Veuillez remplir les champs ci-dessous:");
                  pan2.add(saisie);
-                 saisie.setBounds(480,250,300,20);
+                 saisie.setBounds(280,250,300,20);
                 
                     pan2.add(chp_nom_tl);
-                    chp_nom_tl.setBounds(450,280,75,20);
+                    chp_nom_tl.setBounds(250,280,75,20);
                     pan2.add(champs_nom);
-                    champs_nom.setBounds(450,305,100,20);
+                    champs_nom.setBounds(250,305,100,20);
                     
                     pan2.add(chp_prenom_tl);
-                    chp_prenom_tl.setBounds(450, 340, 100, 20);
+                    chp_prenom_tl.setBounds(250, 340, 100, 20);
                     pan2.add(champs_prenom);
-                    champs_prenom.setBounds(450, 365, 100, 20);
+                    champs_prenom.setBounds(250, 365, 100, 20);
                     
                     pan2.add(mut_tl);
-                    mut_tl.setBounds(450,400,100,20);
+                    mut_tl.setBounds(250,400,100,20);
                     pan2.add(mutuelle);
-                    mutuelle.setBounds(450,425,100,20);
+                    mutuelle.setBounds(250,425,100,20);
                     
                     pan2.add(chp_numero_tl);
-                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    chp_numero_tl.setBounds(450, 400, 100, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(650, 425, 100, 20);
+                    champs_numero.setBounds(450, 425, 100, 20);
                     
                     pan2.add(chp_adresse_tl);
-                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(650, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 100, 20);
                     
                     pan2.add(chp_tel_tl);
-                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    chp_tel_tl.setBounds(450, 340, 100, 20);
                     pan2.add(champs_tel);
-                    champs_tel.setBounds(650, 365, 100, 20);
+                    champs_tel.setBounds(450, 365, 100, 20);
                     
                     pan2.add(valider_maj);
-                    valider_maj.setBounds(550,520,100,30);
+                    valider_maj.setBounds(350,520,100,30);
                     pan2.updateUI();
                     add(pan2,"East");
                     setVisible(true);
@@ -1573,30 +1565,30 @@ public class Recherche extends JFrame
                  
                  saisie.setText("Veuillez remplir les champs ci-dessous:");
                  pan2.add(saisie);
-                 saisie.setBounds(480,250,300,20);
+                 saisie.setBounds(280,250,300,20);
                 
                         pan2.add(chp_num_tl);
-                        chp_num_tl.setBounds(450,340,150,20);
+                        chp_num_tl.setBounds(250,340,150,20);
                         pan2.add(champs_num);
-                        champs_num.setBounds(450,365,150,20);
+                        champs_num.setBounds(250,365,150,20);
                         
                         pan2.add(champs_lit);
-                        champs_lit.setBounds(650,340,75,20);
+                        champs_lit.setBounds(450,340,75,20);
                         pan2.add(lit);
-                        lit.setBounds(650,365,75,20);
+                        lit.setBounds(450,365,75,20);
                     
                         pan2.add(n_chambre_tl);
-                        n_chambre_tl.setBounds(450, 400, 150, 20);
+                        n_chambre_tl.setBounds(250, 400, 150, 20);
                         pan2.add(champs_prenom);
-                        champs_prenom.setBounds(450, 425, 100, 20);
+                        champs_prenom.setBounds(250, 425, 100, 20);
                         
                         pan2.add(cs_tl);
-                        cs_tl.setBounds(650, 400, 100, 20);
+                        cs_tl.setBounds(450, 400, 100, 20);
                         pan2.add(code_service);
-                        code_service.setBounds(650, 425, 100, 20);
+                        code_service.setBounds(450, 425, 100, 20);
                         
                         pan2.add(valider_maj);
-                        valider_maj.setBounds(550,520,100,30);
+                        valider_maj.setBounds(350,520,100,30);
                         pan2.updateUI();
                         add(pan2,"East");
                         setVisible(true);
@@ -1617,20 +1609,20 @@ public class Recherche extends JFrame
                 ///A laisser ou pas? pas vraiment utile à vrai dire
                 saisie.setText("Veuillez remplir les champs ci-dessous:");
                 pan2.add(saisie);
-                saisie.setBounds(480,250,300,20);
+                saisie.setBounds(280,250,300,20);
                 
                 pan2.add(num_medecin);
-                    num_medecin.setBounds(450,300,150,20);
+                    num_medecin.setBounds(250,300,150,20);
                     pan2.add(champs_num);
-                    champs_num.setBounds(450,325,150,20);
+                    champs_num.setBounds(250,325,150,20);
                         
                     pan2.add(chp_numero_patient);
-                    chp_numero_patient.setBounds(650, 300, 150, 20);
+                    chp_numero_patient.setBounds(450, 300, 150, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(650, 325, 100, 20);
+                    champs_numero.setBounds(450, 325, 100, 20);
                 
                 pan2.add(valider_maj);
-                valider_maj.setBounds(560,360,100,30);
+                valider_maj.setBounds(360,360,100,30);
                 
                 if(ae.getSource()==valider_maj){  
                         try { 
@@ -1666,8 +1658,8 @@ public class Recherche extends JFrame
             setVisible(true);
             
             label_maj_p.setText("Que souhaitez-vous supprimer?");
-            label_maj_p.setBounds(510,175,300,20);
-            choix_supprimer.setBounds(450,200,300,20);
+            label_maj_p.setBounds(310,175,300,20);
+            choix_supprimer.setBounds(250,200,300,20);
             pan2.add(label_maj_p);
             pan2.add(choix_supprimer);
             String choixdemodif2 = (String) choix_supprimer.getSelectedItem();
@@ -1676,25 +1668,25 @@ public class Recherche extends JFrame
                 
                 saisie.setText("Veuillez remplir les champs ci-dessous:");
                 pan2.add(saisie);
-                saisie.setBounds(480,250,300,20);
+                saisie.setBounds(280,250,300,20);
                 
                  pan2.add(chp_numero_tl);
-                 chp_numero_tl.setBounds(550, 345, 150,20);
+                 chp_numero_tl.setBounds(350, 345, 150,20);
                  pan2.add(search_maj_numero);
-                 search_maj_numero.setBounds(550,370,150,20);
+                 search_maj_numero.setBounds(350,370,150,20);
                  
                  pan2.add(chp_nom_tl);
-                 chp_nom_tl.setBounds(450,285,150,20);
+                 chp_nom_tl.setBounds(250,285,150,20);
                  pan2.add(search_maj_nom);
-                 search_maj_nom.setBounds(450,310,150,20);
+                 search_maj_nom.setBounds(250,310,150,20);
                  
                  pan2.add(chp_prenom_tl);
-                 chp_prenom_tl.setBounds(650,285,150,20);
+                 chp_prenom_tl.setBounds(450,285,150,20);
                  pan2.add(search_maj_prenom);
-                 search_maj_prenom.setBounds(650,310,150,20);
+                 search_maj_prenom.setBounds(450,310,150,20);
                  
                  pan2.add(valider_maj);
-                 valider_maj.setBounds(575,405,100,30);
+                 valider_maj.setBounds(375,405,100,30);
                  
                  if(ae.getSource()==valider_maj){  
                         try { 
@@ -1714,25 +1706,25 @@ public class Recherche extends JFrame
                  
                  saisie.setText("Veuillez remplir les champs ci-dessous:");
                  pan2.add(saisie);
-                 saisie.setBounds(480,250,300,20);
+                 saisie.setBounds(280,250,300,20);
                 
                  pan2.add(chp_numero_tl);
-                 chp_numero_tl.setBounds(550, 345, 150,20);
+                 chp_numero_tl.setBounds(350, 345, 150,20);
                  pan2.add(search_maj_numero);
-                 search_maj_numero.setBounds(550,370,150,20);
+                 search_maj_numero.setBounds(350,370,150,20);
                  
                  pan2.add(chp_nom_tl);
-                 chp_nom_tl.setBounds(450,285,150,20);
+                 chp_nom_tl.setBounds(250,285,150,20);
                  pan2.add(search_maj_nom);
-                 search_maj_nom.setBounds(450,310,150,20);
+                 search_maj_nom.setBounds(250,310,150,20);
                  
                  pan2.add(chp_prenom_tl);
-                 chp_prenom_tl.setBounds(650,285,150,20);
+                 chp_prenom_tl.setBounds(450,285,150,20);
                  pan2.add(search_maj_prenom);
-                 search_maj_prenom.setBounds(650,310,150,20);
+                 search_maj_prenom.setBounds(450,310,150,20);
                  
                  pan2.add(valider_maj);
-                 valider_maj.setBounds(575,405,100,30);
+                 valider_maj.setBounds(375,405,100,30);
                  
                   if(ae.getSource()==valider_maj){  
                         try { 
@@ -1753,20 +1745,20 @@ public class Recherche extends JFrame
                  
                  saisie.setText("Veuillez remplir les champs ci-dessous:");
                  pan2.add(saisie);
-                 saisie.setBounds(480,250,300,20);
+                 saisie.setBounds(280,250,300,20);
                 
                         pan2.add(chp_num_tl);
-                        chp_num_tl.setBounds(450,285,150,20);
+                        chp_num_tl.setBounds(250,285,150,20);
                         pan2.add(champs_num);
-                        champs_num.setBounds(450,320,150,20);
+                        champs_num.setBounds(250,320,150,20);
                         
                         pan2.add(cs_tl);
-                        cs_tl.setBounds(650, 285, 100, 20);
+                        cs_tl.setBounds(450, 285, 100, 20);
                         pan2.add(code_service);
-                        code_service.setBounds(650, 320, 100, 20);
+                        code_service.setBounds(450, 320, 100, 20);
                  
                  pan2.add(valider_maj);
-                 valider_maj.setBounds(550,355,100,30);
+                 valider_maj.setBounds(350,355,100,30);
                  
                   if(ae.getSource()==valider_maj){  
                         try { 
@@ -1784,15 +1776,15 @@ public class Recherche extends JFrame
                 
                 saisie.setText("Veuillez remplir les champs ci-dessous:");
                 pan2.add(saisie);
-                saisie.setBounds(480,250,300,20);
+                saisie.setBounds(280,250,300,20);
                 
                 pan2.add(chp_numero_patient);
-                chp_numero_patient.setBounds(560, 285, 150, 20);
+                chp_numero_patient.setBounds(360, 285, 150, 20);
                 pan2.add(champs_numero);
-                champs_numero.setBounds(560, 310, 100, 20);
+                champs_numero.setBounds(360, 310, 100, 20);
                 
                 pan2.add(valider_maj);
-                valider_maj.setBounds(560,345,100,30);
+                valider_maj.setBounds(360,345,100,30);
                 
                 if(ae.getSource()==valider_maj){  
                         try { 

@@ -90,8 +90,8 @@ public class Recherche extends JFrame
                 pan2= new JPanel();
                 pan.setLayout(null);
                 pan2.setLayout(null);
-                pan.setBackground(new Color(0x00604A));
-                pan2.setBackground(new Color(0x79F8F8));  
+                pan.setBackground(new Color(0x004A80));
+                pan2.setBackground(new Color(0xEDF7F7));  
                        
                 
                 //Initialisation des 4 boutons sur la gauche de la page pour choisir ce que l'utilisateutr veut faire
@@ -110,11 +110,11 @@ public class Recherche extends JFrame
                 quitter.setBounds(30,310, 120,50);
                 
                 //choisir la couleur des boutons
-                bouton.setBackground(new Color(0x0EAD89 ));
-                bouton2.setBackground(new Color(0x0EAD89 ));  
-                bouton3.setBackground(new Color(0x0EAD89));
-                bouton4.setBackground(new Color(0x0EAD89));
-                quitter.setBackground(new Color(0x0EAD89));
+                bouton.setBackground(new Color(0x3CB878 ));
+                bouton2.setBackground(new Color(0x3CB878));  
+                bouton3.setBackground(new Color(0x3CB878));
+                bouton4.setBackground(new Color(0x3CB878));
+                quitter.setBackground(new Color(0x3CB878));
                 
                // Taille des pannels               
                pan.setPreferredSize(new Dimension(190,800));
@@ -224,10 +224,10 @@ public class Recherche extends JFrame
                 b.add(r4);
                 
                 //Coouleur des radiobutton
-                r1.setBackground(new Color(0x79F8F8));
-                r2.setBackground(new Color(0x79F8F8));
-                r3.setBackground(new Color(0x79F8F8));
-                r4.setBackground(new Color(0x79F8F8));
+                r1.setBackground(new Color(0xEDF7F7));
+                r2.setBackground(new Color(0xEDF7F7));
+                r3.setBackground(new Color(0xEDF7F7));
+                r4.setBackground(new Color(0xEDF7F7));
                 
                 //Position du textfield et du bouton execute
                 t1.setBounds(150,240,210,20);              
@@ -293,11 +293,11 @@ public class Recherche extends JFrame
      pan3= new JPanel();
      pan3.setLayout(null);
      pan3.setBounds(20,30,700,150);
-     pan3.setBackground(new Color(0x79F8F8));   
+     pan3.setBackground(new Color(0xEDF7F7));   
      pan4= new JPanel();
      pan4.setLayout(null);
      pan4.setBounds(20,200,700,500);
-     pan4.setBackground(new Color(0x79F8F8));
+     pan4.setBackground(new Color(0xEDF7F7));
      
      // Création du bouton executer
      execute2 = new JButton ("execute");
@@ -989,7 +989,7 @@ public class Recherche extends JFrame
      //nouveau pan pourr afficher le diagramme 
      pan5= new JPanel();
      pan5.setBounds(20,220,750,430);
-     pan5.setBackground(new Color(0x79F8F8));
+     pan5.setBackground(new Color(0xEDF7F7));
      
    
      
@@ -1238,10 +1238,10 @@ public class Recherche extends JFrame
                     saisie.setBounds(280,250,300,20);
                     
                     pan2.add(saisie_num);
-                    saisie_num.setBackground(new Color(0x79F8F8));
+                    saisie_num.setBackground(new Color(0xEDF7F7));
                     saisie_num.setBounds(150,300,275,20);
                     pan2.add(saisie_nom);
-                    saisie_nom.setBackground(new Color(0x79F8F8));
+                    saisie_nom.setBackground(new Color(0xEDF7F7));
                     saisie_nom.setBounds(450,300,200,20);
                     
                     if(saisie_nom.isSelected()){

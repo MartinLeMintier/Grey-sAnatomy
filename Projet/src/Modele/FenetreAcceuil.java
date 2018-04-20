@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet;
+package Modele;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -169,7 +169,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
         try {    
              conni = new Connexion (nom_data,login, passw);
              this.dispose();
-             FenetrePrincipale P = new FenetrePrincipale(conni);
+             Recherche P = new Recherche(conni);
         
          } catch (SQLException | ClassNotFoundException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,7 +187,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
          try {      
                conni = new Connexion (usernameECE,passwordECE, loginDataBase, passwordDataBase);
                this.dispose();
-               FenetrePrincipale P = new FenetrePrincipale(conni);
+               Recherche P = new Recherche(conni);
              
          } catch (SQLException | ClassNotFoundException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);

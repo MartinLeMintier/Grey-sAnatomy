@@ -997,12 +997,15 @@ public class FenetrePrincipale extends JFrame
         if ("Insérer une donnée".equals(choix_maj)){
             //System.out.println("insérer");
             pan2.removeAll();
+            pan2.setEnabled(false);
+            pan2.setEnabled(true);
             pan2.add(titre);
             pan2.add(label_maj_p1);
             pan2.add(sel_action);
             sel_action.setSelectedItem("Insérer une donnée");
             add(pan2);
             pan2.updateUI();
+            add(pan2,"East");
             setVisible(true);
             
             label_maj_p.setText("Sélectionnez ce que vous souhaitez ajouter");
@@ -1067,12 +1070,15 @@ public class FenetrePrincipale extends JFrame
                             pan2.remove(sal_tl);
                             pan2.remove(salaire);
                             
+                            pan2.setEnabled(false);
+                            pan2.setEnabled(true);
+                            
                             pan2.add(chp_special);
                             chp_special.setBounds(550,460,100,20);
                             pan2.add(combo_spec);
                             combo_spec.setBounds(550,485,100,20);
                             pan2.updateUI();
-                            add(pan2);
+                            add(pan2,"East");
                             setVisible(true);
                             
                         if(ae.getSource()==valider_maj){  
@@ -1096,6 +1102,11 @@ public class FenetrePrincipale extends JFrame
                             pan2.remove(chp_special);
                             pan2.remove(combo_spec);
                             
+                            pan2.setEnabled(false);
+                            pan2.setEnabled(true);
+                            
+                            pan2.setEnabled(false);
+                            pan2.setEnabled(true);
                             pan2.add(cs_tl);
                             cs_tl.setBounds(400,460,100,20);
                             pan2.add(code_service);
@@ -1111,7 +1122,7 @@ public class FenetrePrincipale extends JFrame
                             pan2.add(salaire);
                             salaire.setBounds(700,485,100,20);
                             pan2.updateUI();
-                            add(pan2);
+                            add(pan2,"East");
                             setVisible(true);
                             
                             if(ae.getSource()==valider_maj){  
@@ -1129,7 +1140,7 @@ public class FenetrePrincipale extends JFrame
                             
                         }
                     pan2.updateUI();
-                    add(pan2);
+                    add(pan2,"East");
                     setVisible(true);
                 }
                 
@@ -1171,7 +1182,7 @@ public class FenetrePrincipale extends JFrame
                     pan2.add(valider_maj);
                     valider_maj.setBounds(550,520,100,30);
                     pan2.updateUI();
-                    add(pan2);
+                    add(pan2,"East");
                     setVisible(true);
                     
                     if(ae.getSource()==valider_maj){
@@ -1275,7 +1286,7 @@ public class FenetrePrincipale extends JFrame
                     pan2.add(valider_maj);
                     valider_maj.setBounds(550,520,100,30);
                     pan2.updateUI();
-                    add(pan2);
+                    add(pan2,"East");
                     setVisible(true);
                 }
             
@@ -1307,7 +1318,7 @@ public class FenetrePrincipale extends JFrame
                      pan2.add(valider_maj);
                      valider_maj.setBounds(550,520,100,30);
                      pan2.updateUI();
-                     add(pan2);
+                     add(pan2,"East");
                      setVisible(true);
                      
                      if(ae.getSource()==valider_maj){
@@ -1340,7 +1351,7 @@ public class FenetrePrincipale extends JFrame
                     pan2.add(valider_maj);
                     valider_maj.setBounds(550,400,100,30);
                     pan2.updateUI();
-                    add(pan2);
+                    add(pan2,"East");
                     setVisible(true);
                     
                     if(ae.getSource()==valider_maj){
@@ -1360,11 +1371,15 @@ public class FenetrePrincipale extends JFrame
         if ("Modifier une donnée".equals(choix_maj)){
             
             pan2.removeAll();
+            
+            pan2.setEnabled(false);
+            pan2.setEnabled(true);
+            
             pan2.add(titre);
             pan2.add(label_maj_p1);
             pan2.add(sel_action);
             sel_action.setSelectedItem("Modifier une donnée");
-            add(pan2);
+            add(pan2,"East");
             pan2.updateUI();
             setVisible(true);
             
@@ -1426,12 +1441,15 @@ public class FenetrePrincipale extends JFrame
                             pan2.remove(sal_tl);
                             pan2.remove(salaire);
                             
+                            pan2.setEnabled(false);
+                            pan2.setEnabled(true);
+                            
                             pan2.add(chp_special);
                             chp_special.setBounds(550,460,100,20);
                             pan2.add(combo_spec);
                             combo_spec.setBounds(550,485,100,20);
                             pan2.updateUI();
-                            add(pan2);
+                            add(pan2,"East");
                             setVisible(true);
                             
                         if(ae.getSource()==valider_maj){  
@@ -1455,6 +1473,9 @@ public class FenetrePrincipale extends JFrame
                             pan2.remove(chp_special);
                             pan2.remove(combo_spec);
                             
+                            pan2.setEnabled(false);
+                            pan2.setEnabled(true);
+                            
                             pan2.add(cs_tl);
                             cs_tl.setBounds(400,460,100,20);
                             pan2.add(code_service);
@@ -1470,7 +1491,7 @@ public class FenetrePrincipale extends JFrame
                             pan2.add(salaire);
                             salaire.setBounds(700,485,100,20);
                             pan2.updateUI();
-                            add(pan2);
+                            add(pan2,"East");
                             setVisible(true);
                             
                             if(ae.getSource()==valider_maj){  
@@ -1488,7 +1509,7 @@ public class FenetrePrincipale extends JFrame
                             
                         }
                     pan2.updateUI();
-                    add(pan2);
+                    add(pan2,"East");
                     setVisible(true);
   
             }
@@ -1532,7 +1553,7 @@ public class FenetrePrincipale extends JFrame
                     pan2.add(valider_maj);
                     valider_maj.setBounds(550,520,100,30);
                     pan2.updateUI();
-                    add(pan2);
+                    add(pan2,"East");
                     setVisible(true);
                     
                     if(ae.getSource()==valider_maj){  
@@ -1577,7 +1598,7 @@ public class FenetrePrincipale extends JFrame
                         pan2.add(valider_maj);
                         valider_maj.setBounds(550,520,100,30);
                         pan2.updateUI();
-                        add(pan2);
+                        add(pan2,"East");
                         setVisible(true);
                  
                  if(ae.getSource()==valider_maj){  
@@ -1624,7 +1645,7 @@ public class FenetrePrincipale extends JFrame
                 
             }
             
-            add(pan2);
+            add(pan2,"East");
             setVisible(true);
        
         }
@@ -1632,11 +1653,15 @@ public class FenetrePrincipale extends JFrame
         if("Supprimer une donnée".equals(choix_maj)){
             //system.out.println("supprimer");
             pan2.removeAll();
+            
+            pan2.setEnabled(false);
+            pan2.setEnabled(true);
+            
             pan2.add(titre);
             pan2.add(label_maj_p1);
             pan2.add(sel_action);
             sel_action.setSelectedItem("Supprimer une donnée");
-            add(pan2);
+            add(pan2,"East");
             pan2.updateUI();
             setVisible(true);
             
@@ -1780,7 +1805,7 @@ public class FenetrePrincipale extends JFrame
                         }}
             }
             
-            add(pan2);
+            add(pan2,"East");
             setVisible(true);
             
         }

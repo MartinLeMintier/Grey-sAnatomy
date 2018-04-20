@@ -25,7 +25,7 @@ import org.jfree.ui.RefineryUtilities;
 public class Recherche extends JFrame
 {
    private JPanel pan, pan2, pan3, pan4, pan5; // 2 premiers pan = pan principaux, les deux autres= sous pan dans le module recherchec compliquée
-   private JButton bouton, bouton2, bouton3,bouton4, execute, execute2,exit,exemartin; // 4 boutons pour choisir le modul et differents boutons quitter
+   private JButton bouton, bouton2, bouton3,bouton4, execute, execute2, exemartin,quitter; // 4 boutons pour choisir le modul et differents boutons quitter
    private JTextField t1, t2;
    private JComboBox c1, c2,c3,c4;
    private  JLabel l1, l2, l3, l4, l5, l6, l7, l8;
@@ -99,6 +99,7 @@ public class Recherche extends JFrame
                 bouton2= new JButton("Mise à jour");
                 bouton3= new JButton("Reporting ");
                 bouton4= new JButton("Complique ");
+                quitter= new JButton("Quitter ");
                 
               
                 //Positionner les boutons
@@ -106,12 +107,14 @@ public class Recherche extends JFrame
                 bouton2.setBounds(30,100,120,50);
                 bouton3.setBounds(30,170, 120,50);
                 bouton4.setBounds(30,240, 120,50);
+                quitter.setBounds(30,310, 120,50);
                 
                 //choisir la couleur des boutons
                 bouton.setBackground(new Color(0x0EAD89 ));
                 bouton2.setBackground(new Color(0x0EAD89 ));  
                 bouton3.setBackground(new Color(0x0EAD89));
                 bouton4.setBackground(new Color(0x0EAD89));
+                quitter.setBackground(new Color(0x0EAD89));
                 
                // Taille des pannels               
                pan.setPreferredSize(new Dimension(190,800));
@@ -126,6 +129,7 @@ public class Recherche extends JFrame
                 pan.add(bouton2);
                 pan.add(bouton3);
                 pan.add(bouton4);
+                pan.add(quitter);
                
                // Ajoute les deux apnnels sur la fenetre        
                 add(pan, "West");
@@ -136,7 +140,8 @@ public class Recherche extends JFrame
                 bouton.addActionListener(new ItemAction());
                 bouton2.addActionListener(new ItemAction());
                 bouton3.addActionListener(new ItemAction());
-                 bouton4.addActionListener(new ItemAction());
+                bouton4.addActionListener(new ItemAction());
+                quitter.addActionListener(new ItemAction());
                 
                 
             }
@@ -412,6 +417,12 @@ public class Recherche extends JFrame
            if(e.getSource()==bouton2)
            {
                afficher_MAJ();
+           }
+           
+           //fermer le programme
+           if(e.getSource()==quitter)
+           {
+               dispose();
            }
            
            
@@ -980,9 +991,7 @@ public class Recherche extends JFrame
      pan5.setBounds(20,220,750,430);
      pan5.setBackground(new Color(0x79F8F8));
      
-     //bouton de sortie pour fermer un diagramme sans frmer la fenetre
-     exit = new JButton("EXIT");
-     exit.addActionListener(new ItemAction());
+   
      
      //declaration de la comboboxe pour choisir le diagramme a afficher
      c4= new JComboBox ();

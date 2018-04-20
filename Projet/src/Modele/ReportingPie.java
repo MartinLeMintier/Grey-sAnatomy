@@ -15,18 +15,24 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.ui.ApplicationFrame;
 import Controleur.Connexion;
 
-    
+    /**
+     * Classe qui permet la création des différents camemberts pour fairedes statistiques
+     * @author MArgaux
+     */
     
     public class ReportingPie extends ApplicationFrame 
     {
-        private Connexion connex;
-        private String [] retour;
-        private String [] specialite ;
-        private String total ;
-        private String titre;
-        private JFreeChart chart;
+        private Connexion connex; // Connexion utilisée pour executer les requetes
+        private String [] retour; // Retour des requetes
+        private String [] specialite ; // Permet de faire varier les requetes, contient selon les cas différentes specialités, services, mutuelle
+        private String titre; // nom des différents diagrammes
+        private JFreeChart chart; // Diagramme créé
         
-    
+    /**
+     * Constructeur qui recupere le titre du diagramme et la connexion
+     * @param title : titre du diagramme
+     * @param con : connexion pour executer les requetes
+     */
    public ReportingPie(String title, Connexion con ) {
       super(title); 
       titre= title;
@@ -35,66 +41,72 @@ import Controleur.Connexion;
    }
    
    
-   
+   /**
+    * Recupere la requete et créé le camembert en fonction de la requete 
+    * @return : retourne le camembert à afficher
+    */
    public  ChartPanel createDataset( ){
        
-           try {
+    //Appel le sous programme qui fait la requete 
+       try {
                requete();
            } catch (ClassNotFoundException ex) {
                Logger.getLogger(ReportingPie.class.getName()).log(Level.SEVERE, null, ex);
            }
            
-           
+     // Déclaration d'une variable pour rentrer les donnees dans le camembert     
      DefaultPieDataset dataset = new DefaultPieDataset( );  
-           
+        
+     //Pour chaque diagramme proposé reconnu grace a son titre remplir le diagramme avec les données remplies dans le sous programme requete
       if(titre.equals("Spécilites des docteurs"))
     {
-     
-      dataset.setValue( "Orthopediste :" + retour[0] , new Double( retour[0] ) );  
-      dataset.setValue( "Cardiologue : " + retour[1], new Double( retour[1] ) );   
-      dataset.setValue( "Traumatologue :" + retour[2] , new Double( retour[2] ) );    
-      dataset.setValue( "Anesthesiste : " + retour[3] , new Double( retour[3] ) );  
-      dataset.setValue( "Pneumologue" + retour[4], new Double( retour[4] ) );    
-      dataset.setValue( "Radiologue " + retour[5], new Double( retour[5] ) ); 
+        // remplir les données avec le tableau retour qui contient le resultat de la requete
+          for(int i=0; i< specialite.length; i++)
+     {
+         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+     }
+    
       
     } 
       if(titre.equals("rotation des infirmieres"))
-    {    
-      dataset.setValue( "Jour :" + retour[0] , new Double( retour[0] ) );  
-      dataset.setValue( "Nuit : " + retour[1], new Double( retour[1] ) );   
+    {     // remplir les données avec le tableau retour qui contient le resultat de la requete
+          for(int i=0; i< specialite.length; i++)
+     {
+         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+     }
+ 
     } 
       
       if(titre.equals("Personnes hospitalisees par service"))
         {
-           dataset.setValue( "CAR :" + retour[0] , new Double( retour[0] ) );  
-           dataset.setValue( "CHG : " + retour[1], new Double( retour[1] ) );   
-           dataset.setValue( "REA :" + retour[2] , new Double( retour[2] ) );
+             // remplir les données avec le tableau retour qui contient le resultat de la requete
+              for(int i=0; i< specialite.length; i++)
+     {
+         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+     }
+
         }
        if(titre.equals("Infirmiers par service"))
         {
-           dataset.setValue( "CAR :" + retour[0] , new Double( retour[0] ) );  
-           dataset.setValue( "CHG : " + retour[1], new Double( retour[1] ) );   
-           dataset.setValue( "REA :" + retour[2] , new Double( retour[2] ) );
+             // remplir les données avec le tableau retour qui contient le resultat de la requete
+              for(int i=0; i< specialite.length; i++)
+     {
+         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+     }
+
         }
       
        if(titre.equals("Malades par mutuelle"))
     {
+         // remplir les données avec le tableau retour qui contient le resultat de la requete
+     for(int i=0; i< specialite.length; i++)
+     {
+         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+     }
+
      
-      dataset.setValue( "MNAM :" + retour[0] , new Double( retour[0] ) );  
-      dataset.setValue( "LMDE : " + retour[1], new Double( retour[1] ) );   
-      dataset.setValue( "MNH:" + retour[2] , new Double( retour[2] ) );    
-      dataset.setValue( "MAAF : " + retour[3] , new Double( retour[3] ) );  
-      dataset.setValue( "AG2R" + retour[4], new Double( retour[4] ) );    
-      dataset.setValue( "CCVRP " + retour[5], new Double( retour[5] ) ); 
-       dataset.setValue( "CNAMTS :" + retour[6] , new Double( retour[6] ) );  
-      dataset.setValue( "MAS : " + retour[7], new Double( retour[7] ) );   
-      dataset.setValue( "MGEN :" + retour[8] , new Double( retour[8] ) );    
-      dataset.setValue( "MGSP : " + retour[9] , new Double( retour[9] ) );  
-      dataset.setValue( "MMA" + retour[10], new Double( retour[10] ) );    
-      dataset.setValue( "MNFTC " + retour[11], new Double( retour[11] ) ); 
-      
     } 
-       
+      // Création du chart avec les données créées 
       chart = ChartFactory.createPieChart(      
          titre,   // chart title 
          dataset,          // data    
@@ -102,7 +114,7 @@ import Controleur.Connexion;
          true, 
          false);
       
-      
+      // Variable associée au camembert qui prend le chart créé
       ChartPanel cam = new ChartPanel(chart) ;
      
       return cam;
@@ -112,157 +124,103 @@ import Controleur.Connexion;
    }
    
  
-   
+   /**
+    * Methode qui permet pour chaque camembert reconnu grace a son titre, de recuperer la requete grace à connexion, et remplir un tableau avec le resulatta de la requete
+    * @throws ClassNotFoundException 
+    */
    
    public void requete() throws ClassNotFoundException
    {
            try {
+               //declaration de la requete
                 String requete[];
                
+                // selon le diagramme demandé, executer la bonne requete et remplir le tableau retour avec le resultat de la requete
                if(titre.equals("Spécilites des docteurs"))
                {
+                   //Déclaration des variables 
                     specialite= new String []{"orthopediste","cardiologue","traumatologue","anesthesiste","pneumologue","radiologue"};
-
                     retour= new String [specialite.length];
                     requete= new String[specialite.length];  
                     
                     for(int i=0; i<specialite.length;i++)
                   {
+                      // requete prend la valeur desirée
                       requete[i] ="select count(specialite)/32 from docteur where specialite='"+specialite[i]+"'";
+                      // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
-                      System.out.println(retour[i]) ;
                   }
     
                }
                
                  if(titre.equals("rotation des infirmieres"))
                {
+                   //Déclaration des variables 
                     specialite= new String []{"nuit","jour"};
-
                     retour= new String [specialite.length];
                     requete = new String[specialite.length];
                     
                     for(int i=0; i<specialite.length;i++)
                   {
-                      requete[i] ="select count(rotation)/28 from infirmier where rotation='"+specialite[i]+"'";
-                      retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
-                      System.out.println(retour[i]) ;
+                      // requete prend la valeur desirée
+                    requete[i] ="select count(rotation)/28 from infirmier where rotation='"+specialite[i]+"'";
+                    // retour prend la valeur du retour de l'executiuon de la requete
+                    retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                   }                  
             
                }
               if(titre.equals("Personnes hospitalisees par service"))
         {
-            specialite= new String []{"CAR","CHG","REA"};
-
-                    retour= new String [specialite.length];
-                    requete = new String[specialite.length];
+            //Déclaration des variables 
+                   specialite= new String []{"CAR","CHG","REA"};
+                   retour= new String [specialite.length];
+                   requete = new String[specialite.length];
                     
                     for(int i=0; i<specialite.length;i++)
                   {
-                      requete[i] ="SELECT count(no_malade) FROM hospitalisation WHERE code_service='"+specialite[i]+"'";
+                      // requete prend la valeur desirée
+                      requete[i] ="SELECT count(no_malade)/39 FROM hospitalisation WHERE code_service='"+specialite[i]+"'";
+                      // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
-                      System.out.println(retour[i]) ;
                   }                  
            
         }   
                if(titre.equals("Infirmiers par service"))
         {
-            specialite= new String []{"CAR","CHG","REA"};
-
+                    //Déclaration des variables 
+                    specialite= new String []{"CAR","CHG","REA"};
                     retour= new String [specialite.length];
                     requete = new String[specialite.length];
                     
                     for(int i=0; i<specialite.length;i++)
                   {
-                      requete[i] ="SELECT count(numero) FROM infirmier WHERE code_service='"+specialite[i]+"'";
+                      // requete prend la valeur desirée
+                      requete[i] ="SELECT count(numero)/28 FROM infirmier WHERE code_service='"+specialite[i]+"'";
+                      // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
-                      System.out.println(retour[i]) ;
                   }                  
            
         }  
                
                if(titre.equals("Malades par mutuelle"))
         {
-            specialite= new String []{"MNAM","LMDE","MNH","MAAF","AG2R","CCVRP","CNAMTS","MAS","MGEN","MGSP","MMA","MNFTC"};
-
+                    //Déclaration des variables 
+                    specialite= new String []{"MNAM","LMDE","MNH","MAAF","AG2R","CCVRP","CNAMTS","MAS","MGEN","MGSP","MMA","MNFTC"};
                     retour= new String [specialite.length];
                     requete = new String[specialite.length];
                     
                     for(int i=0; i<specialite.length;i++)
                   {
-                      requete[i] ="SELECT count(numero) FROM malade WHERE mutuelle='"+specialite[i]+"'";
+                      // requete prend la valeur desirée
+                      requete[i] ="SELECT count(numero)/80 FROM malade WHERE mutuelle='"+specialite[i]+"'";
+                      // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
-                      System.out.println(retour[i]) ;
                   }                  
            
         }   
-              
-              
-                   
-              
-                   
-               
            } catch (SQLException ex) {
                Logger.getLogger(ReportingPie.class.getName()).log(Level.SEVERE, null, ex);
            }
    }
-   
-   
-   
-//      public  PieDataset createDataset2( ){
-//       
-//           try {
-//               requete2();
-//           } catch (ClassNotFoundException ex) {
-//               Logger.getLogger(Pie.class.getName()).log(Level.SEVERE, null, ex);
-//           }
-//             
-//           
-//      DefaultPieDataset dataset = new DefaultPieDataset( );
-//      dataset.setValue( "Infirmiers de Jour :" + retour[0] , new Double( retour[0] ) );  
-//      dataset.setValue( "Infirmier de Nuit : " + retour[1], new Double( retour[1] ) );   
-//     
-//      
-//      return dataset;         
-//   }
-   
-//   public  JFreeChart createChart2( PieDataset dataset ) {
-//      JFreeChart chart = ChartFactory.createPieChart(      
-//         "Nombre d'infirmier par garde",   // chart title 
-//         dataset,          // data    
-//         true,             // include legend   
-//         true, 
-//         false);
-//      
-//      return chart;
-//   }
-//   
-//    public  JPanel createDemoPanel2( ) {
-//      JFreeChart chart = createChart2(createDataset2( ) );   
-//      return new ChartPanel( chart ); 
-//   }
-//    
     
-//       public void requete2() throws ClassNotFoundException
-//   {
-//           try {
-//               connex= new Connexion("hopital", "root", "");
-//               retour= new String [specialite.length];
-//               String requete2[] = new String[specialite.length];
-//               
-//               for(int i=0; i<specialite.length;i++)
-//               {
-//                   requete2[i] ="select count(rotation) from infirmier where rotation='"+specialite[i]+"'";
-//                   retour[i]= connex.remplirChampsRequete(requete2[i]).get(0);
-//                   System.out.println(retour[i]) ;
-//               }
-//           
-//               
-//           } catch (SQLException ex) {
-//               Logger.getLogger(Pie.class.getName()).log(Level.SEVERE, null, ex);
-//           }
-//   }
-//  
-
-   
 }

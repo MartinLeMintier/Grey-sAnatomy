@@ -31,6 +31,7 @@ public class SelectionServeur extends JFrame implements ActionListener
         this.setSize(400,150);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         choix="";
         

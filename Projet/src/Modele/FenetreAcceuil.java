@@ -47,6 +47,8 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     this.setSize(500, 300);
     this.setResizable(false);
     this.setLocationRelativeTo(null);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+               
 
     //fenetre d'erreur
     error = new JFrame("erreur");

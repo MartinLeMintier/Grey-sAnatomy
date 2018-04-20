@@ -42,6 +42,16 @@ public class FenetrePrincipale extends JFrame
    public double []y;
    public int x;
    
+   public JRadioButton saisie_num, saisie_nom;
+   public String choix_maj, choix_sous_menu, choix_combo_ss, requeteMaj;
+   public JComboBox sel_action, choix_supprimer, choix_mis, combo_ss_menu,combo_spec, code_service, rotation, mutuelle, champs_surveillant,nbr_lit, choix_modifier;
+   public JTextField champs_nom, champs_prenom, champs_numero,champs_adresse,champs_tel, salaire, lit, n_chambre, n_doctor, champs_num;
+   public JTextField search_maj_numero, search_maj_nom, search_maj_prenom;
+   public JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit;
+   public JLabel n_chambre_tl, search_maj_numtl, search_maj_ptl, n_doctor_tl, chp_num_tl, chp_chambre_num, nb_lit_tl, n_surveillant_tl, num_medecin, chp_numero_patient, titre, label_maj_p1;
+   public JButton valider_maj;
+   public JLabel label_maj_p, saisie;
+   
    
    /**
     *Constructeur
@@ -763,7 +773,175 @@ public class FenetrePrincipale extends JFrame
    
     public void afficher_MAJ()
    {
-      
+      pan2.removeAll();
+       pan2.setLayout(null);
+       
+        
+       ////Need pour la fenetre de mise à jour
+       label_maj_p = new JLabel();
+       search_maj_numero = new JTextField();
+       search_maj_nom = new JTextField();
+       search_maj_prenom = new JTextField();
+       num_medecin = new JLabel("Numéro du médecin: ");
+       chp_numero_patient = new JLabel("Numéro du patient");
+       saisie = new JLabel();
+       nb_lit_tl = new JLabel("Nombre de lits: ");
+       n_surveillant_tl = new JLabel("Surveillant: ");
+       valider_maj = new JButton("Valider");
+       saisie_nom = new JRadioButton("Saisie par nom");
+       saisie_num = new JRadioButton("Saisie par numéro d'identification");
+       lit = new JTextField();
+       n_doctor = new JTextField();
+       n_chambre = new JTextField();
+       n_doctor_tl = new JLabel("Numero du médecin");
+       n_chambre_tl = new JLabel("Numero de chambre");
+       champs_lit = new JLabel("Lit:");
+       saisie_nom.addActionListener(new ItemActionMaj());
+       saisie_num.addActionListener(new ItemActionMaj());
+       
+       nbr_lit =  new JComboBox ();
+            nbr_lit.addItem("");
+            nbr_lit.addItem("1");
+            nbr_lit.addItem("2");
+            nbr_lit.addItem("3");
+            nbr_lit.addItem("4");
+       nbr_lit.addActionListener(new ItemActionMaj());
+       
+       choix_modifier = new JComboBox();
+            choix_modifier.addItem("");
+            choix_modifier.addItem("Un employé");
+            choix_modifier.addItem("Un malade");
+            choix_modifier.addItem("Une hospitalisation");
+            choix_modifier.addItem("Changement de médecin");
+       choix_modifier.addActionListener(new ItemActionMaj()); 
+       
+       choix_supprimer = new JComboBox();
+            choix_supprimer.addItem("");
+            choix_supprimer.addItem("Un employé");
+            choix_supprimer.addItem("Un malade");
+            choix_supprimer.addItem("Une hospitalisation");
+            choix_supprimer.addItem("Fin de traitement");
+       choix_supprimer.addActionListener(new ItemActionMaj());  
+       
+       champs_surveillant = new JComboBox();
+            champs_surveillant.addItem("");
+            champs_surveillant.addItem("95");
+            champs_surveillant.addItem("29");
+            champs_surveillant.addItem("57");
+            champs_surveillant.addItem("130");
+            champs_surveillant.addItem("151");
+            champs_surveillant.addItem("12");
+            champs_surveillant.addItem("23");
+            champs_surveillant.addItem("49");
+            champs_surveillant.addItem("116");
+            champs_surveillant.addItem("169");
+       champs_surveillant.addActionListener(new ItemActionMaj());
+            
+       choix_mis = new JComboBox();
+            choix_mis.addItem("");
+            choix_mis.addItem("Un employé");
+            choix_mis.addItem("Un malade");
+            choix_mis.addItem("Une chambre");
+            choix_mis.addItem("Une hospitalisation");
+            choix_mis.addItem("Attribuer un médecin");
+       choix_mis.addActionListener(new ItemActionMaj());
+       
+       sel_action = new JComboBox();
+                 sel_action.addItem("");
+                 sel_action.addItem("Insérer une donnée");
+                 sel_action.addItem("Modifier une donnée");
+                 sel_action.addItem("Supprimer une donnée");
+                 
+       combo_ss_menu = new JComboBox();
+                 combo_ss_menu.addItem("");
+                 combo_ss_menu.addItem("Docteur");
+                 combo_ss_menu.addItem("Infirmier");
+       combo_ss_menu.addActionListener(new ItemActionMaj());
+       
+       combo_spec = new JComboBox();
+                 combo_spec.addItem("");
+                 combo_spec.addItem("Orthopediste");
+                 combo_spec.addItem("Cardiologue");
+                 combo_spec.addItem("Traumatologue");
+                 combo_spec.addItem("Anesthesiste");
+                 combo_spec.addItem("Pneumologue");
+                 combo_spec.addItem("Radiologue");
+                 combo_spec.addItem("Pneumologue");
+        combo_spec.addActionListener(new ItemActionMaj());  
+        
+        code_service = new JComboBox();
+                 code_service.addItem("");
+                 code_service.addItem("REA");
+                 code_service.addItem("CHG");
+                 code_service.addItem("CAR");
+        code_service.addActionListener(new ItemActionMaj());
+        
+        rotation = new JComboBox();
+                 rotation.addItem("");
+                 rotation.addItem("JOUR");
+                 rotation.addItem("NUIT");
+        rotation.addActionListener(new ItemActionMaj());
+        
+        mutuelle = new JComboBox();
+                 mutuelle.addItem("");
+                 mutuelle.addItem("MNAM");
+                 mutuelle.addItem("LMDE");
+                 mutuelle.addItem("MNH");
+                 mutuelle.addItem("MAAF");
+                 mutuelle.addItem("MGEN");
+                 mutuelle.addItem("MMA");
+                 mutuelle.addItem("CNAMTS");
+                 mutuelle.addItem("CCVRP");
+                 mutuelle.addItem("MNFTC");
+                 mutuelle.addItem("MAS");
+                 mutuelle.addItem("AG2R");
+                 mutuelle.addItem("MGSP");
+        mutuelle.addActionListener(new ItemActionMaj());
+        
+        ButtonGroup g = new ButtonGroup();
+                 g.add(saisie_nom);
+                 g.add(saisie_num);
+        
+       champs_nom = new JTextField();
+       champs_prenom = new JTextField();
+       champs_tel = new JTextField();
+       champs_numero = new JTextField();
+       champs_adresse = new JTextField();
+       champs_num = new JTextField();
+       salaire = new JTextField();
+       chp_nom_tl = new JLabel("Nom: ");
+       chp_prenom_tl = new JLabel("Prenom: ");
+       chp_tel_tl = new JLabel ("Téléphone: ");
+       chp_numero_tl = new JLabel ("Numéro: ");
+       chp_adresse_tl = new JLabel ("Adresse: ");
+       type_emploi = new JLabel("Type d'employé: ");
+       chp_special = new JLabel ("Spécialité:");
+       cs_tl = new JLabel ("Code service:");
+       rot_tl = new JLabel ("Rotation: ");
+       sal_tl = new JLabel ("Salaire: ");
+       mut_tl = new JLabel ("Mutuelle");
+       chp_num_tl = new JLabel ("Numéro du patient: ");
+       chp_chambre_num = new JLabel ("Numéro de chambre:");
+       saisie_nom.setSelected(false);
+       saisie_num.setSelected(false);
+       
+       Font font = new Font("Arial",Font.BOLD,18);
+       titre = new JLabel("Menu de mise à jour des données");
+       label_maj_p1 = new JLabel("Quelle action souhaitez-vous effectuer?");
+       titre.setFont(font);
+       titre.setBounds(450,50,300,20);
+       label_maj_p1.setBounds(490,100,300,20);
+       sel_action.setBounds(450,125,300,20);
+       //On met la combobox sous écoute afin de récupérer le choix de l'utilisateur
+       sel_action.addActionListener(new ItemActionMaj());
+       
+       pan2.add(titre);
+       pan2.add(label_maj_p1);
+       pan2.add(sel_action);
+       
+       pan2.updateUI();
+       add(pan2);
+       setVisible(true);
    }
     /**
     * Méthode qui est appelé qaund l'utilisateur decide d'afficher des diagrammes faisant certaines statistiques
@@ -799,4 +977,813 @@ public class FenetrePrincipale extends JFrame
       
    }
     
+     class ItemActionMaj implements ActionListener{
+       
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            
+            //on récupère le choix de la combobox du menu de maj
+            choix_maj = (String) sel_action.getSelectedItem();
+            choix_mis.addActionListener(new ItemActionMaj());
+            choix_sous_menu = "";
+            valider_maj.addActionListener(this);
+        ///////////////////////////////////////////
+        // Actions pour le menu des mises à jour //
+        ///////////////////////////////////////////
+       
+        if ("Insérer une donnée".equals(choix_maj)){
+            //System.out.println("insérer");
+            pan2.removeAll();
+            pan2.add(titre);
+            pan2.add(label_maj_p1);
+            pan2.add(sel_action);
+            sel_action.setSelectedItem("Insérer une donnée");
+            add(pan2);
+            pan2.updateUI();
+            setVisible(true);
+            
+            label_maj_p.setText("Sélectionnez ce que vous souhaitez ajouter");
+            label_maj_p.setBounds(450,175,300,20);
+            choix_mis.setBounds(450,200,300,20);
+            pan2.add(label_maj_p);
+            pan2.add(choix_mis);
+            
+            choix_sous_menu = (String) choix_mis.getSelectedItem();
+               
+                ///////////////////////
+                //Sous menu d'insérer//
+                ///////////////////////
+                
+                if("Un employé".equals(choix_sous_menu)){
+                    saisie.setText("Veuillez remplir les champs ci-dessous:");
+                    pan2.add(saisie);
+                    saisie.setBounds(480,250,300,20);
+                    
+                    pan2.add(chp_nom_tl);
+                    chp_nom_tl.setBounds(450,340,75,20);
+                    pan2.add(champs_nom);
+                    champs_nom.setBounds(450,365,100,20);
+                    
+                    pan2.add(chp_prenom_tl);
+                    chp_prenom_tl.setBounds(450, 400, 100, 20);
+                    pan2.add(champs_prenom);
+                    champs_prenom.setBounds(450, 425, 100, 20);
+                    
+                    pan2.add(chp_numero_tl);
+                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    pan2.add(champs_numero);
+                    champs_numero.setBounds(650, 425, 100, 20);
+                    
+                    pan2.add(chp_adresse_tl);
+                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    pan2.add(champs_adresse);
+                    champs_adresse.setBounds(650, 305, 100, 20);
+                    
+                    pan2.add(chp_tel_tl);
+                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    pan2.add(champs_tel);
+                    champs_tel.setBounds(650, 365, 100, 20);
+                    
+                    pan2.add(type_emploi);
+                    type_emploi.setBounds(450,280,100,20);
+                    pan2.add(combo_ss_menu);
+                    
+                    pan2.add(valider_maj);
+                    valider_maj.setBounds(550,520,100,30);
+                    combo_ss_menu.setBounds(450,305,100,20);
+                    
+                    
+                    choix_combo_ss = (String) combo_ss_menu.getSelectedItem();
+                    
+                        if("Docteur".equals(choix_combo_ss))
+                        {
+                            pan2.remove(cs_tl);
+                            pan2.remove(code_service);
+                            pan2.remove(rot_tl);
+                            pan2.remove(rotation);
+                            pan2.remove(sal_tl);
+                            pan2.remove(salaire);
+                            
+                            pan2.add(chp_special);
+                            chp_special.setBounds(550,460,100,20);
+                            pan2.add(combo_spec);
+                            combo_spec.setBounds(550,485,100,20);
+                            pan2.updateUI();
+                            add(pan2);
+                            setVisible(true);
+                            
+                        if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+"')";
+                            con.executeUpdate(requeteMaj);
+                            requeteMaj = "INSERT INTO docteur (numero,specialite) VALUES ('" + champs_numero.getText() + "','" + combo_spec.getSelectedItem() + "');";
+                            con.executeUpdate(requeteMaj);
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("ca marche pas");
+                            
+                        }}
+                            
+                            
+                        }
+                        
+                        if("Infirmier".equals(choix_combo_ss)){
+                            
+                            pan2.remove(chp_special);
+                            pan2.remove(combo_spec);
+                            
+                            pan2.add(cs_tl);
+                            cs_tl.setBounds(400,460,100,20);
+                            pan2.add(code_service);
+                            code_service.setBounds(400,485,100,20);
+                            
+                            pan2.add(rot_tl);
+                            rot_tl.setBounds(550,460,100,20);
+                            pan2.add(rotation);
+                            rotation.setBounds(550,485,100,20);
+                            
+                            pan2.add(sal_tl);
+                            sal_tl.setBounds(700,460,100,20);
+                            pan2.add(salaire);
+                            salaire.setBounds(700,485,100,20);
+                            pan2.updateUI();
+                            add(pan2);
+                            setVisible(true);
+                            
+                            if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+"')";
+                            con.executeUpdate(requeteMaj);
+                            requeteMaj = "INSERT INTO infirmier (numero,code_service,rotation,salaire) VALUES ('" + champs_numero.getText() + "','" + code_service.getSelectedItem() + "','" + rotation.getSelectedItem() + "','" + salaire.getText() + "');";
+                            con.executeUpdate(requeteMaj);
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("ca marche pas");
+                            
+                        }}
+                            
+                        }
+                    pan2.updateUI();
+                    add(pan2);
+                    setVisible(true);
+                }
+                
+                if("Un malade".equals(choix_sous_menu)){
+                    saisie.setText("Veuillez remplir les champs ci-dessous:");
+                    pan2.add(saisie);
+                    saisie.setBounds(480,250,300,20);
+                    
+                    pan2.add(chp_nom_tl);
+                    chp_nom_tl.setBounds(450,280,75,20);
+                    pan2.add(champs_nom);
+                    champs_nom.setBounds(450,305,100,20);
+                    
+                    pan2.add(chp_prenom_tl);
+                    chp_prenom_tl.setBounds(450, 340, 100, 20);
+                    pan2.add(champs_prenom);
+                    champs_prenom.setBounds(450, 365, 100, 20);
+                    
+                    pan2.add(mut_tl);
+                    mut_tl.setBounds(450,400,100,20);
+                    pan2.add(mutuelle);
+                    mutuelle.setBounds(450,425,100,20);
+                    
+                    pan2.add(chp_numero_tl);
+                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    pan2.add(champs_numero);
+                    champs_numero.setBounds(650, 425, 100, 20);
+                    
+                    pan2.add(chp_adresse_tl);
+                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    pan2.add(champs_adresse);
+                    champs_adresse.setBounds(650, 305, 100, 20);
+                    
+                    pan2.add(chp_tel_tl);
+                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    pan2.add(champs_tel);
+                    champs_tel.setBounds(650, 365, 100, 20);
+                    
+                    pan2.add(valider_maj);
+                    valider_maj.setBounds(550,520,100,30);
+                    pan2.updateUI();
+                    add(pan2);
+                    setVisible(true);
+                    
+                    if(ae.getSource()==valider_maj){
+                    try {Connexion con = new Connexion("hopital", "root", "");
+                    requeteMaj = "INSERT INTO malade (numero,nom,prenom,adresse,tel,mutuelle) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+ "','" + mutuelle.getSelectedItem() + "');";
+                    con.executeUpdate(requeteMaj);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+                }   
+                }
+                
+                if("Une hospitalisation".equals(choix_sous_menu)){
+                    saisie.setText("Veuillez remplir les champs ci-dessous:");
+                    pan2.add(saisie);
+                    saisie.setBounds(480,250,300,20);
+                    
+                    pan2.add(saisie_num);
+                    saisie_num.setBounds(350,300,275,20);
+                    pan2.add(saisie_nom);
+                    saisie_nom.setBounds(650,300,200,20);
+                    
+                    if(saisie_nom.isSelected()){
+                        
+                        pan2.add(chp_nom_tl);
+                        chp_nom_tl.setBounds(450,340,75,20);
+                        pan2.add(champs_nom);
+                        champs_nom.setBounds(450,365,100,20);
+                        
+                        pan2.add(champs_lit);
+                        champs_lit.setBounds(650,340,75,20);
+                        pan2.add(lit);
+                        lit.setBounds(650,365,75,20);
+                    
+                        pan2.add(chp_prenom_tl);
+                        chp_prenom_tl.setBounds(450, 400, 100, 20);
+                        pan2.add(champs_prenom);
+                        champs_prenom.setBounds(450, 425, 100, 20);
+                        
+                        pan2.add(cs_tl);
+                        cs_tl.setBounds(650, 400, 100, 20);
+                        pan2.add(code_service);
+                        code_service.setBounds(650, 425, 100, 20);
+                        
+                        pan2.add(n_chambre_tl);
+                        n_chambre_tl.setBounds(450, 460,150,20);
+                        pan2.add(n_chambre);
+                        n_chambre.setBounds(450,485,100,20);
+                        
+                        if(ae.getSource()==valider_maj){
+                         try {Connexion con = new Connexion("hopital", "root", "");
+                         String tampon;
+                         tampon = "SELECT numero FROM malade WHERE nom = '" + champs_nom.getText() + "'";
+                         String num = (String) (con.remplirChampsRequete(tampon).get(0));
+                         requeteMaj = "INSERT INTO hopital.hospitalisation (no_malade,code_service,no_chambre,lit) VALUES('" + num + "','" + code_service.getSelectedItem() + "','" + n_chambre.getText() + "','" + lit.getText() + "');";
+                         con.executeUpdate(requeteMaj);
+                         } catch (SQLException | ClassNotFoundException ex) {
+                         Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                    
+                         }
+                        
+                        
+                    }
+                    
+                    if(saisie_num.isSelected()){
+                        pan2.add(chp_num_tl);
+                        chp_num_tl.setBounds(450,340,150,20);
+                        pan2.add(champs_num);
+                        champs_num.setBounds(450,365,150,20);
+                        
+                        pan2.add(champs_lit);
+                        champs_lit.setBounds(650,340,75,20);
+                        pan2.add(lit);
+                        lit.setBounds(650,365,75,20);
+                    
+                        pan2.add(n_chambre_tl);
+                        n_chambre_tl.setBounds(450, 400, 150, 20);
+                        pan2.add(champs_prenom);
+                        champs_prenom.setBounds(450, 425, 100, 20);
+                        
+                        pan2.add(cs_tl);
+                        cs_tl.setBounds(650, 400, 100, 20);
+                        pan2.add(code_service);
+                        code_service.setBounds(650, 425, 100, 20);
+                        
+                        if(ae.getSource()==valider_maj){
+                         try {Connexion con = new Connexion("hopital", "root", "");
+                         requeteMaj = "INSERT INTO hopital.hospitalisation (no_malade,code_service,no_chambre,lit) VALUES('" + champs_num.getText() + "','" + code_service.getSelectedItem() + "','" + champs_prenom.getText() + "','" + lit.getText() + "');";
+                         con.executeUpdate(requeteMaj);
+                         } catch (SQLException | ClassNotFoundException ex) {
+                         Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                    
+                         }
+                        
+                    }
+                   
+                    
+                    pan2.add(valider_maj);
+                    valider_maj.setBounds(550,520,100,30);
+                    pan2.updateUI();
+                    add(pan2);
+                    setVisible(true);
+                }
+            
+                if("Une chambre".equals(choix_sous_menu)){
+                     saisie.setText("Veuillez remplir les champs ci-dessous:");
+                     pan2.add(saisie);
+                     saisie.setBounds(480,250,300,20);
+                    
+                     pan2.add(cs_tl);
+                     cs_tl.setBounds(450,300,150,20);
+                     pan2.add(code_service);
+                     code_service.setBounds(450,325,150,20);
+                    
+                     pan2.add(n_chambre_tl);
+                     n_chambre_tl.setBounds(450, 360, 150, 20);
+                     pan2.add(champs_prenom);
+                     champs_prenom.setBounds(450, 385, 100, 20);
+                     
+                     pan2.add(n_surveillant_tl);
+                     n_surveillant_tl.setBounds(650, 300, 150, 20);
+                     pan2.add(champs_surveillant);
+                     champs_surveillant.setBounds(650, 325, 100, 20);
+                     
+                     pan2.add(nb_lit_tl);
+                     nb_lit_tl.setBounds(650, 360, 150, 20);
+                     pan2.add(nbr_lit);
+                     nbr_lit.setBounds(650, 385, 100, 20);
+                     
+                     pan2.add(valider_maj);
+                     valider_maj.setBounds(550,520,100,30);
+                     pan2.updateUI();
+                     add(pan2);
+                     setVisible(true);
+                     
+                     if(ae.getSource()==valider_maj){
+                    try {Connexion con = new Connexion("hopital", "root", "");
+                    requeteMaj = "INSERT INTO chambre (code_service,no_chambre,surveillant,nb_lits) VALUES('" + code_service.getSelectedItem() + "','" + champs_prenom.getText() + "','" + champs_surveillant.getSelectedItem() + "','" + nbr_lit.getSelectedItem() + "');";
+                    con.executeUpdate(requeteMaj);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+                }
+                     
+            }       
+                
+                if("Attribuer un médecin".equals(choix_sous_menu)){
+                    saisie.setText("Veuillez remplir les champs ci-dessous:");
+                    pan2.add(saisie);
+                    saisie.setBounds(480,250,300,20);
+                    
+                    pan2.add(num_medecin);
+                    num_medecin.setBounds(450,300,150,20);
+                    pan2.add(champs_num);
+                    champs_num.setBounds(450,325,150,20);
+                        
+                    pan2.add(chp_numero_patient);
+                    chp_numero_patient.setBounds(650, 300, 150, 20);
+                    pan2.add(champs_numero);
+                    champs_numero.setBounds(650, 325, 100, 20);
+                    
+                    pan2.add(valider_maj);
+                    valider_maj.setBounds(550,400,100,30);
+                    pan2.updateUI();
+                    add(pan2);
+                    setVisible(true);
+                    
+                    if(ae.getSource()==valider_maj){
+                    try {Connexion con = new Connexion("hopital", "root", "");
+                    requeteMaj = "INSERT INTO hopital.soigne (no_docteur, no_malade) VALUES ('" + champs_num.getText() + "','" + champs_numero.getText() +"');";
+                    con.executeUpdate(requeteMaj);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+                }
+                    
+                }
+                
+        }
+        
+        if ("Modifier une donnée".equals(choix_maj)){
+            
+            pan2.removeAll();
+            pan2.add(titre);
+            pan2.add(label_maj_p1);
+            pan2.add(sel_action);
+            sel_action.setSelectedItem("Modifier une donnée");
+            add(pan2);
+            pan2.updateUI();
+            setVisible(true);
+            
+            label_maj_p.setText("Que souhaitez-vous modifier?");
+            label_maj_p.setBounds(510,175,300,20);
+            choix_modifier.setBounds(450,200,300,20);
+            pan2.add(label_maj_p);
+            pan2.add(choix_modifier);
+            String choixdemodif = (String) choix_modifier.getSelectedItem();
+            
+            if("Un employé".equals(choixdemodif)){
+                
+                saisie.setText("Veuillez remplir les champs ci-dessous:");
+                    pan2.add(saisie);
+                    saisie.setBounds(480,250,300,20);
+                    
+                    pan2.add(chp_nom_tl);
+                    chp_nom_tl.setBounds(450,340,75,20);
+                    pan2.add(champs_nom);
+                    champs_nom.setBounds(450,365,100,20);
+                    
+                    pan2.add(chp_prenom_tl);
+                    chp_prenom_tl.setBounds(450, 400, 100, 20);
+                    pan2.add(champs_prenom);
+                    champs_prenom.setBounds(450, 425, 100, 20);
+                    
+                    pan2.add(chp_numero_tl);
+                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    pan2.add(champs_numero);
+                    champs_numero.setBounds(650, 425, 100, 20);
+                    
+                    pan2.add(chp_adresse_tl);
+                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    pan2.add(champs_adresse);
+                    champs_adresse.setBounds(650, 305, 100, 20);
+                    
+                    pan2.add(chp_tel_tl);
+                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    pan2.add(champs_tel);
+                    champs_tel.setBounds(650, 365, 100, 20);
+                    
+                    pan2.add(type_emploi);
+                    type_emploi.setBounds(450,280,100,20);
+                    pan2.add(combo_ss_menu);
+                    
+                    pan2.add(valider_maj);
+                    valider_maj.setBounds(550,520,100,30);
+                    combo_ss_menu.setBounds(450,305,100,20);
+                    
+                    
+                    choix_combo_ss = (String) combo_ss_menu.getSelectedItem();
+                    
+                        if("Docteur".equals(choix_combo_ss))
+                        {
+                            pan2.remove(cs_tl);
+                            pan2.remove(code_service);
+                            pan2.remove(rot_tl);
+                            pan2.remove(rotation);
+                            pan2.remove(sal_tl);
+                            pan2.remove(salaire);
+                            
+                            pan2.add(chp_special);
+                            chp_special.setBounds(550,460,100,20);
+                            pan2.add(combo_spec);
+                            combo_spec.setBounds(550,485,100,20);
+                            pan2.updateUI();
+                            add(pan2);
+                            setVisible(true);
+                            
+                        if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "UPDATE employe SET numero = '" + champs_numero.getText() + "', adresse = '" + champs_adresse.getText() + "', tel = '" + champs_tel.getText() + "' WHERE nom = '" + champs_nom.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            requeteMaj = "UPDATE docteur SET specialite = '" + combo_spec.getSelectedItem() + "' WHERE numero = '" + champs_numero.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+                            
+                            
+                        }
+                        
+                        if("Infirmier".equals(choix_combo_ss)){
+                            
+                            pan2.remove(chp_special);
+                            pan2.remove(combo_spec);
+                            
+                            pan2.add(cs_tl);
+                            cs_tl.setBounds(400,460,100,20);
+                            pan2.add(code_service);
+                            code_service.setBounds(400,485,100,20);
+                            
+                            pan2.add(rot_tl);
+                            rot_tl.setBounds(550,460,100,20);
+                            pan2.add(rotation);
+                            rotation.setBounds(550,485,100,20);
+                            
+                            pan2.add(sal_tl);
+                            sal_tl.setBounds(700,460,100,20);
+                            pan2.add(salaire);
+                            salaire.setBounds(700,485,100,20);
+                            pan2.updateUI();
+                            add(pan2);
+                            setVisible(true);
+                            
+                            if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "UPDATE employe SET numero = '" + champs_numero.getText() + "', adresse = '" + champs_adresse.getText() + "', tel = '" + champs_tel.getText() + "' WHERE nom = '" + champs_nom.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            requeteMaj = "UPDATE infirmier SET code_service = '" + code_service.getSelectedItem() + "', rotation = '" + rotation.getSelectedItem() + "', salaire = '" + salaire.getText() + "' WHERE numero = '" + champs_numero.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+                            
+                        }
+                    pan2.updateUI();
+                    add(pan2);
+                    setVisible(true);
+  
+            }
+            
+            if("Un malade".equals(choixdemodif)){
+                 
+                 saisie.setText("Veuillez remplir les champs ci-dessous:");
+                 pan2.add(saisie);
+                 saisie.setBounds(480,250,300,20);
+                
+                    pan2.add(chp_nom_tl);
+                    chp_nom_tl.setBounds(450,280,75,20);
+                    pan2.add(champs_nom);
+                    champs_nom.setBounds(450,305,100,20);
+                    
+                    pan2.add(chp_prenom_tl);
+                    chp_prenom_tl.setBounds(450, 340, 100, 20);
+                    pan2.add(champs_prenom);
+                    champs_prenom.setBounds(450, 365, 100, 20);
+                    
+                    pan2.add(mut_tl);
+                    mut_tl.setBounds(450,400,100,20);
+                    pan2.add(mutuelle);
+                    mutuelle.setBounds(450,425,100,20);
+                    
+                    pan2.add(chp_numero_tl);
+                    chp_numero_tl.setBounds(650, 400, 100, 20);
+                    pan2.add(champs_numero);
+                    champs_numero.setBounds(650, 425, 100, 20);
+                    
+                    pan2.add(chp_adresse_tl);
+                    chp_adresse_tl.setBounds(650, 280, 100, 20);
+                    pan2.add(champs_adresse);
+                    champs_adresse.setBounds(650, 305, 100, 20);
+                    
+                    pan2.add(chp_tel_tl);
+                    chp_tel_tl.setBounds(650, 340, 100, 20);
+                    pan2.add(champs_tel);
+                    champs_tel.setBounds(650, 365, 100, 20);
+                    
+                    pan2.add(valider_maj);
+                    valider_maj.setBounds(550,520,100,30);
+                    pan2.updateUI();
+                    add(pan2);
+                    setVisible(true);
+                    
+                    if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "UPDATE malade SET numero = '" + champs_numero.getText() + "', adresse = '" + champs_adresse.getText() + "', tel = '" + champs_tel.getText() + "', mutuelle = '" + mutuelle.getSelectedItem() + "' WHERE nom = '" + champs_nom.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+                 
+            }
+            
+            if("Une hospitalisation".equals(choixdemodif)){
+                 
+                 saisie.setText("Veuillez remplir les champs ci-dessous:");
+                 pan2.add(saisie);
+                 saisie.setBounds(480,250,300,20);
+                
+                        pan2.add(chp_num_tl);
+                        chp_num_tl.setBounds(450,340,150,20);
+                        pan2.add(champs_num);
+                        champs_num.setBounds(450,365,150,20);
+                        
+                        pan2.add(champs_lit);
+                        champs_lit.setBounds(650,340,75,20);
+                        pan2.add(lit);
+                        lit.setBounds(650,365,75,20);
+                    
+                        pan2.add(n_chambre_tl);
+                        n_chambre_tl.setBounds(450, 400, 150, 20);
+                        pan2.add(champs_prenom);
+                        champs_prenom.setBounds(450, 425, 100, 20);
+                        
+                        pan2.add(cs_tl);
+                        cs_tl.setBounds(650, 400, 100, 20);
+                        pan2.add(code_service);
+                        code_service.setBounds(650, 425, 100, 20);
+                        
+                        pan2.add(valider_maj);
+                        valider_maj.setBounds(550,520,100,30);
+                        pan2.updateUI();
+                        add(pan2);
+                        setVisible(true);
+                 
+                 if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "UPDATE hospitalisation SET code_service = '" + code_service.getSelectedItem() + "', no_chambre = '" + champs_prenom.getText() + "', lit = '" + lit.getText() + "' WHERE no_malade = '" + champs_num.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+            }
+            
+            if("Changement de médecin".equals(choixdemodif)){
+                ///A laisser ou pas? pas vraiment utile à vrai dire
+                saisie.setText("Veuillez remplir les champs ci-dessous:");
+                pan2.add(saisie);
+                saisie.setBounds(480,250,300,20);
+                
+                pan2.add(num_medecin);
+                    num_medecin.setBounds(450,300,150,20);
+                    pan2.add(champs_num);
+                    champs_num.setBounds(450,325,150,20);
+                        
+                    pan2.add(chp_numero_patient);
+                    chp_numero_patient.setBounds(650, 300, 150, 20);
+                    pan2.add(champs_numero);
+                    champs_numero.setBounds(650, 325, 100, 20);
+                
+                pan2.add(valider_maj);
+                valider_maj.setBounds(560,360,100,30);
+                
+                if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "UPDATE soigne SET no_docteur = '" + champs_num.getText() + "' WHERE no_malade = '" + champs_numero.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                            
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+                
+            }
+            
+            add(pan2);
+            setVisible(true);
+       
+        }
+        
+        if("Supprimer une donnée".equals(choix_maj)){
+            //system.out.println("supprimer");
+            pan2.removeAll();
+            pan2.add(titre);
+            pan2.add(label_maj_p1);
+            pan2.add(sel_action);
+            sel_action.setSelectedItem("Supprimer une donnée");
+            add(pan2);
+            pan2.updateUI();
+            setVisible(true);
+            
+            label_maj_p.setText("Que souhaitez-vous supprimer?");
+            label_maj_p.setBounds(510,175,300,20);
+            choix_supprimer.setBounds(450,200,300,20);
+            pan2.add(label_maj_p);
+            pan2.add(choix_supprimer);
+            String choixdemodif2 = (String) choix_supprimer.getSelectedItem();
+            
+            if("Un employé".equals(choixdemodif2)){
+                
+                saisie.setText("Veuillez remplir les champs ci-dessous:");
+                pan2.add(saisie);
+                saisie.setBounds(480,250,300,20);
+                
+                 pan2.add(chp_numero_tl);
+                 chp_numero_tl.setBounds(550, 345, 150,20);
+                 pan2.add(search_maj_numero);
+                 search_maj_numero.setBounds(550,370,150,20);
+                 
+                 pan2.add(chp_nom_tl);
+                 chp_nom_tl.setBounds(450,285,150,20);
+                 pan2.add(search_maj_nom);
+                 search_maj_nom.setBounds(450,310,150,20);
+                 
+                 pan2.add(chp_prenom_tl);
+                 chp_prenom_tl.setBounds(650,285,150,20);
+                 pan2.add(search_maj_prenom);
+                 search_maj_prenom.setBounds(650,310,150,20);
+                 
+                 pan2.add(valider_maj);
+                 valider_maj.setBounds(575,405,100,30);
+                 
+                 if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "DELETE FROM employe WHERE numero = '" + search_maj_numero.getText() + "'";
+                            requeteMaj = "DELETE FROM employe WHERE nom = '" + search_maj_nom.getText() + "'";
+                            requeteMaj = "DELETE FROM employe WHERE prenom = '" + search_maj_prenom.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+  
+            }
+            
+            if("Un malade".equals(choixdemodif2)){
+                 
+                 saisie.setText("Veuillez remplir les champs ci-dessous:");
+                 pan2.add(saisie);
+                 saisie.setBounds(480,250,300,20);
+                
+                 pan2.add(chp_numero_tl);
+                 chp_numero_tl.setBounds(550, 345, 150,20);
+                 pan2.add(search_maj_numero);
+                 search_maj_numero.setBounds(550,370,150,20);
+                 
+                 pan2.add(chp_nom_tl);
+                 chp_nom_tl.setBounds(450,285,150,20);
+                 pan2.add(search_maj_nom);
+                 search_maj_nom.setBounds(450,310,150,20);
+                 
+                 pan2.add(chp_prenom_tl);
+                 chp_prenom_tl.setBounds(650,285,150,20);
+                 pan2.add(search_maj_prenom);
+                 search_maj_prenom.setBounds(650,310,150,20);
+                 
+                 pan2.add(valider_maj);
+                 valider_maj.setBounds(575,405,100,30);
+                 
+                  if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "DELETE FROM malade WHERE numero = '" + search_maj_numero.getText() + "'";
+                            requeteMaj = "DELETE FROM malade WHERE nom = '" + search_maj_nom.getText() + "'";
+                            requeteMaj = "DELETE FROM malade WHERE prenom = '" + search_maj_prenom.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+                 
+                 
+            }
+            
+            if("Une hospitalisation".equals(choixdemodif2)){
+                 
+                 saisie.setText("Veuillez remplir les champs ci-dessous:");
+                 pan2.add(saisie);
+                 saisie.setBounds(480,250,300,20);
+                
+                        pan2.add(chp_num_tl);
+                        chp_num_tl.setBounds(450,285,150,20);
+                        pan2.add(champs_num);
+                        champs_num.setBounds(450,320,150,20);
+                        
+                        pan2.add(cs_tl);
+                        cs_tl.setBounds(650, 285, 100, 20);
+                        pan2.add(code_service);
+                        code_service.setBounds(650, 320, 100, 20);
+                 
+                 pan2.add(valider_maj);
+                 valider_maj.setBounds(550,355,100,30);
+                 
+                  if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "DELETE FROM hospitalisation WHERE no_malade = '" + champs_num.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+                 
+            }
+            
+            if("Fin de traitement".equals(choixdemodif2)){
+                
+                saisie.setText("Veuillez remplir les champs ci-dessous:");
+                pan2.add(saisie);
+                saisie.setBounds(480,250,300,20);
+                
+                pan2.add(chp_numero_patient);
+                chp_numero_patient.setBounds(560, 285, 150, 20);
+                pan2.add(champs_numero);
+                champs_numero.setBounds(560, 310, 100, 20);
+                
+                pan2.add(valider_maj);
+                valider_maj.setBounds(560,345,100,30);
+                
+                if(ae.getSource()==valider_maj){  
+                        try { 
+                            Connexion con = new Connexion("hopital", "root", "");
+                            requeteMaj = "DELETE FROM soigne WHERE no_malade = '" + champs_numero.getText() + "'";
+                            con.executeUpdate(requeteMaj);
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }}
+            }
+            
+            add(pan2);
+            setVisible(true);
+            
+        }
+          
+        }
+       
+   }
+     
 }

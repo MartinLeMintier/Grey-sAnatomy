@@ -1194,8 +1194,10 @@ public class Recherche extends JFrame
                     saisie.setBounds(280,250,300,20);
                     
                     pan2.add(saisie_num);
+                    saisie_num.setBackground(new Color(0x79F8F8));
                     saisie_num.setBounds(150,300,275,20);
                     pan2.add(saisie_nom);
+                    saisie_nom.setBackground(new Color(0x79F8F8));
                     saisie_nom.setBounds(450,300,200,20);
                     
                     if(saisie_nom.isSelected()){

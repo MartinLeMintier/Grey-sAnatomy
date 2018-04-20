@@ -26,7 +26,7 @@ import Controleur.Connexion;
         private String total ;
         private String titre;
         
-    
+
    public ReportingPie(String title, Connexion con ) {
       super(title); 
       titre= title;

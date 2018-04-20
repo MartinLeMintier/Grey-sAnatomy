@@ -32,6 +32,12 @@ public class FenetreAcceuil extends JFrame implements ActionListener
    private Connexion conni;
    private String choix_serveur;
    
+   private JFrame error;
+   private JLabel mess_error;
+   private JLabel mess_error2;
+   private JButton berror;
+   private JPanel pan_error;
+   
    ///Constructeur
     public FenetreAcceuil(String choix){
         
@@ -42,6 +48,32 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     this.setResizable(false);
     this.setLocationRelativeTo(null);
 
+    //fenetre d'erreur
+    error = new JFrame("erreur");
+    error.setResizable(false);
+    error.setSize(300,150);
+    error.setLocationRelativeTo(null);
+    
+    pan_error = new JPanel();
+    pan_error.setLayout(null);
+    pan_error.setBackground(new Color(0x79F8F8));
+    mess_error = new JLabel("Echec de la connexion");
+    mess_error2 = new JLabel("Vérifiez vos identifiants");
+    berror = new JButton();
+    berror.setText("OK");
+    berror.addActionListener(this);
+    
+    mess_error.setBounds(85,5,200,20);
+    mess_error2.setBounds(85,40, 200, 20);
+    berror.setBounds(110,70,70,30);
+    
+    pan_error.add(mess_error);
+    pan_error.add(mess_error2);
+    pan_error.add(berror);
+    
+    error.add(pan_error);
+    
+    
     //Panel général qui regroupe tous les autres 
     P1 = new JPanel();
     P1.setBackground(new Color(0x79F8F8));
@@ -145,7 +177,13 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     
    @Override
  public void actionPerformed (ActionEvent e)
- {
+ { 
+     
+     if(e.getSource()==berror){
+         error.dispose();
+         setEnabled(true);
+         setVisible(true);
+     }
      
      if(e.getSource()==b4)
      {
@@ -173,7 +211,8 @@ public class FenetreAcceuil extends JFrame implements ActionListener
         
          } catch (SQLException | ClassNotFoundException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
-             
+             error.setVisible(true);
+             setEnabled(false);
          }
         }
    
@@ -191,7 +230,8 @@ public class FenetreAcceuil extends JFrame implements ActionListener
              
          } catch (SQLException | ClassNotFoundException ex) {
              Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
-             
+             error.setVisible(true);
+             setEnabled(false);
          }
          
         }        

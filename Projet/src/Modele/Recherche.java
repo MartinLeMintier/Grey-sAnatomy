@@ -74,8 +74,7 @@ public class Recherche extends JFrame
                 
                // recupee la connexion et le place en attribut
                con=conni;
-              // Initialisation des 4 varaibles qui permettent de créer la requete
-              
+              // Initialisation des 4 varaibles qui permettent de créer la requete             
                 math="=";
                 select="";
                 table="";
@@ -415,40 +414,72 @@ public class Recherche extends JFrame
                afficher_MAJ();
            }
            
-           // Bouton pour gérer la fermeture du diagramme sans fermer la fenetre
-           if(e.getSource()==exit)
-           {
-               demo.dispose();
-             
-           }
            
            //Bouton qui lance le diagramme choisit par l'utilisateur dans la comboboxe
-           if(e.getSource()==exemartin)
+          if(e.getSource()==exemartin)
            {
                //Premier diagramme
                if(condition2.equals("% de docteur par specialite"))
                {
-                demo = new ReportingPie( "Spécilites des docteurs", con );  
+                pan5.removeAll();
+                demo = new ReportingPie( "Spécilites des docteurs", con );
                 demo.setSize( 500 , 500 );    
                 RefineryUtilities.centerFrameOnScreen(demo);
-                demo.add(exit);
-                demo.setVisible( true ); 
+                pan5.add(demo.createDataset());
+                setVisible( true ); 
    
                }
                //deuxieme diagramme
                if(condition2.equals("% d'infirmier par rotation"))
                {
-//                   HistogramDataset h = new  HistogramDataset();
-//                   h.addSeries("histogramme",y,x);
+                pan5.removeAll();
                 demo = new ReportingPie( "rotation des infirmieres", con );  
                 demo.setSize( 500 , 500 );    
                 RefineryUtilities.centerFrameOnScreen(demo);
-                demo.add(exit);
-                demo.setVisible( true ); 
+                pan5.add(demo.createDataset());
+                setVisible( true ); 
+               }
+               //troisieme diagramme
+               if(condition2.equals("% de personnes hospitalisees par service"))
+               {
+                pan5.removeAll();
+                demo = new ReportingPie( "Personnes hospitalisees par service", con );  
+                demo.setSize( 500 , 500 );    
+                RefineryUtilities.centerFrameOnScreen(demo);
+                pan5.add(demo.createDataset());
+                setVisible( true ); 
+               }
+               //Quatrieme
+                 if(condition2.equals("% d'infirmiers par service"))
+               {
+                pan5.removeAll();
+                demo = new ReportingPie( "Infirmiers par service", con );  
+                demo.setSize( 500 , 500 );    
+                RefineryUtilities.centerFrameOnScreen(demo);
+                pan5.add(demo.createDataset());
+                setVisible( true ); 
+               }
+                 
+                 if(condition2.equals("% de malades par mutuelle"))
+               {
+                pan5.removeAll();
+                demo = new ReportingPie( "Malades par mutuelle", con );  
+                demo.setSize( 500 , 500 );    
+                RefineryUtilities.centerFrameOnScreen(demo);
+                pan5.add(demo.createDataset());
+                setVisible( true ); 
                }
               
+               
+//               if(condition2.equals("test"))
+//               {
+//                   pan5.removeAll();
+//                   ReportingHistogramme r = new ReportingHistogramme("test","x","y",con);
+//                   pan5.add(r.creation_chart());
+//                   setVisible(true);
+//               }
+              
            }
-           
            
            
        }
@@ -946,7 +977,8 @@ public class Recherche extends JFrame
      
      //nouveau pan pourr afficher le diagramme 
      pan5= new JPanel();
-     pan5.setBounds(20,130,750,600);
+     pan5.setBounds(20,220,750,430);
+     pan5.setBackground(new Color(0x79F8F8));
      
      //bouton de sortie pour fermer un diagramme sans frmer la fenetre
      exit = new JButton("EXIT");
@@ -956,6 +988,9 @@ public class Recherche extends JFrame
      c4= new JComboBox ();
      c4.addItem("% de docteur par specialite");
      c4.addItem("% d'infirmier par rotation");
+     c4.addItem("% de personnes hospitalisees par service");
+     c4.addItem("% de malades par mutuelle");
+     c4.addItem("% d'infirmiers par service");
      c4.setBounds(250,30,280,20);
      c4.addActionListener(new Combo4());
      

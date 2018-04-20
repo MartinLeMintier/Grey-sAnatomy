@@ -3,7 +3,6 @@
 
 
 package Modele;
-
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,18 +24,19 @@ import Controleur.Connexion;
         private String [] specialite ;
         private String total ;
         private String titre;
+        private JFreeChart chart;
         
-
+    
    public ReportingPie(String title, Connexion con ) {
       super(title); 
       titre= title;
       connex=con;
-      setContentPane(createDemoPanel());
+
    }
    
    
    
-   public  PieDataset createDataset( ){
+   public  ChartPanel createDataset( ){
        
            try {
                requete();
@@ -64,26 +64,55 @@ import Controleur.Connexion;
       dataset.setValue( "Nuit : " + retour[1], new Double( retour[1] ) );   
     } 
       
+      if(titre.equals("Personnes hospitalisees par service"))
+        {
+           dataset.setValue( "CAR :" + retour[0] , new Double( retour[0] ) );  
+           dataset.setValue( "CHG : " + retour[1], new Double( retour[1] ) );   
+           dataset.setValue( "REA :" + retour[2] , new Double( retour[2] ) );
+        }
+       if(titre.equals("Infirmiers par service"))
+        {
+           dataset.setValue( "CAR :" + retour[0] , new Double( retour[0] ) );  
+           dataset.setValue( "CHG : " + retour[1], new Double( retour[1] ) );   
+           dataset.setValue( "REA :" + retour[2] , new Double( retour[2] ) );
+        }
       
+       if(titre.equals("Malades par mutuelle"))
+    {
+     
+      dataset.setValue( "MNAM :" + retour[0] , new Double( retour[0] ) );  
+      dataset.setValue( "LMDE : " + retour[1], new Double( retour[1] ) );   
+      dataset.setValue( "MNH:" + retour[2] , new Double( retour[2] ) );    
+      dataset.setValue( "MAAF : " + retour[3] , new Double( retour[3] ) );  
+      dataset.setValue( "AG2R" + retour[4], new Double( retour[4] ) );    
+      dataset.setValue( "CCVRP " + retour[5], new Double( retour[5] ) ); 
+       dataset.setValue( "CNAMTS :" + retour[6] , new Double( retour[6] ) );  
+      dataset.setValue( "MAS : " + retour[7], new Double( retour[7] ) );   
+      dataset.setValue( "MGEN :" + retour[8] , new Double( retour[8] ) );    
+      dataset.setValue( "MGSP : " + retour[9] , new Double( retour[9] ) );  
+      dataset.setValue( "MMA" + retour[10], new Double( retour[10] ) );    
+      dataset.setValue( "MNFTC " + retour[11], new Double( retour[11] ) ); 
       
-      return dataset;         
-   }
-   
-   public  JFreeChart createChart( PieDataset dataset ) {
-      JFreeChart chart = ChartFactory.createPieChart(      
+    } 
+       
+      chart = ChartFactory.createPieChart(      
          titre,   // chart title 
          dataset,          // data    
          true,             // include legend   
          true, 
          false);
       
-      return chart;
+      
+      ChartPanel cam = new ChartPanel(chart) ;
+     
+      return cam;
+      
+      
+           
    }
    
-    public  JPanel createDemoPanel( ) {
-      JFreeChart chart = createChart(createDataset( ) );   
-      return new ChartPanel( chart ); 
-   }
+ 
+   
    
    public void requete() throws ClassNotFoundException
    {
@@ -121,7 +150,53 @@ import Controleur.Connexion;
                   }                  
             
                }
-                 
+              if(titre.equals("Personnes hospitalisees par service"))
+        {
+            specialite= new String []{"CAR","CHG","REA"};
+
+                    retour= new String [specialite.length];
+                    requete = new String[specialite.length];
+                    
+                    for(int i=0; i<specialite.length;i++)
+                  {
+                      requete[i] ="SELECT count(no_malade) FROM hospitalisation WHERE code_service='"+specialite[i]+"'";
+                      retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
+                      System.out.println(retour[i]) ;
+                  }                  
+           
+        }   
+               if(titre.equals("Infirmiers par service"))
+        {
+            specialite= new String []{"CAR","CHG","REA"};
+
+                    retour= new String [specialite.length];
+                    requete = new String[specialite.length];
+                    
+                    for(int i=0; i<specialite.length;i++)
+                  {
+                      requete[i] ="SELECT count(numero) FROM infirmier WHERE code_service='"+specialite[i]+"'";
+                      retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
+                      System.out.println(retour[i]) ;
+                  }                  
+           
+        }  
+               
+               if(titre.equals("Malades par mutuelle"))
+        {
+            specialite= new String []{"MNAM","LMDE","MNH","MAAF","AG2R","CCVRP","CNAMTS","MAS","MGEN","MGSP","MMA","MNFTC"};
+
+                    retour= new String [specialite.length];
+                    requete = new String[specialite.length];
+                    
+                    for(int i=0; i<specialite.length;i++)
+                  {
+                      requete[i] ="SELECT count(numero) FROM malade WHERE mutuelle='"+specialite[i]+"'";
+                      retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
+                      System.out.println(retour[i]) ;
+                  }                  
+           
+        }   
+              
               
                    
               

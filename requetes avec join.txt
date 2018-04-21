@@ -1,0 +1,34 @@
+Pour chaque malade soigné par plus de 3 médecins donner le nombre total de ses médecins ainsi que le nombre correspondant de spécialités médicales concernées. 
+
+select nom, prenom, count(no_docteur), count(distinct specialite)
+From soigne
+Join malade on malade.numero = no_malade
+Join docteur on docteur.numero = soigne.no_docteur
+Group By no_malade
+Having count(no_docteur) >3
+
+
+Donner pour chaque lit occupé du bâtiment « B » de l’hôpital occupé par un malade affilié à une mutuelle dont le nom commence par « MN... », le numéro du lit, le numéro de la chambre, le nom du service ainsi que le prénom, le nom et la mutuelle du malade l’occupant. 
+
+SELECT chambre.no_chambre, lit , service.nom, prenom, malade.nom, mutuelle 
+FROM chambre 
+JOIN service ON chambre.code_service = code
+JOIN hospitalisation ON chambre.code_service = hospitalisation.code_service and chambre.no_chambre = hospitalisation.no_Chambre
+JOIN malade ON numero = no_Malade
+WHERE batiment = 'B' AND mutuelle LIKE 'MN%'
+
+
+Quelle est la moyenne des salaires des infirmiers(ères) par service ? 
+
+select code_Service, avg(Salaire) From infirmier Group By code_service 
+
+
+Pour chaque service du bâtiment « A » de l’hôpital, quel est le nombre moyen de lits par chambre ? 
+
+
+select code_service, AVG(nb_lits)
+From chambre
+Join service on code_service = Code
+Where batiment = 'A'
+Group By code_service
+

@@ -125,7 +125,7 @@ import Controleur.Connexion;
    
  
    /**
-    * Methode qui permet pour chaque camembert reconnu grace a son titre, de recuperer la requete grace à connexion, et remplir un tableau avec le resulatta de la requete
+    * Methode qui permet pour chaque camembert reconnu grace a son titre, de recuperer la requete grace à connexion, et remplir un tableau avec le resultat de la requete
     * @throws ClassNotFoundException 
     */
    

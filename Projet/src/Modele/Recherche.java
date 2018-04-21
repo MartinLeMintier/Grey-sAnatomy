@@ -55,7 +55,7 @@ public class Recherche extends JFrame
    
    /**
     *Constructeur
-    * Initialise la page principale avec les 4 boutons à gauche et le pan vide à droite
+    * Initialise la page principale avec les 4 boutons à gauche et le pannel vide à droite
      * @param conni
     */
     public Recherche(Connexion conni)
@@ -148,7 +148,7 @@ public class Recherche extends JFrame
 
  /**
   * Cette méthode permet d'afficher ce qui se passe qaund on veut rechercher dans la base de donnée: c'est-a-dire quand on appuie sur le bouton 1 
-  * Elle affiche tous les elelments graphique nécéssaires à la bonne position et mis en forment
+  * Elle affiche tous les elements graphiques nécéssaires à la bonne position et mise en forme
   */
    public void afficher_recherche()
    {   
@@ -280,8 +280,8 @@ public class Recherche extends JFrame
                            
    }
    /**
-    * Méthode qui gère l'interface quand on appuie sur l bouton qui permet à l'utilisateur de rentrer ces propres requetes
-    * Elle met en place le pan2 et le maj pour ue l'utilisateur puisse rentrer une requete
+    * Méthode qui gère l'interface quand on appuie sur le bouton qui permet à l'utilisateur de rentrer ces propres requetes
+    * Elle met en place le pan2 et le maj pour que l'utilisateur puisse rentrer une requete
     */
    
    public void requetes_compliquees()
@@ -498,7 +498,7 @@ public class Recherche extends JFrame
       
    }
    /**
-    * Methode qui affiche qui créé une requete selon les decisions de l'utilisateur et remplit le tableau affichant le resultat
+    * Methode qui affiche qui créé une requete selon les decisions de l'utilisateur et remplit le tableau affichant le resultat de la  requete
     */
    public void afficher_resultat()
    {
@@ -803,7 +803,7 @@ public class Recherche extends JFrame
    }
    
    /**
-    * Méthode qui est appelée qaund l'utilisateur decide de mettre à jour la base de donnée
+    * Méthode qui est appelée quand l'utilisateur decide de mettre à jour la base de donnée
     */
    
     public void afficher_MAJ()
@@ -983,7 +983,7 @@ public class Recherche extends JFrame
        setVisible(true);
    }
     /**
-    * Méthode qui est appelé qaund l'utilisateur decide d'afficher des diagrammes faisant certaines statistiques
+    * Méthode qui est appelée qaund l'utilisateur decide d'afficher des diagrammes faisant certaines statistiques
     * Il affiche seulement la mise en page du pannel
     */
      public void afficher_reporting()

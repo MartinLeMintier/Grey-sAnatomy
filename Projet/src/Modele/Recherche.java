@@ -555,8 +555,7 @@ public class Recherche extends JFrame
            if((select!=""&&table!=""&&condition!="")|| choix==false)
            {
                     
-          
-        System.out.println(requete);
+     
         
         // remplir le tableau du resultat des requetes
         try{
@@ -1040,7 +1039,7 @@ public class Recherche extends JFrame
         ///////////////////////////////////////////
        
         if ("Insérer une donnée".equals(choix_maj)){
-            //System.out.println("insérer");
+            
             pan2.removeAll();
             
             pan2.setEnabled(false);
@@ -1980,7 +1979,7 @@ public class Recherche extends JFrame
         }
         
         if("Supprimer une donnée".equals(choix_maj)){
-            //system.out.println("supprimer");
+           
             pan2.removeAll();
             
             pan2.setEnabled(false);

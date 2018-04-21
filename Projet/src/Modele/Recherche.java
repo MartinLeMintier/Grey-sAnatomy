@@ -560,7 +560,7 @@ public class Recherche extends JFrame
         
         // remplir le tableau du resultat des requetes
         try{
-//          tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
+         tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
 //          //tableau qui va recupererle retour de la requete
 //           tabRecup [0][0]="";
 //
@@ -574,7 +574,7 @@ public class Recherche extends JFrame
 //           }
 //           }
 
-           for(int i=1; i<con.remplirChampsRequete(requete).size();i++)
+           for(int i=0; i<con.remplirChampsRequete(requete).size();i++)
            {
               tabRecup[i][0]= con.remplirChampsRequete(requete).get(i);
               

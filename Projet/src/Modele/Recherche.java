@@ -581,7 +581,7 @@ public class Recherche extends JFrame
            }
         }catch(com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e )
         {
-            l8.setText("SQL excetion, votre requete est erronee veuillez en saisir une nouvelle");
+            l8.setText("SQL exception, votre requete est erronee veuillez en saisir une nouvelle");
         }
            
            // remplir le tableau graphique avec le tableau de requetes
@@ -592,7 +592,7 @@ public class Recherche extends JFrame
            else
            {
                 // Affichage que la requete est erronee dans le cas ou le blindage a empeché la requete de s'executer          
-               l6.setText("Votre saisie est erronee veuillez recommencer");
+               l6.setText("Votre saisie est erronée veuillez recommencer");
              
            }
            

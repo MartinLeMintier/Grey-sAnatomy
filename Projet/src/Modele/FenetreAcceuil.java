@@ -200,6 +200,12 @@ public class FenetreAcceuil extends JFrame implements ActionListener
         String loginDataBase;
         String passwordDataBase;
                
+        if ((t2.getText().length() == 0)||(t3.getText().length()==0)){
+            mess_error2.setText("Champs BDD ou login vide");
+            error.setVisible(true);
+            setEnabled(false);
+        }
+        
         ///localhost
         if(("localhost".equals(choix_serveur))&&(!"".equals(t2.getText()))&&(!"".equals(t3.getText()))){
          
@@ -212,6 +218,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
              Recherche P = new Recherche(conni);
         
          } catch (SQLException | ClassNotFoundException ex) {
+             mess_error2.setText("Vérifiez vos identifiants");
              error.setVisible(true);
              setEnabled(false);
          }
@@ -230,6 +237,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
                Recherche P = new Recherche(conni);
              
          } catch (SQLException | ClassNotFoundException ex) {
+             mess_error2.setText("Vérifiez vos identifiants");
              error.setVisible(true);
              setEnabled(false);
          }

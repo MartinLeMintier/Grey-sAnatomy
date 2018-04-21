@@ -15,15 +15,15 @@ import java.awt.event.*;
 public class SelectionServeur extends JFrame implements ActionListener
 {
     
-    public JPanel servt;
-    public JPanel servc;
-    public JPanel servb;
-    public JPanel servG;
-    public JLabel titre;
-    public Box boite;
-    public JComboBox selection;
-    public JButton bouton;
-    public String choix;
+    private JPanel servt;
+    private JPanel servc;
+    private JPanel servb;
+    private JPanel servG;
+    private JLabel titre;
+    private Box boite;
+    private JComboBox selection;
+    private JButton bouton;
+    private String choix;
     
     public SelectionServeur(){
         

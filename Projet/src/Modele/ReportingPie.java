@@ -63,7 +63,7 @@ import Controleur.Connexion;
         // remplir les données avec le tableau retour qui contient le resultat de la requete
           for(int i=0; i< specialite.length; i++)
      {
-         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+         dataset.setValue( specialite[i] , new Double( retour[i] ) );  
      }
     
       
@@ -72,7 +72,7 @@ import Controleur.Connexion;
     {     // remplir les données avec le tableau retour qui contient le resultat de la requete
           for(int i=0; i< specialite.length; i++)
      {
-         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+         dataset.setValue( specialite[i], new Double( retour[i] ) );  
      }
  
     } 
@@ -82,7 +82,7 @@ import Controleur.Connexion;
              // remplir les données avec le tableau retour qui contient le resultat de la requete
               for(int i=0; i< specialite.length; i++)
      {
-         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+         dataset.setValue( specialite[i] , new Double( retour[i] ) );  
      }
 
         }
@@ -91,7 +91,7 @@ import Controleur.Connexion;
              // remplir les données avec le tableau retour qui contient le resultat de la requete
               for(int i=0; i< specialite.length; i++)
      {
-         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+         dataset.setValue( specialite[i] , new Double( retour[i] ) );  
      }
 
         }
@@ -101,7 +101,7 @@ import Controleur.Connexion;
          // remplir les données avec le tableau retour qui contient le resultat de la requete
      for(int i=0; i< specialite.length; i++)
      {
-         dataset.setValue( specialite[i]+" :" + retour[i] , new Double( retour[i] ) );  
+         dataset.setValue( specialite[i] , new Double( retour[i] ) );  
      }
 
      
@@ -146,7 +146,7 @@ import Controleur.Connexion;
                     for(int i=0; i<specialite.length;i++)
                   {
                       // requete prend la valeur desirée
-                      requete[i] ="select count(specialite)/32 from docteur where specialite='"+specialite[i]+"'";
+                      requete[i] ="select count(specialite) from docteur where specialite='"+specialite[i]+"'";
                       // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                   }
@@ -163,7 +163,7 @@ import Controleur.Connexion;
                     for(int i=0; i<specialite.length;i++)
                   {
                       // requete prend la valeur desirée
-                    requete[i] ="select count(rotation)/28 from infirmier where rotation='"+specialite[i]+"'";
+                    requete[i] ="select count(rotation) from infirmier where rotation='"+specialite[i]+"'";
                     // retour prend la valeur du retour de l'executiuon de la requete
                     retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                   }                  
@@ -179,7 +179,7 @@ import Controleur.Connexion;
                     for(int i=0; i<specialite.length;i++)
                   {
                       // requete prend la valeur desirée
-                      requete[i] ="SELECT count(no_malade)/39 FROM hospitalisation WHERE code_service='"+specialite[i]+"'";
+                      requete[i] ="SELECT count(no_malade) FROM hospitalisation WHERE code_service='"+specialite[i]+"'";
                       // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                   }                  
@@ -195,7 +195,7 @@ import Controleur.Connexion;
                     for(int i=0; i<specialite.length;i++)
                   {
                       // requete prend la valeur desirée
-                      requete[i] ="SELECT count(numero)/28 FROM infirmier WHERE code_service='"+specialite[i]+"'";
+                      requete[i] ="SELECT count(numero) FROM infirmier WHERE code_service='"+specialite[i]+"'";
                       // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                   }                  
@@ -212,7 +212,7 @@ import Controleur.Connexion;
                     for(int i=0; i<specialite.length;i++)
                   {
                       // requete prend la valeur desirée
-                      requete[i] ="SELECT count(numero)/80 FROM malade WHERE mutuelle='"+specialite[i]+"'";
+                      requete[i] ="SELECT count(numero) FROM malade WHERE mutuelle='"+specialite[i]+"'";
                       // retour prend la valeur du retour de l'executiuon de la requete
                       retour[i]= connex.remplirChampsRequete(requete[i]).get(0);
                   }                  

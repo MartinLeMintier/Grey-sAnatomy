@@ -58,7 +58,7 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     
     pan_error = new JPanel();
     pan_error.setLayout(null);
-    pan_error.setBackground(new Color(0x79F8F8));
+    pan_error.setBackground(new Color(0xEF3C15));
     mess_error = new JLabel("Echec de la connexion");
     mess_error2 = new JLabel("Vérifiez vos identifiants");
     berror = new JButton();
@@ -212,7 +212,6 @@ public class FenetreAcceuil extends JFrame implements ActionListener
              Recherche P = new Recherche(conni);
         
          } catch (SQLException | ClassNotFoundException ex) {
-             Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
              error.setVisible(true);
              setEnabled(false);
          }
@@ -231,7 +230,6 @@ public class FenetreAcceuil extends JFrame implements ActionListener
                Recherche P = new Recherche(conni);
              
          } catch (SQLException | ClassNotFoundException ex) {
-             Logger.getLogger(FenetreAcceuil.class.getName()).log(Level.SEVERE, null, ex);
              error.setVisible(true);
              setEnabled(false);
          }

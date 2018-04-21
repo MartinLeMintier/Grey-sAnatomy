@@ -50,8 +50,8 @@ public class Recherche extends JFrame
    private JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit;
    private JLabel n_chambre_tl, search_maj_numtl, search_maj_ptl, n_doctor_tl, chp_num_tl, chp_chambre_num, nb_lit_tl, n_surveillant_tl, num_medecin, chp_numero_patient, titre, label_maj_p1;
    private JButton valider_maj;
-   private JLabel label_maj_p, saisie;
-   
+   private JLabel label_maj_p, saisie, error_saisie;
+   private boolean bool;
    
    /**
     *Constructeur
@@ -812,8 +812,10 @@ public class Recherche extends JFrame
       pan2.removeAll();
       pan2.setLayout(null);
        
-        
+       bool = false; 
        ////Need pour la fenetre de mise à jour
+       error_saisie = new JLabel("Saisie erronée, vérifiez que les champs saisis ne soient pas déjà attribués");
+       error_saisie.setBounds(200, 600, 500, 20);
        label_maj_p = new JLabel();
        search_maj_numero = new JTextField();
        search_maj_nom = new JTextField();
@@ -1032,6 +1034,7 @@ public class Recherche extends JFrame
             choix_mis.addActionListener(new ItemActionMaj());
             choix_sous_menu = "";
             valider_maj.addActionListener(this);
+            
         ///////////////////////////////////////////
         // Actions pour le menu des mises à jour //
         ///////////////////////////////////////////
@@ -1085,7 +1088,7 @@ public class Recherche extends JFrame
                     pan2.add(chp_adresse_tl);
                     chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(450, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 250, 20);
                     
                     pan2.add(chp_tel_tl);
                     chp_tel_tl.setBounds(450, 340, 100, 20);
@@ -1124,17 +1127,43 @@ public class Recherche extends JFrame
                             setVisible(true);
                             
                         if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
+                        
                             requeteMaj = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+"')";
-                            con.executeUpdate(requeteMaj);
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    pan2.setEnabled(false);
+                                    pan2.setEnabled(true);
+                                    
+                                    if(bool==false){
+                                    
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    }
+                                }
                             requeteMaj = "INSERT INTO docteur (numero,specialite) VALUES ('" + champs_numero.getText() + "','" + combo_spec.getSelectedItem() + "');";
-                            con.executeUpdate(requeteMaj);
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            System.out.println("ca marche pas");
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    pan2.setEnabled(false);
+                                    pan2.setEnabled(true);
+                                 
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }     
                             
-                        }}
+                        }
                             
                             
                         }
@@ -1168,17 +1197,41 @@ public class Recherche extends JFrame
                             setVisible(true);
                             
                             if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+"')";
-                            con.executeUpdate(requeteMaj);
-                            requeteMaj = "INSERT INTO infirmier (numero,code_service,rotation,salaire) VALUES ('" + champs_numero.getText() + "','" + code_service.getSelectedItem() + "','" + rotation.getSelectedItem() + "','" + salaire.getText() + "');";
-                            con.executeUpdate(requeteMaj);
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            System.out.println("ca marche pas");
+                        
                             
-                        }}
+                            requeteMaj = "INSERT INTO employe (numero,nom,prenom,adresse,tel) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+"')";
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                   bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }
+                            requeteMaj = "INSERT INTO infirmier (numero,code_service,rotation,salaire) VALUES ('" + champs_numero.getText() + "','" + code_service.getSelectedItem() + "','" + rotation.getSelectedItem() + "','" + salaire.getText() + "');";
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }
+                        
+                            
+                        }
                             
                         }
                     pan2.updateUI();
@@ -1214,7 +1267,7 @@ public class Recherche extends JFrame
                     pan2.add(chp_adresse_tl);
                     chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(450, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 250, 20);
                     
                     pan2.add(chp_tel_tl);
                     chp_tel_tl.setBounds(450, 340, 100, 20);
@@ -1228,12 +1281,23 @@ public class Recherche extends JFrame
                     setVisible(true);
                     
                     if(ae.getSource()==valider_maj){
-                    try {Connexion con = new Connexion("hopital", "root", "");
+                    
                     requeteMaj = "INSERT INTO malade (numero,nom,prenom,adresse,tel,mutuelle) VALUES('" + champs_numero.getText() + "','" + champs_nom.getText() + "','" + champs_prenom.getText() + "','" + champs_adresse.getText() + "','" + champs_tel.getText()+ "','" + mutuelle.getSelectedItem() + "');";
-                    con.executeUpdate(requeteMaj);
-                    } catch (SQLException | ClassNotFoundException ex) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                        try {
+                            con.executeUpdate(requeteMaj);
+                            bool = true;
+                        } catch (SQLException ex) {
+                            
+                            if(bool==false){
+                                        
+                             pan2.add(error_saisie);
+                             pan2.updateUI();
+                             add(pan2,"East");
+                             setVisible(true);
+                                    
+                             }
+                        }
+                    
                     
                 }   
                 }
@@ -1278,16 +1342,29 @@ public class Recherche extends JFrame
                         n_chambre.setBounds(250,485,100,20);
                         
                         if(ae.getSource()==valider_maj){
-                         try {Connexion con = new Connexion("hopital", "root", "");
+                         
                          String tampon;
                          tampon = "SELECT numero FROM malade WHERE nom = '" + champs_nom.getText() + "'";
-                         String num = (String) (con.remplirChampsRequete(tampon).get(0));
-                         requeteMaj = "INSERT INTO hopital.hospitalisation (no_malade,code_service,no_chambre,lit) VALUES('" + num + "','" + code_service.getSelectedItem() + "','" + n_chambre.getText() + "','" + lit.getText() + "');";
-                         con.executeUpdate(requeteMaj);
-                         } catch (SQLException | ClassNotFoundException ex) {
-                         Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-                    
+                         String num;
+                            try {
+                                num = (String) (con.remplirChampsRequete(tampon).get(0));
+                                requeteMaj = "INSERT INTO hopital.hospitalisation (no_malade,code_service,no_chambre,lit) VALUES('" + num + "','" + code_service.getSelectedItem() + "','" + n_chambre.getText() + "','" + lit.getText() + "');";
+                                con.executeUpdate(requeteMaj);
+                                bool = true;
+                            } catch (SQLException ex) {
+                                
+                                 if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                
+                            }
+                         
+                         
                          }
                         
                         
@@ -1315,12 +1392,22 @@ public class Recherche extends JFrame
                         code_service.setBounds(450, 425, 100, 20);
                         
                         if(ae.getSource()==valider_maj){
-                         try {Connexion con = new Connexion("hopital", "root", "");
+                         
                          requeteMaj = "INSERT INTO hopital.hospitalisation (no_malade,code_service,no_chambre,lit) VALUES('" + champs_num.getText() + "','" + code_service.getSelectedItem() + "','" + champs_prenom.getText() + "','" + lit.getText() + "');";
-                         con.executeUpdate(requeteMaj);
-                         } catch (SQLException | ClassNotFoundException ex) {
-                         Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                         }
+                            try {
+                                con.executeUpdate(requeteMaj);
+                                bool = true;
+                            } catch (SQLException ex) {
+                                 
+                                if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                            }
                     
                          }
                         
@@ -1366,12 +1453,22 @@ public class Recherche extends JFrame
                      setVisible(true);
                      
                      if(ae.getSource()==valider_maj){
-                    try {Connexion con = new Connexion("hopital", "root", "");
+                   
                     requeteMaj = "INSERT INTO chambre (code_service,no_chambre,surveillant,nb_lits) VALUES('" + code_service.getSelectedItem() + "','" + champs_prenom.getText() + "','" + champs_surveillant.getSelectedItem() + "','" + nbr_lit.getSelectedItem() + "');";
-                    con.executeUpdate(requeteMaj);
-                    } catch (SQLException | ClassNotFoundException ex) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                         try {
+                             con.executeUpdate(requeteMaj);
+                             bool = true;
+                         } catch (SQLException ex) {
+                              
+                             if(bool==false){
+                                        
+                              pan2.add(error_saisie);
+                              pan2.updateUI();
+                              add(pan2,"East");
+                              setVisible(true);
+                                    
+                                     }
+                         }
                     
                 }
                      
@@ -1399,14 +1496,24 @@ public class Recherche extends JFrame
                     setVisible(true);
                     
                     if(ae.getSource()==valider_maj){
-                    try {Connexion con = new Connexion("hopital", "root", "");
+                   
                     requeteMaj = "INSERT INTO hopital.soigne (no_docteur, no_malade) VALUES ('" + champs_num.getText() + "','" + champs_numero.getText() +"');";
-                    con.executeUpdate(requeteMaj);
-                    } catch (SQLException | ClassNotFoundException ex) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                        try {
+                            con.executeUpdate(requeteMaj);
+                            bool = true;
+                        } catch (SQLException ex) {
+                             
+                            if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                        }
                     
-                }
+                    }
                     
                 }
                 
@@ -1458,7 +1565,7 @@ public class Recherche extends JFrame
                     pan2.add(chp_adresse_tl);
                     chp_adresse_tl.setBounds(450, 280, 100, 20);
                     pan2.add(champs_adresse);
-                    champs_adresse.setBounds(450, 305, 100, 20);
+                    champs_adresse.setBounds(450, 305, 300, 20);
                     
                     pan2.add(chp_tel_tl);
                     chp_tel_tl.setBounds(450, 340, 100, 20);
@@ -1497,17 +1604,39 @@ public class Recherche extends JFrame
                             setVisible(true);
                             
                         if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
+                            
                             requeteMaj = "UPDATE employe SET numero = '" + champs_numero.getText() + "', adresse = '" + champs_adresse.getText() + "', tel = '" + champs_tel.getText() + "' WHERE nom = '" + champs_nom.getText() + "'";
-                            con.executeUpdate(requeteMaj);
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }
                             requeteMaj = "UPDATE docteur SET specialite = '" + combo_spec.getSelectedItem() + "' WHERE numero = '" + champs_numero.getText() + "'";
-                            con.executeUpdate(requeteMaj);
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }
                             
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            
-                        }}
+                        }
                             
                             
                         }
@@ -1539,19 +1668,42 @@ public class Recherche extends JFrame
                             setVisible(true);
                             
                             if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
+                        
                             requeteMaj = "UPDATE employe SET numero = '" + champs_numero.getText() + "', adresse = '" + champs_adresse.getText() + "', tel = '" + champs_tel.getText() + "' WHERE nom = '" + champs_nom.getText() + "'";
-                            con.executeUpdate(requeteMaj);
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }
                             requeteMaj = "UPDATE infirmier SET code_service = '" + code_service.getSelectedItem() + "', rotation = '" + rotation.getSelectedItem() + "', salaire = '" + salaire.getText() + "' WHERE numero = '" + champs_numero.getText() + "'";
-                            con.executeUpdate(requeteMaj);
+                                try {
+                                    con.executeUpdate(requeteMaj);
+                                    bool = true;
+                                } catch (SQLException ex) {
+                                    
+                                    if(bool==false){
+                                        
+                                    pan2.add(error_saisie);
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
+                                     }
+                                }
                             
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            
-                        }}
+                            }
                             
                         }
+                        
                     pan2.updateUI();
                     add(pan2,"East");
                     setVisible(true);
@@ -1601,15 +1753,23 @@ public class Recherche extends JFrame
                     setVisible(true);
                     
                     if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
+                            
                             requeteMaj = "UPDATE malade SET numero = '" + champs_numero.getText() + "', adresse = '" + champs_adresse.getText() + "', tel = '" + champs_tel.getText() + "', mutuelle = '" + mutuelle.getSelectedItem() + "' WHERE nom = '" + champs_nom.getText() + "'";
-                            con.executeUpdate(requeteMaj);
+                     try {
+                         con.executeUpdate(requeteMaj);
+                         bool = true;
+                     } catch (SQLException ex) {
+                          if(bool==false){
+                                        
+                          pan2.add(error_saisie);
+                          pan2.updateUI();
+                          add(pan2,"East");
+                          setVisible(true);
+                                    
+                                     }
+                     }
                             
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            
-                        }}
+                        }
                  
             }
             
@@ -1646,15 +1806,25 @@ public class Recherche extends JFrame
                         setVisible(true);
                  
                  if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "UPDATE hospitalisation SET code_service = '" + code_service.getSelectedItem() + "', no_chambre = '" + champs_prenom.getText() + "', lit = '" + lit.getText() + "' WHERE no_malade = '" + champs_num.getText() + "'";
-                            con.executeUpdate(requeteMaj);
                             
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                    requeteMaj = "UPDATE hospitalisation SET code_service = '" + code_service.getSelectedItem() + "', no_chambre = '" + champs_prenom.getText() + "', lit = '" + lit.getText() + "' WHERE no_malade = '" + champs_num.getText() + "'";
+                     
+                    try {
+                         con.executeUpdate(requeteMaj);
+                         bool = true;
+                     } catch (SQLException ex) {
+                         
+                          if(bool==false){
+                                        
+                          pan2.add(error_saisie);
+                          pan2.updateUI();
+                          add(pan2,"East");
+                          setVisible(true);
+                                    
+                                     }
+                     }
                             
-                        }}
+                        }
             }
             
             if("Changement de médecin".equals(choixdemodif)){
@@ -1677,15 +1847,23 @@ public class Recherche extends JFrame
                 valider_maj.setBounds(360,360,100,30);
                 
                 if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "UPDATE soigne SET no_docteur = '" + champs_num.getText() + "' WHERE no_malade = '" + champs_numero.getText() + "'";
-                            con.executeUpdate(requeteMaj);
+                                                   
+                    requeteMaj = "UPDATE soigne SET no_docteur = '" + champs_num.getText() + "' WHERE no_malade = '" + champs_numero.getText() + "'";
+                    try {
+                        con.executeUpdate(requeteMaj);
+                        bool = true;
+                    } catch (SQLException ex) {
+                         if(bool==false){
+                                        
+                         pan2.add(error_saisie);
+                         pan2.updateUI();
+                         add(pan2,"East");
+                         setVisible(true);
+                                    
+                                     }
+                    }
                             
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            
-                        }}
+                  }
                 
             }
             
@@ -1741,16 +1919,29 @@ public class Recherche extends JFrame
                  valider_maj.setBounds(375,405,100,30);
                  
                  if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "DELETE FROM employe WHERE numero = '" + search_maj_numero.getText() + "'";
-                            requeteMaj = "DELETE FROM employe WHERE nom = '" + search_maj_nom.getText() + "'";
-                            requeteMaj = "DELETE FROM employe WHERE prenom = '" + search_maj_prenom.getText() + "'";
-                            con.executeUpdate(requeteMaj);
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                        
                             
-                        }}
+                            
+                    try {
+                        requeteMaj = "DELETE FROM employe WHERE numero = '" + search_maj_numero.getText() + "'";
+                        con.executeUpdate(requeteMaj);
+                        requeteMaj = "DELETE FROM employe WHERE nom = '" + search_maj_nom.getText() + "'";
+                        con.executeUpdate(requeteMaj);
+                        requeteMaj = "DELETE FROM employe WHERE prenom = '" + search_maj_prenom.getText() + "'";
+                        con.executeUpdate(requeteMaj);
+                        bool = true;
+                    } catch (SQLException ex) {
+                             if(bool==false){
+                                        
+                             pan2.add(error_saisie);
+                             pan2.updateUI();
+                             add(pan2,"East");
+                             setVisible(true);
+                                    
+                                     }   
+                        }
+                           
+                  }
   
             }
             
@@ -1779,17 +1970,28 @@ public class Recherche extends JFrame
                  valider_maj.setBounds(375,405,100,30);
                  
                   if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "DELETE FROM malade WHERE numero = '" + search_maj_numero.getText() + "'";
-                            requeteMaj = "DELETE FROM malade WHERE nom = '" + search_maj_nom.getText() + "'";
-                            requeteMaj = "DELETE FROM malade WHERE prenom = '" + search_maj_prenom.getText() + "'";
-                            con.executeUpdate(requeteMaj);
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                       
                             
-                        }}
-                 
+                     try {
+                         requeteMaj = "DELETE FROM malade WHERE numero = '" + search_maj_numero.getText() + "'";
+                         con.executeUpdate(requeteMaj);
+                         requeteMaj = "DELETE FROM malade WHERE nom = '" + search_maj_nom.getText() + "'";
+                         con.executeUpdate(requeteMaj);
+                         requeteMaj = "DELETE FROM malade WHERE prenom = '" + search_maj_prenom.getText() + "'";
+                         con.executeUpdate(requeteMaj);
+                         bool = true;
+                     } catch (SQLException ex) {
+                             if(bool==false){
+                                        
+                             pan2.add(error_saisie);
+                             pan2.updateUI();
+                             add(pan2,"East");
+                             setVisible(true);
+                                    
+                                     }
+                        }
+                            
+                  }   
                  
             }
             
@@ -1812,15 +2014,22 @@ public class Recherche extends JFrame
                  pan2.add(valider_maj);
                  valider_maj.setBounds(350,355,100,30);
                  
-                  if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "DELETE FROM hospitalisation WHERE no_malade = '" + champs_num.getText() + "'";
-                            con.executeUpdate(requeteMaj);
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            
-                        }}
+                  if(ae.getSource()==valider_maj){   
+                     
+                     requeteMaj = "DELETE FROM hospitalisation WHERE no_malade = '" + champs_num.getText() + "'";
+                     try {
+                         con.executeUpdate(requeteMaj);
+                     } catch (SQLException ex) {
+                         if(bool==false){
+                                        
+                         pan2.add(error_saisie);
+                         pan2.updateUI();
+                         add(pan2,"East");
+                         setVisible(true);
+                                    
+                                     }
+                        }
+                        }
                  
             }
             
@@ -1839,14 +2048,22 @@ public class Recherche extends JFrame
                 valider_maj.setBounds(360,345,100,30);
                 
                 if(ae.getSource()==valider_maj){  
-                        try { 
-                            Connexion con = new Connexion("hopital", "root", "");
-                            requeteMaj = "DELETE FROM soigne WHERE no_malade = '" + champs_numero.getText() + "'";
-                            con.executeUpdate(requeteMaj);
-                        } catch (SQLException | ClassNotFoundException ex) {
-                            Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                            
-                        }}
+                        
+                    requeteMaj = "DELETE FROM soigne WHERE no_malade = '" + champs_numero.getText() + "'";
+                    try {
+                        con.executeUpdate(requeteMaj);
+                    } catch (SQLException ex) {
+                      
+                      if(bool==false){
+                                       
+                      pan2.add(error_saisie);
+                      pan2.updateUI();
+                      add(pan2,"East");
+                      setVisible(true);
+                                    
+                                     }
+                        }
+                        }
             }
             
             add(pan2,"East");

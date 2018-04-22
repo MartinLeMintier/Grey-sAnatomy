@@ -50,7 +50,7 @@ public class Recherche extends JFrame
    private JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, num_nouv_medecin, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit, ancien_medecin_tl;
    private JLabel n_chambre_tl, search_maj_numtl, search_maj_ptl, n_doctor_tl, chp_num_tl, chp_chambre_num, nb_lit_tl, n_surveillant_tl, num_medecin, chp_numero_patient, titre, label_maj_p1;
    private JButton valider_maj;
-   private JLabel label_maj_p, saisie, error_saisie;
+   private JLabel label_maj_p, saisie, error_saisie,champs_oblig, champs_oblig2;
    private boolean bool;
    public boolean bool_erreur;
    
@@ -816,6 +816,10 @@ public class Recherche extends JFrame
        ////Need pour la fenetre de mise à jour
        error_saisie = new JLabel("Saisie erronée, vérifiez que les champs saisis ne soient pas déjà attribués ou vides");
        error_saisie.setBounds(200, 600, 500, 20);
+       champs_oblig = new JLabel("Champs nécessaires pour l'identification d'un employé et d'un malade: nom, prénom, numéro");
+       champs_oblig2 = new JLabel("Champs nécessaires pour l'identification d'une hospitalisation ou pour changer de médecin: numéros");
+       champs_oblig.setBounds(100, 635, 600, 20);
+       champs_oblig2.setBounds(100, 670, 600 , 20);
        label_maj_p = new JLabel();
        search_maj_numero = new JTextField();
        ancien_medecin = new JTextField();
@@ -824,7 +828,7 @@ public class Recherche extends JFrame
        search_maj_nom = new JTextField();
        search_maj_prenom = new JTextField();
        num_medecin = new JLabel("Numéro du médecin: ");
-       chp_numero_patient = new JLabel("Numéro du patient");
+       chp_numero_patient = new JLabel("Numéro du patient:");
        saisie = new JLabel();
        nb_lit_tl = new JLabel("Nombre de lits: ");
        n_surveillant_tl = new JLabel("Surveillant: ");
@@ -834,8 +838,8 @@ public class Recherche extends JFrame
        lit = new JTextField();
        n_doctor = new JTextField();
        n_chambre = new JTextField();
-       n_doctor_tl = new JLabel("Numero du médecin");
-       n_chambre_tl = new JLabel("Numero de chambre");
+       n_doctor_tl = new JLabel("Numero du médecin:");
+       n_chambre_tl = new JLabel("Numero de chambre:");
        champs_lit = new JLabel("Lit:");
        saisie_nom.addActionListener(new ItemActionMaj());
        saisie_num.addActionListener(new ItemActionMaj());
@@ -960,7 +964,7 @@ public class Recherche extends JFrame
        cs_tl = new JLabel ("Code service:");
        rot_tl = new JLabel ("Rotation: ");
        sal_tl = new JLabel ("Salaire: ");
-       mut_tl = new JLabel ("Mutuelle");
+       mut_tl = new JLabel ("Mutuelle:");
        chp_num_tl = new JLabel ("Numéro du patient: ");
        chp_chambre_num = new JLabel ("Numéro de chambre:");
        saisie_nom.setSelected(false);
@@ -1574,6 +1578,8 @@ public class Recherche extends JFrame
             pan2.add(titre);
             pan2.add(label_maj_p1);
             pan2.add(sel_action);
+            pan2.add(champs_oblig);
+            pan2.add(champs_oblig2);
             sel_action.setSelectedItem("Modifier une donnée");
             add(pan2,"East");
             pan2.updateUI();
@@ -2120,8 +2126,10 @@ public class Recherche extends JFrame
                          pan2.updateUI();
                          add(pan2,"East");
                          setVisible(true);
-                    }
-                        else{
+                         bool_erreur=true;
+                       }
+                                    
+                        else if (bool_erreur==false){
                              pan2.add(error_saisie);
                              pan2.updateUI();
                              add(pan2,"East");
@@ -2186,8 +2194,10 @@ public class Recherche extends JFrame
                          pan2.updateUI();
                          add(pan2,"East");
                          setVisible(true);
-                         }
-                         else{
+                         bool_erreur=true;
+                                    }
+                                    
+                        else if (bool_erreur==false){
                              pan2.add(error_saisie);
                              pan2.updateUI();
                              add(pan2,"East");
@@ -2238,10 +2248,11 @@ public class Recherche extends JFrame
                          champs_num.setText("");
                          pan2.updateUI();
                          add(pan2,"East");
-                         setVisible(true);
-                         
-                         }
-                         else{
+                         setVisible(true); 
+                        bool_erreur=true;
+                                    }
+                                    
+                        else if (bool_erreur==false){
                              pan2.add(error_saisie);
                              pan2.updateUI();
                              add(pan2,"East");
@@ -2288,9 +2299,10 @@ public class Recherche extends JFrame
                          pan2.updateUI();
                          add(pan2,"East");
                          setVisible(true);
-                         
-                        }
-                        else{
+                        bool_erreur=true;
+                                    }
+                                    
+                        else if (bool_erreur==false){
                             pan2.add(error_saisie);
                              pan2.updateUI();
                              add(pan2,"East");

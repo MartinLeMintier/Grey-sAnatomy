@@ -14,8 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author martin
+ *Classe de l'écran d'accueil avec les champs permettant de rentrer les identifiants
+ * de l'utilisateur en fonction du serveur choisi sur la fenêtre précédente
+ * elle contient ainsi tous les éléments graphiques de la fenêtre
+ * elle dispose également d'un constructeur permettant d'initialiser la fenêtre, ainsi 
+ * que d'une fonction actionPerformed qui détermine les actions effectuées lorsqu'on
+ * interagit avec un élément graphique
+ * 
  */
 public class FenetreAcceuil extends JFrame implements ActionListener 
 {

@@ -802,10 +802,9 @@ public class Recherche extends JFrame
        
    }
    
-   /**
-    * Méthode qui est appelée quand l'utilisateur decide de mettre à jour la base de donnée
-    */
-   
+     /**
+      * Fonction qui permet d'instancier tous les objets graphiques de la fonction de mise à jour 
+      */
     public void afficher_MAJ()
    {
       pan2.removeAll();
@@ -1023,6 +1022,14 @@ public class Recherche extends JFrame
       
    }
     
+     /**
+    * Cette classe permet l'intéraction entre l'utilisateur et le programme 
+    * Elle permet de déterminer les actions à réaliser lorsque l'utilisateur intéragit avec le logiciel
+    * Celle-ci est décomposée en 3 "sous-menus" qui sont Insérer/Modifier/Supprimer
+    * L'utilisateur dispose ainsi de toutes les méthodes de modifications possibles de la BDD
+    * Elle permet également le réaffichage du panneau principal en fonction de l'action sélectionnée par l'utilisateur
+    */
+     
      class ItemActionMaj implements ActionListener{
        
         @Override
@@ -1133,6 +1140,11 @@ public class Recherche extends JFrame
                                                                            
                                    con.executeUpdate(requeteMaj);
                                     bool = true;
+                                    champs_tel.setText("");
+                                    champs_adresse.setText("");
+                                    champs_numero.setText("");
+                                    champs_prenom.setText("");
+                                    champs_nom.setText("");
                                     
                                 } catch (SQLException ex) {
                                     pan2.setEnabled(false);
@@ -1206,6 +1218,12 @@ public class Recherche extends JFrame
                                     
                                     con.executeUpdate(requeteMaj);
                                    bool = true;
+                                   champs_tel.setText("");
+                                    champs_adresse.setText("");
+                                    champs_numero.setText("");
+                                    champs_prenom.setText("");
+                                    champs_nom.setText("");
+                                    salaire.setText("");
                                    
                                 } catch (SQLException ex) {
                                     
@@ -1290,6 +1308,11 @@ public class Recherche extends JFrame
                         try {
                             con.executeUpdate(requeteMaj);
                             bool = true;
+                            champs_tel.setText("");
+                            champs_nom.setText("");
+                            champs_prenom.setText("");
+                            champs_numero.setText("");
+                            champs_adresse.setText("");
                         } catch (SQLException ex) {
                             
                             if(bool==false){
@@ -1355,6 +1378,11 @@ public class Recherche extends JFrame
                                 requeteMaj = "INSERT INTO hopital.hospitalisation (no_malade,code_service,no_chambre,lit) VALUES('" + num + "','" + code_service.getSelectedItem() + "','" + n_chambre.getText() + "','" + lit.getText() + "');";
                                 con.executeUpdate(requeteMaj);
                                 bool = true;
+                                lit.setText("");
+                                n_chambre.setText("");
+                                champs_prenom.setText("");
+                                champs_nom.setText("");
+                                
                             } catch (SQLException ex) {
                                 
                                  if(bool==false){
@@ -1401,6 +1429,10 @@ public class Recherche extends JFrame
                             try {
                                 con.executeUpdate(requeteMaj);
                                 bool = true;
+                                lit.setText("");
+                                n_chambre.setText("");
+                                champs_prenom.setText("");
+                                champs_num.setText("");
                             } catch (SQLException ex) {
                                  
                                 if(bool==false){
@@ -1462,6 +1494,8 @@ public class Recherche extends JFrame
                          try {
                              con.executeUpdate(requeteMaj);
                              bool = true;
+                             champs_prenom.setText("");
+                             
                          } catch (SQLException ex) {
                               
                              if(bool==false){
@@ -1505,6 +1539,8 @@ public class Recherche extends JFrame
                         try {
                             con.executeUpdate(requeteMaj);
                             bool = true;
+                            champs_num.setText("");
+                            champs_numero.setText("");
                         } catch (SQLException ex) {
                              
                             if(bool==false){
@@ -1617,6 +1653,11 @@ public class Recherche extends JFrame
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
+                                    champs_tel.setText("");
+                                    champs_adresse.setText("");
+                                    champs_numero.setText("");
+                                    champs_prenom.setText("");
+                                    champs_nom.setText("");
                                     }
                                     
                                     else{
@@ -1712,6 +1753,12 @@ public class Recherche extends JFrame
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
+                                    champs_tel.setText("");
+                                    champs_adresse.setText("");
+                                    champs_numero.setText("");
+                                    champs_prenom.setText("");
+                                    champs_nom.setText("");
+                                    salaire.setText("");
                                     }
                                     
                                     else{
@@ -1825,6 +1872,11 @@ public class Recherche extends JFrame
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
+                                    champs_tel.setText("");
+                                    champs_nom.setText("");
+                                    champs_prenom.setText("");
+                                    champs_numero.setText("");
+                                    champs_adresse.setText("");
                                     }
                                     
                                     else{
@@ -1893,6 +1945,9 @@ public class Recherche extends JFrame
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
+                                    lit.setText("");
+                                    champs_prenom.setText("");
+                                    champs_num.setText("");
                                     }
                                     
                                     else{
@@ -1947,6 +2002,8 @@ public class Recherche extends JFrame
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
+                                    champs_num.setText("");
+                                    champs_numero.setText("");
                                     }
                                     
                                     else{
@@ -2038,6 +2095,9 @@ public class Recherche extends JFrame
                         requeteMaj = "DELETE FROM employe WHERE prenom = '" + search_maj_prenom.getText() + "'";
                         con.executeUpdate(requeteMaj);
                         bool = true;
+                        search_maj_numero.setText("");
+                        search_maj_nom.setText("");
+                        search_maj_prenom.setText("");
                          pan2.remove(error_saisie);
                          pan2.updateUI();
                          add(pan2,"East");
@@ -2101,6 +2161,9 @@ public class Recherche extends JFrame
                          requeteMaj = "DELETE FROM malade WHERE prenom = '" + search_maj_prenom.getText() + "'";
                          con.executeUpdate(requeteMaj);
                          bool = true;
+                         search_maj_numero.setText("");
+                         search_maj_nom.setText("");
+                         search_maj_prenom.setText("");
                          pan2.remove(error_saisie);
                          pan2.updateUI();
                          add(pan2,"East");
@@ -2153,6 +2216,7 @@ public class Recherche extends JFrame
                          if(champs_num.getText().length()!=0){
                          con.executeUpdate(requeteMaj);
                          pan2.remove(error_saisie);
+                         champs_num.setText("");
                          pan2.updateUI();
                          add(pan2,"East");
                          setVisible(true);
@@ -2199,6 +2263,7 @@ public class Recherche extends JFrame
                         if(champs_numero.getText().length()!=0){
                         con.executeUpdate(requeteMaj);
                         pan2.remove(error_saisie);
+                        champs_numero.setText("");
                          pan2.updateUI();
                          add(pan2,"East");
                          setVisible(true);

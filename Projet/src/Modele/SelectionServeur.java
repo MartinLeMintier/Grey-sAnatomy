@@ -9,8 +9,8 @@ import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.*;
 /**
- *
- * @author User
+ *Classe de la première fenêtre du programme permettant de sélectionner le type 
+ *de connexion (local/distance) et donc le serveur adéquat 
  */
 public class SelectionServeur extends JFrame implements ActionListener
 {

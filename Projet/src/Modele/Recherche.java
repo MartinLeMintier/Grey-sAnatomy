@@ -178,10 +178,10 @@ public class Recherche extends JFrame
                 c3= new JComboBox (new String[]{""});
                 
                 // Création des radiobutton pour choisir si l'on veut cherccher qq chose <, > ou = a la valeur rentrée
-                r1= new JRadioButton("Inferieur ou egal");
-                r2= new JRadioButton("Supérieur ou egal");
-                r3= new JRadioButton("Egal");
-                r4= new JRadioButton("Different");
+                r1= new JRadioButton("Inferieure ou egale");
+                r2= new JRadioButton("Supérieure ou egale");
+                r3= new JRadioButton("Egale");
+                r4= new JRadioButton("Differente");
                 
                 // Création du JText Field pour rentrer la valeur du where par l'utilisateur
                 t1= new JTextField (20);
@@ -212,10 +212,10 @@ public class Recherche extends JFrame
                 c3.setBounds(150,170,210,20);
                 
                 //positionnement des radiobuttons
-                r1.setBounds(550,70,130,20);
-                r2.setBounds(550,110,130,20);
-                r3.setBounds(550,150,130,20);
-                r4.setBounds(550,190,130,20);
+                r1.setBounds(550,70,140,20);
+                r2.setBounds(550,110,140,20);
+                r3.setBounds(550,150,140,20);
+                r4.setBounds(550,190,140,20);
                 
                 //Creation d'un bouton group qui permet qu'on ne puisse chosiir qu'un seul radiobutton
                 ButtonGroup b = new ButtonGroup();
@@ -560,23 +560,23 @@ public class Recherche extends JFrame
         
         // remplir le tableau du resultat des requetes
         try{
-         tabRecup = new String[con.remplirChampsRequete(requete).size()][1];
-//          //tableau qui va recupererle retour de la requete
-//           tabRecup [0][0]="";
-//
-//           //initialise les titres dans le tableau qui affiche le resulatta de la requete
-//           if(choix==true)
-//           {
-//               
-//                for(int i=0; i< tab3.length; i++)
-//           {
-//                tabRecup[0][0]+=tab3[i]+"  ";
-//           }
-//           }
+         tabRecup = new String[con.remplirChampsRequete(requete).size()+1][1];
+          //tableau qui va recupererle retour de la requete
+           tabRecup [0][0]="";
+
+           //initialise les titres dans le tableau qui affiche le resulatta de la requete
+           if(choix==true)
+           {
+               
+                for(int i=0; i< tab3.length; i++)
+           {
+                tabRecup[0][0]+=tab3[i]+"  ";
+           }
+           }
 
            for(int i=0; i<con.remplirChampsRequete(requete).size();i++)
            {
-              tabRecup[i][0]= con.remplirChampsRequete(requete).get(i);
+              tabRecup[i+1][0]= con.remplirChampsRequete(requete).get(i);
               
            }
         }catch(com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e )

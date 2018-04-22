@@ -5,7 +5,7 @@
  */
 package Controleur;
 
-import Modele.SelectionServeur;
+import Vue.SelectionServeur;
 
 /**
  *Classe contenant le main

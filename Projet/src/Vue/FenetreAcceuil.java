@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modele;
+package Vue;
 
 import javax.swing.*;
 import java.awt.event.*;
 import Controleur.Connexion;
+import Modele.Recherche;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *Classe de l'écran d'accueil avec les champs permettant de rentrer les identifiants

@@ -99,7 +99,7 @@ public class Recherche extends JFrame
                 bouton= new JButton("Recherche ");
                 bouton2= new JButton("Mise à jour");
                 bouton3= new JButton("Reporting ");
-                bouton4= new JButton("Complique ");
+                bouton4= new JButton("Requete ");
                 quitter= new JButton("Quitter ");
                 
               
@@ -318,7 +318,7 @@ public class Recherche extends JFrame
      l6 = new JLabel();
      l8 = new JLabel();
      l6.setBounds(250,400,300,20);
-     l8.setBounds(250,400,300,20);
+     l8.setBounds(250,400,500,20);
      
      //declaration du JTextField qui recupere la requete
      t2= new JTextField(25);

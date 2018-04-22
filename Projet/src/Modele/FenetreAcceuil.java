@@ -43,7 +43,10 @@ public class FenetreAcceuil extends JFrame implements ActionListener
    private JButton berror;
    private JPanel pan_error;
    
-   ///Constructeur
+   /**
+    * constructeur qui crée la fênetre d'accueil et instancie tous les objets graphiques s'y trouvant 
+    * @param choix 
+    */
     public FenetreAcceuil(String choix){
         
     //titre de la fenetre
@@ -182,6 +185,13 @@ public class FenetreAcceuil extends JFrame implements ActionListener
     
     }
     
+    /**
+     * méthode actionPerformed qui instancie des objets de la classe connexion
+     * En fonction du choix du serveur, l'objet instancié ne reçoit pas les mêmes
+     * paramètres
+     * Permet aussi d'afficher une fenetre d'erreur en cas d'échec de la connexion
+     * @param e 
+     */
    @Override
  public void actionPerformed (ActionEvent e)
  { 

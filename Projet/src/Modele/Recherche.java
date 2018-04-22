@@ -46,8 +46,8 @@ public class Recherche extends JFrame
    private String choix_maj, choix_sous_menu, choix_combo_ss, requeteMaj;
    private JComboBox sel_action, choix_supprimer, choix_mis, combo_ss_menu,combo_spec, code_service, rotation, mutuelle, champs_surveillant,nbr_lit, choix_modifier;
    private JTextField champs_nom, champs_prenom, champs_numero,champs_adresse,champs_tel, salaire, lit, n_chambre, n_doctor, champs_num;
-   private JTextField search_maj_numero, search_maj_nom, search_maj_prenom;
-   private JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit;
+   private JTextField search_maj_numero, search_maj_nom, search_maj_prenom, ancien_medecin;
+   private JLabel chp_nom_tl, chp_prenom_tl, chp_numero_tl,chp_adresse_tl, num_nouv_medecin, chp_tel_tl, type_emploi, chp_special,cs_tl,rot_tl,sal_tl, mut_tl, champs_lit, ancien_medecin_tl;
    private JLabel n_chambre_tl, search_maj_numtl, search_maj_ptl, n_doctor_tl, chp_num_tl, chp_chambre_num, nb_lit_tl, n_surveillant_tl, num_medecin, chp_numero_patient, titre, label_maj_p1;
    private JButton valider_maj;
    private JLabel label_maj_p, saisie, error_saisie;
@@ -818,6 +818,9 @@ public class Recherche extends JFrame
        error_saisie.setBounds(200, 600, 500, 20);
        label_maj_p = new JLabel();
        search_maj_numero = new JTextField();
+       ancien_medecin = new JTextField();
+       ancien_medecin_tl = new JLabel("Numero ancien médecin: ");
+       num_nouv_medecin = new JLabel("Numero nouveau medecin: ");
        search_maj_nom = new JTextField();
        search_maj_prenom = new JTextField();
        num_medecin = new JLabel("Numéro du médecin: ");
@@ -1983,32 +1986,38 @@ public class Recherche extends JFrame
             }
             
             if("Changement de médecin".equals(choixdemodif)){
-                ///A laisser ou pas? pas vraiment utile à vrai dire
+                
                 saisie.setText("Veuillez remplir les champs ci-dessous:");
                 pan2.add(saisie);
                 saisie.setBounds(280,250,300,20);
+                    
+                    pan2.add(ancien_medecin_tl);
+                    ancien_medecin_tl.setBounds(150,300,150,20);
+                    pan2.add(ancien_medecin);
+                    ancien_medecin.setBounds(150, 325, 150, 20);
                 
-                pan2.add(num_medecin);
-                    num_medecin.setBounds(250,300,150,20);
+                    pan2.add(num_nouv_medecin);
+                    num_nouv_medecin.setBounds(350,300,160,20);
                     pan2.add(champs_num);
-                    champs_num.setBounds(250,325,150,20);
+                    champs_num.setBounds(350,325,150,20);
                         
                     pan2.add(chp_numero_patient);
-                    chp_numero_patient.setBounds(450, 300, 150, 20);
+                    chp_numero_patient.setBounds(550, 300, 150, 20);
                     pan2.add(champs_numero);
-                    champs_numero.setBounds(450, 325, 100, 20);
+                    champs_numero.setBounds(550, 325, 100, 20);
                 
                 pan2.add(valider_maj);
                 valider_maj.setBounds(360,360,100,30);
                 
                 if(ae.getSource()==valider_maj){  
                                                    
-                    requeteMaj = "UPDATE soigne SET no_docteur = '" + champs_num.getText() + "' WHERE no_malade = '" + champs_numero.getText() + "'";
+                    requeteMaj = "UPDATE soigne SET no_docteur = '" + champs_num.getText() + "' WHERE no_malade = '" + champs_numero.getText() + "' AND no_docteur = '" + ancien_medecin.getText() +"'";
                     try {
-                        if((champs_num.getText().length()!=0)&&(champs_numero.getText().length()!=0)){
+                        if((champs_num.getText().length()!=0)&&(champs_numero.getText().length()!=0)&&(ancien_medecin.getText().length()!=0)){
                                     con.executeUpdate(requeteMaj);
                                     champs_num.setText("");
                                     champs_numero.setText("");
+                                    ancien_medecin.setText("");
                                     bool = true;
                                     pan2.remove(error_saisie);
                                     pan2.updateUI();

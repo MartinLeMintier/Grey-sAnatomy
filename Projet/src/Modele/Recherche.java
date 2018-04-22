@@ -1650,14 +1650,15 @@ public class Recherche extends JFrame
                           
                                     if((champs_nom.getText().length()==0)||(champs_prenom.getText().length()==0)||(champs_adresse.getText().length()==0)||(champs_tel.getText().length()==0)||(combo_spec.getSelectedItem()=="")){
                                     pan2.add(error_saisie);
-                                    pan2.updateUI();
-                                    add(pan2,"East");
-                                    setVisible(true);
                                     champs_tel.setText("");
                                     champs_adresse.setText("");
                                     champs_numero.setText("");
                                     champs_prenom.setText("");
                                     champs_nom.setText("");
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
                                     }
                                     
                                     else{
@@ -1750,15 +1751,15 @@ public class Recherche extends JFrame
                                 try {
                                     if((champs_nom.getText().length()==0)||(champs_prenom.getText().length()==0)||(champs_adresse.getText().length()==0)||(champs_tel.getText().length()==0)||(code_service.getSelectedItem()=="")||(rotation.getSelectedItem()=="")||(salaire.getText().length()==0)){
                                     pan2.add(error_saisie);
-                                    pan2.updateUI();
-                                    add(pan2,"East");
-                                    setVisible(true);
                                     champs_tel.setText("");
                                     champs_adresse.setText("");
                                     champs_numero.setText("");
                                     champs_prenom.setText("");
                                     champs_nom.setText("");
                                     salaire.setText("");
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
                                     }
                                     
                                     else{
@@ -1869,14 +1870,15 @@ public class Recherche extends JFrame
                      try {
                          if((champs_nom.getText().length()==0)||(champs_prenom.getText().length()==0)||(champs_adresse.getText().length()==0)||(champs_tel.getText().length()==0)||(mutuelle.getSelectedItem()=="")||(champs_numero.getText().length()==0)){
                                     pan2.add(error_saisie);
-                                    pan2.updateUI();
-                                    add(pan2,"East");
-                                    setVisible(true);
                                     champs_tel.setText("");
                                     champs_nom.setText("");
                                     champs_prenom.setText("");
                                     champs_numero.setText("");
                                     champs_adresse.setText("");
+                                    pan2.updateUI();
+                                    add(pan2,"East");
+                                    setVisible(true);
+                                    
                                     }
                                     
                                     else{
@@ -1942,12 +1944,13 @@ public class Recherche extends JFrame
                     try {
                          if((champs_num.getText().length()==0)||(lit.getText().length()==0)||(champs_prenom.getText().length()==0)||(code_service.getSelectedItem()=="")){
                                     pan2.add(error_saisie);
+                                    champs_prenom.setText("");
+                                    champs_num.setText("");
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
                                     lit.setText("");
-                                    champs_prenom.setText("");
-                                    champs_num.setText("");
+                                    
                                     }
                                     
                                     else{
@@ -1999,11 +2002,12 @@ public class Recherche extends JFrame
                     try {
                         if((champs_num.getText().length()==0)||(champs_numero.getText().length()==0)){
                                     pan2.add(error_saisie);
+                                    champs_num.setText("");
+                                    champs_numero.setText("");
                                     pan2.updateUI();
                                     add(pan2,"East");
                                     setVisible(true);
-                                    champs_num.setText("");
-                                    champs_numero.setText("");
+                                    
                                     }
                                     
                                     else{
